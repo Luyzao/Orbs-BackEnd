@@ -1,6 +1,4 @@
-// import cors from "cors";
 import { NextApiRequest, NextApiResponse } from "next";
-import nextCors from "nextjs-cors";
 // import config from "./configurations";
 // import { validadeToken } from "./services/middleware";
 
@@ -13,10 +11,11 @@ export async function middlewareV2(
   response.setHeader('Expires', '0');
   response.setHeader("Access-Control-Allow-Origin", "*");
   response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   /*
   if (config.ENV == "PROD" || config.ENV == "STAG") {
-    response.setHeader( "Access-Control-Allow-Headers", "Content-Type, Authorization");
+    response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
     const authHeader = request.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -34,16 +33,8 @@ export async function middlewareV2(
     }
 
     response.setHeader("Authorization", `Bearer ${config.AUTH_TOKEN}`);
-  } else {
-    response.setHeader("Access-Control-Allow-Headers", "Content-Type");
   }
   */
-
-  await nextCors(request, response, {
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    origin: "*",
-    optionsSuccessStatus: 200,
-  });
 
   if (request.method === "OPTIONS") {
     return response.status(200).end();
