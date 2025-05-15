@@ -15,6 +15,56 @@ datasource db {
 }
 
 model User {
-  id   String @id
-  name String
+  id        String    @id @default(uuid())
+  name      String
+  avatarUrl String?
+  expenses  Expense[]
+  goals     Goal[]
+  balance   Balance?
+}
+
+model Expense {
+  id                 String   @id @default(uuid())
+  title              String
+  amount             Float
+  date               DateTime
+  isCredit           Boolean  @default(false) // Se a compra foi feita no crédito
+  totalInstallments  Int? // Total de parcelas (se foi parcelado)
+  currentInstallment Int? // Número da parcela atual
+  categoryId         String
+  category           Category @relation(fields: [categoryId], references: [id])
+  userId             String
+  user               User     @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  color    String? // Cor para o gráfico (ex: "#A020F0")
+  expenses Expense[]
+}
+
+model Goal {
+  id        String     @id @default(uuid())
+  title     String
+  target    Float
+  progress  Float      @default(0)
+  status    GoalStatus
+  user      User       @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime   @default(now())
+}
+
+enum GoalStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+model Balance {
+  id     String   @id @default(uuid())
+  value  Float
+  date   DateTime
+  user   User     @relation(fields: [userId], references: [id])
+  userId String   @unique
 }

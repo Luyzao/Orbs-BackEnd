@@ -122,7 +122,43 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  avatarUrl: 'avatarUrl'
+};
+
+exports.Prisma.ExpenseScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  amount: 'amount',
+  date: 'date',
+  isCredit: 'isCredit',
+  totalInstallments: 'totalInstallments',
+  currentInstallment: 'currentInstallment',
+  categoryId: 'categoryId',
+  userId: 'userId'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color'
+};
+
+exports.Prisma.GoalScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  target: 'target',
+  progress: 'progress',
+  status: 'status',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BalanceScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
+  date: 'date',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {
@@ -135,9 +171,22 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.GoalStatus = exports.$Enums.GoalStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Expense: 'Expense',
+  Category: 'Category',
+  Goal: 'Goal',
+  Balance: 'Balance'
 };
 
 /**
