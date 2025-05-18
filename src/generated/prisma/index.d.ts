@@ -38,6 +38,11 @@ export type Goal = $Result.DefaultSelection<Prisma.$GoalPayload>
  * 
  */
 export type Balance = $Result.DefaultSelection<Prisma.$BalancePayload>
+/**
+ * Model Income
+ * 
+ */
+export type Income = $Result.DefaultSelection<Prisma.$IncomePayload>
 
 /**
  * Enums
@@ -231,6 +236,16 @@ export class PrismaClient<
     * ```
     */
   get balance(): Prisma.BalanceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.income`: Exposes CRUD operations for the **Income** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Incomes
+    * const incomes = await prisma.income.findMany()
+    * ```
+    */
+  get income(): Prisma.IncomeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -289,8 +304,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -675,7 +690,8 @@ export namespace Prisma {
     Expense: 'Expense',
     Category: 'Category',
     Goal: 'Goal',
-    Balance: 'Balance'
+    Balance: 'Balance',
+    Income: 'Income'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -694,7 +710,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "expense" | "category" | "goal" | "balance"
+      modelProps: "user" | "expense" | "category" | "goal" | "balance" | "income"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1068,6 +1084,80 @@ export namespace Prisma {
           }
         }
       }
+      Income: {
+        payload: Prisma.$IncomePayload<ExtArgs>
+        fields: Prisma.IncomeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IncomeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IncomeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload>
+          }
+          findFirst: {
+            args: Prisma.IncomeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IncomeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload>
+          }
+          findMany: {
+            args: Prisma.IncomeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload>[]
+          }
+          create: {
+            args: Prisma.IncomeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload>
+          }
+          createMany: {
+            args: Prisma.IncomeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IncomeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload>[]
+          }
+          delete: {
+            args: Prisma.IncomeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload>
+          }
+          update: {
+            args: Prisma.IncomeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload>
+          }
+          deleteMany: {
+            args: Prisma.IncomeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IncomeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IncomeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload>[]
+          }
+          upsert: {
+            args: Prisma.IncomeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomePayload>
+          }
+          aggregate: {
+            args: Prisma.IncomeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIncome>
+          }
+          groupBy: {
+            args: Prisma.IncomeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IncomeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IncomeCountArgs<ExtArgs>
+            result: $Utils.Optional<IncomeCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1157,6 +1247,7 @@ export namespace Prisma {
     category?: CategoryOmit
     goal?: GoalOmit
     balance?: BalanceOmit
+    income?: IncomeOmit
   }
 
   /* Types for Logging */
@@ -1253,11 +1344,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     expenses: number
     goals: number
+    incomes: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     expenses?: boolean | UserCountOutputTypeCountExpensesArgs
     goals?: boolean | UserCountOutputTypeCountGoalsArgs
+    incomes?: boolean | UserCountOutputTypeCountIncomesArgs
   }
 
   // Custom InputTypes
@@ -1283,6 +1376,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountGoalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: GoalWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountIncomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncomeWhereInput
   }
 
 
@@ -1471,6 +1571,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     expenses?: boolean | User$expensesArgs<ExtArgs>
     goals?: boolean | User$goalsArgs<ExtArgs>
+    incomes?: boolean | User$incomesArgs<ExtArgs>
     balance?: boolean | User$balanceArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1497,6 +1598,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     expenses?: boolean | User$expensesArgs<ExtArgs>
     goals?: boolean | User$goalsArgs<ExtArgs>
+    incomes?: boolean | User$incomesArgs<ExtArgs>
     balance?: boolean | User$balanceArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -1508,6 +1610,7 @@ export namespace Prisma {
     objects: {
       expenses: Prisma.$ExpensePayload<ExtArgs>[]
       goals: Prisma.$GoalPayload<ExtArgs>[]
+      incomes: Prisma.$IncomePayload<ExtArgs>[]
       balance: Prisma.$BalancePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -1910,6 +2013,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     expenses<T extends User$expensesArgs<ExtArgs> = {}>(args?: Subset<T, User$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     goals<T extends User$goalsArgs<ExtArgs> = {}>(args?: Subset<T, User$goalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    incomes<T extends User$incomesArgs<ExtArgs> = {}>(args?: Subset<T, User$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     balance<T extends User$balanceArgs<ExtArgs> = {}>(args?: Subset<T, User$balanceArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2376,6 +2480,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: GoalScalarFieldEnum | GoalScalarFieldEnum[]
+  }
+
+  /**
+   * User.incomes
+   */
+  export type User$incomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    where?: IncomeWhereInput
+    orderBy?: IncomeOrderByWithRelationInput | IncomeOrderByWithRelationInput[]
+    cursor?: IncomeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IncomeScalarFieldEnum | IncomeScalarFieldEnum[]
   }
 
   /**
@@ -6822,6 +6950,1119 @@ export namespace Prisma {
 
 
   /**
+   * Model Income
+   */
+
+  export type AggregateIncome = {
+    _count: IncomeCountAggregateOutputType | null
+    _avg: IncomeAvgAggregateOutputType | null
+    _sum: IncomeSumAggregateOutputType | null
+    _min: IncomeMinAggregateOutputType | null
+    _max: IncomeMaxAggregateOutputType | null
+  }
+
+  export type IncomeAvgAggregateOutputType = {
+    income: number | null
+    extraincome: number | null
+    otherincome: number | null
+  }
+
+  export type IncomeSumAggregateOutputType = {
+    income: number | null
+    extraincome: number | null
+    otherincome: number | null
+  }
+
+  export type IncomeMinAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    userId: string | null
+    income: number | null
+    extraincome: number | null
+    otherincome: number | null
+  }
+
+  export type IncomeMaxAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    userId: string | null
+    income: number | null
+    extraincome: number | null
+    otherincome: number | null
+  }
+
+  export type IncomeCountAggregateOutputType = {
+    id: number
+    date: number
+    userId: number
+    income: number
+    extraincome: number
+    otherincome: number
+    _all: number
+  }
+
+
+  export type IncomeAvgAggregateInputType = {
+    income?: true
+    extraincome?: true
+    otherincome?: true
+  }
+
+  export type IncomeSumAggregateInputType = {
+    income?: true
+    extraincome?: true
+    otherincome?: true
+  }
+
+  export type IncomeMinAggregateInputType = {
+    id?: true
+    date?: true
+    userId?: true
+    income?: true
+    extraincome?: true
+    otherincome?: true
+  }
+
+  export type IncomeMaxAggregateInputType = {
+    id?: true
+    date?: true
+    userId?: true
+    income?: true
+    extraincome?: true
+    otherincome?: true
+  }
+
+  export type IncomeCountAggregateInputType = {
+    id?: true
+    date?: true
+    userId?: true
+    income?: true
+    extraincome?: true
+    otherincome?: true
+    _all?: true
+  }
+
+  export type IncomeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Income to aggregate.
+     */
+    where?: IncomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incomes to fetch.
+     */
+    orderBy?: IncomeOrderByWithRelationInput | IncomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IncomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incomes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Incomes
+    **/
+    _count?: true | IncomeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IncomeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IncomeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IncomeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IncomeMaxAggregateInputType
+  }
+
+  export type GetIncomeAggregateType<T extends IncomeAggregateArgs> = {
+        [P in keyof T & keyof AggregateIncome]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIncome[P]>
+      : GetScalarType<T[P], AggregateIncome[P]>
+  }
+
+
+
+
+  export type IncomeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncomeWhereInput
+    orderBy?: IncomeOrderByWithAggregationInput | IncomeOrderByWithAggregationInput[]
+    by: IncomeScalarFieldEnum[] | IncomeScalarFieldEnum
+    having?: IncomeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IncomeCountAggregateInputType | true
+    _avg?: IncomeAvgAggregateInputType
+    _sum?: IncomeSumAggregateInputType
+    _min?: IncomeMinAggregateInputType
+    _max?: IncomeMaxAggregateInputType
+  }
+
+  export type IncomeGroupByOutputType = {
+    id: string
+    date: Date
+    userId: string
+    income: number
+    extraincome: number
+    otherincome: number
+    _count: IncomeCountAggregateOutputType | null
+    _avg: IncomeAvgAggregateOutputType | null
+    _sum: IncomeSumAggregateOutputType | null
+    _min: IncomeMinAggregateOutputType | null
+    _max: IncomeMaxAggregateOutputType | null
+  }
+
+  type GetIncomeGroupByPayload<T extends IncomeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IncomeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IncomeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IncomeGroupByOutputType[P]>
+            : GetScalarType<T[P], IncomeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IncomeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    userId?: boolean
+    income?: boolean
+    extraincome?: boolean
+    otherincome?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["income"]>
+
+  export type IncomeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    userId?: boolean
+    income?: boolean
+    extraincome?: boolean
+    otherincome?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["income"]>
+
+  export type IncomeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    userId?: boolean
+    income?: boolean
+    extraincome?: boolean
+    otherincome?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["income"]>
+
+  export type IncomeSelectScalar = {
+    id?: boolean
+    date?: boolean
+    userId?: boolean
+    income?: boolean
+    extraincome?: boolean
+    otherincome?: boolean
+  }
+
+  export type IncomeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "userId" | "income" | "extraincome" | "otherincome", ExtArgs["result"]["income"]>
+  export type IncomeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IncomeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IncomeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $IncomePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Income"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      date: Date
+      userId: string
+      income: number
+      extraincome: number
+      otherincome: number
+    }, ExtArgs["result"]["income"]>
+    composites: {}
+  }
+
+  type IncomeGetPayload<S extends boolean | null | undefined | IncomeDefaultArgs> = $Result.GetResult<Prisma.$IncomePayload, S>
+
+  type IncomeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IncomeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IncomeCountAggregateInputType | true
+    }
+
+  export interface IncomeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Income'], meta: { name: 'Income' } }
+    /**
+     * Find zero or one Income that matches the filter.
+     * @param {IncomeFindUniqueArgs} args - Arguments to find a Income
+     * @example
+     * // Get one Income
+     * const income = await prisma.income.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IncomeFindUniqueArgs>(args: SelectSubset<T, IncomeFindUniqueArgs<ExtArgs>>): Prisma__IncomeClient<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Income that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IncomeFindUniqueOrThrowArgs} args - Arguments to find a Income
+     * @example
+     * // Get one Income
+     * const income = await prisma.income.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IncomeFindUniqueOrThrowArgs>(args: SelectSubset<T, IncomeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IncomeClient<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Income that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeFindFirstArgs} args - Arguments to find a Income
+     * @example
+     * // Get one Income
+     * const income = await prisma.income.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IncomeFindFirstArgs>(args?: SelectSubset<T, IncomeFindFirstArgs<ExtArgs>>): Prisma__IncomeClient<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Income that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeFindFirstOrThrowArgs} args - Arguments to find a Income
+     * @example
+     * // Get one Income
+     * const income = await prisma.income.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IncomeFindFirstOrThrowArgs>(args?: SelectSubset<T, IncomeFindFirstOrThrowArgs<ExtArgs>>): Prisma__IncomeClient<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Incomes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Incomes
+     * const incomes = await prisma.income.findMany()
+     * 
+     * // Get first 10 Incomes
+     * const incomes = await prisma.income.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const incomeWithIdOnly = await prisma.income.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IncomeFindManyArgs>(args?: SelectSubset<T, IncomeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Income.
+     * @param {IncomeCreateArgs} args - Arguments to create a Income.
+     * @example
+     * // Create one Income
+     * const Income = await prisma.income.create({
+     *   data: {
+     *     // ... data to create a Income
+     *   }
+     * })
+     * 
+     */
+    create<T extends IncomeCreateArgs>(args: SelectSubset<T, IncomeCreateArgs<ExtArgs>>): Prisma__IncomeClient<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Incomes.
+     * @param {IncomeCreateManyArgs} args - Arguments to create many Incomes.
+     * @example
+     * // Create many Incomes
+     * const income = await prisma.income.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IncomeCreateManyArgs>(args?: SelectSubset<T, IncomeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Incomes and returns the data saved in the database.
+     * @param {IncomeCreateManyAndReturnArgs} args - Arguments to create many Incomes.
+     * @example
+     * // Create many Incomes
+     * const income = await prisma.income.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Incomes and only return the `id`
+     * const incomeWithIdOnly = await prisma.income.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IncomeCreateManyAndReturnArgs>(args?: SelectSubset<T, IncomeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Income.
+     * @param {IncomeDeleteArgs} args - Arguments to delete one Income.
+     * @example
+     * // Delete one Income
+     * const Income = await prisma.income.delete({
+     *   where: {
+     *     // ... filter to delete one Income
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IncomeDeleteArgs>(args: SelectSubset<T, IncomeDeleteArgs<ExtArgs>>): Prisma__IncomeClient<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Income.
+     * @param {IncomeUpdateArgs} args - Arguments to update one Income.
+     * @example
+     * // Update one Income
+     * const income = await prisma.income.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IncomeUpdateArgs>(args: SelectSubset<T, IncomeUpdateArgs<ExtArgs>>): Prisma__IncomeClient<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Incomes.
+     * @param {IncomeDeleteManyArgs} args - Arguments to filter Incomes to delete.
+     * @example
+     * // Delete a few Incomes
+     * const { count } = await prisma.income.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IncomeDeleteManyArgs>(args?: SelectSubset<T, IncomeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Incomes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Incomes
+     * const income = await prisma.income.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IncomeUpdateManyArgs>(args: SelectSubset<T, IncomeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Incomes and returns the data updated in the database.
+     * @param {IncomeUpdateManyAndReturnArgs} args - Arguments to update many Incomes.
+     * @example
+     * // Update many Incomes
+     * const income = await prisma.income.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Incomes and only return the `id`
+     * const incomeWithIdOnly = await prisma.income.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IncomeUpdateManyAndReturnArgs>(args: SelectSubset<T, IncomeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Income.
+     * @param {IncomeUpsertArgs} args - Arguments to update or create a Income.
+     * @example
+     * // Update or create a Income
+     * const income = await prisma.income.upsert({
+     *   create: {
+     *     // ... data to create a Income
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Income we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IncomeUpsertArgs>(args: SelectSubset<T, IncomeUpsertArgs<ExtArgs>>): Prisma__IncomeClient<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Incomes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeCountArgs} args - Arguments to filter Incomes to count.
+     * @example
+     * // Count the number of Incomes
+     * const count = await prisma.income.count({
+     *   where: {
+     *     // ... the filter for the Incomes we want to count
+     *   }
+     * })
+    **/
+    count<T extends IncomeCountArgs>(
+      args?: Subset<T, IncomeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IncomeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Income.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IncomeAggregateArgs>(args: Subset<T, IncomeAggregateArgs>): Prisma.PrismaPromise<GetIncomeAggregateType<T>>
+
+    /**
+     * Group by Income.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IncomeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IncomeGroupByArgs['orderBy'] }
+        : { orderBy?: IncomeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IncomeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIncomeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Income model
+   */
+  readonly fields: IncomeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Income.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IncomeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Income model
+   */
+  interface IncomeFieldRefs {
+    readonly id: FieldRef<"Income", 'String'>
+    readonly date: FieldRef<"Income", 'DateTime'>
+    readonly userId: FieldRef<"Income", 'String'>
+    readonly income: FieldRef<"Income", 'Float'>
+    readonly extraincome: FieldRef<"Income", 'Float'>
+    readonly otherincome: FieldRef<"Income", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Income findUnique
+   */
+  export type IncomeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which Income to fetch.
+     */
+    where: IncomeWhereUniqueInput
+  }
+
+  /**
+   * Income findUniqueOrThrow
+   */
+  export type IncomeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which Income to fetch.
+     */
+    where: IncomeWhereUniqueInput
+  }
+
+  /**
+   * Income findFirst
+   */
+  export type IncomeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which Income to fetch.
+     */
+    where?: IncomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incomes to fetch.
+     */
+    orderBy?: IncomeOrderByWithRelationInput | IncomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Incomes.
+     */
+    cursor?: IncomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incomes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Incomes.
+     */
+    distinct?: IncomeScalarFieldEnum | IncomeScalarFieldEnum[]
+  }
+
+  /**
+   * Income findFirstOrThrow
+   */
+  export type IncomeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which Income to fetch.
+     */
+    where?: IncomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incomes to fetch.
+     */
+    orderBy?: IncomeOrderByWithRelationInput | IncomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Incomes.
+     */
+    cursor?: IncomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incomes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Incomes.
+     */
+    distinct?: IncomeScalarFieldEnum | IncomeScalarFieldEnum[]
+  }
+
+  /**
+   * Income findMany
+   */
+  export type IncomeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    /**
+     * Filter, which Incomes to fetch.
+     */
+    where?: IncomeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incomes to fetch.
+     */
+    orderBy?: IncomeOrderByWithRelationInput | IncomeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Incomes.
+     */
+    cursor?: IncomeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incomes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incomes.
+     */
+    skip?: number
+    distinct?: IncomeScalarFieldEnum | IncomeScalarFieldEnum[]
+  }
+
+  /**
+   * Income create
+   */
+  export type IncomeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Income.
+     */
+    data: XOR<IncomeCreateInput, IncomeUncheckedCreateInput>
+  }
+
+  /**
+   * Income createMany
+   */
+  export type IncomeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Incomes.
+     */
+    data: IncomeCreateManyInput | IncomeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Income createManyAndReturn
+   */
+  export type IncomeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Incomes.
+     */
+    data: IncomeCreateManyInput | IncomeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Income update
+   */
+  export type IncomeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Income.
+     */
+    data: XOR<IncomeUpdateInput, IncomeUncheckedUpdateInput>
+    /**
+     * Choose, which Income to update.
+     */
+    where: IncomeWhereUniqueInput
+  }
+
+  /**
+   * Income updateMany
+   */
+  export type IncomeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Incomes.
+     */
+    data: XOR<IncomeUpdateManyMutationInput, IncomeUncheckedUpdateManyInput>
+    /**
+     * Filter which Incomes to update
+     */
+    where?: IncomeWhereInput
+    /**
+     * Limit how many Incomes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Income updateManyAndReturn
+   */
+  export type IncomeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * The data used to update Incomes.
+     */
+    data: XOR<IncomeUpdateManyMutationInput, IncomeUncheckedUpdateManyInput>
+    /**
+     * Filter which Incomes to update
+     */
+    where?: IncomeWhereInput
+    /**
+     * Limit how many Incomes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Income upsert
+   */
+  export type IncomeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Income to update in case it exists.
+     */
+    where: IncomeWhereUniqueInput
+    /**
+     * In case the Income found by the `where` argument doesn't exist, create a new Income with this data.
+     */
+    create: XOR<IncomeCreateInput, IncomeUncheckedCreateInput>
+    /**
+     * In case the Income was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IncomeUpdateInput, IncomeUncheckedUpdateInput>
+  }
+
+  /**
+   * Income delete
+   */
+  export type IncomeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+    /**
+     * Filter which Income to delete.
+     */
+    where: IncomeWhereUniqueInput
+  }
+
+  /**
+   * Income deleteMany
+   */
+  export type IncomeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Incomes to delete
+     */
+    where?: IncomeWhereInput
+    /**
+     * Limit how many Incomes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Income without action
+   */
+  export type IncomeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Income
+     */
+    select?: IncomeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Income
+     */
+    omit?: IncomeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6889,6 +8130,18 @@ export namespace Prisma {
   };
 
   export type BalanceScalarFieldEnum = (typeof BalanceScalarFieldEnum)[keyof typeof BalanceScalarFieldEnum]
+
+
+  export const IncomeScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    userId: 'userId',
+    income: 'income',
+    extraincome: 'extraincome',
+    otherincome: 'otherincome'
+  };
+
+  export type IncomeScalarFieldEnum = (typeof IncomeScalarFieldEnum)[keyof typeof IncomeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7009,6 +8262,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     expenses?: ExpenseListRelationFilter
     goals?: GoalListRelationFilter
+    incomes?: IncomeListRelationFilter
     balance?: XOR<BalanceNullableScalarRelationFilter, BalanceWhereInput> | null
   }
 
@@ -7018,6 +8272,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     expenses?: ExpenseOrderByRelationAggregateInput
     goals?: GoalOrderByRelationAggregateInput
+    incomes?: IncomeOrderByRelationAggregateInput
     balance?: BalanceOrderByWithRelationInput
   }
 
@@ -7030,6 +8285,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     expenses?: ExpenseListRelationFilter
     goals?: GoalListRelationFilter
+    incomes?: IncomeListRelationFilter
     balance?: XOR<BalanceNullableScalarRelationFilter, BalanceWhereInput> | null
   }, "id">
 
@@ -7295,12 +8551,75 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Balance"> | string
   }
 
+  export type IncomeWhereInput = {
+    AND?: IncomeWhereInput | IncomeWhereInput[]
+    OR?: IncomeWhereInput[]
+    NOT?: IncomeWhereInput | IncomeWhereInput[]
+    id?: StringFilter<"Income"> | string
+    date?: DateTimeFilter<"Income"> | Date | string
+    userId?: StringFilter<"Income"> | string
+    income?: FloatFilter<"Income"> | number
+    extraincome?: FloatFilter<"Income"> | number
+    otherincome?: FloatFilter<"Income"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type IncomeOrderByWithRelationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    userId?: SortOrder
+    income?: SortOrder
+    extraincome?: SortOrder
+    otherincome?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type IncomeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IncomeWhereInput | IncomeWhereInput[]
+    OR?: IncomeWhereInput[]
+    NOT?: IncomeWhereInput | IncomeWhereInput[]
+    date?: DateTimeFilter<"Income"> | Date | string
+    userId?: StringFilter<"Income"> | string
+    income?: FloatFilter<"Income"> | number
+    extraincome?: FloatFilter<"Income"> | number
+    otherincome?: FloatFilter<"Income"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type IncomeOrderByWithAggregationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    userId?: SortOrder
+    income?: SortOrder
+    extraincome?: SortOrder
+    otherincome?: SortOrder
+    _count?: IncomeCountOrderByAggregateInput
+    _avg?: IncomeAvgOrderByAggregateInput
+    _max?: IncomeMaxOrderByAggregateInput
+    _min?: IncomeMinOrderByAggregateInput
+    _sum?: IncomeSumOrderByAggregateInput
+  }
+
+  export type IncomeScalarWhereWithAggregatesInput = {
+    AND?: IncomeScalarWhereWithAggregatesInput | IncomeScalarWhereWithAggregatesInput[]
+    OR?: IncomeScalarWhereWithAggregatesInput[]
+    NOT?: IncomeScalarWhereWithAggregatesInput | IncomeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Income"> | string
+    date?: DateTimeWithAggregatesFilter<"Income"> | Date | string
+    userId?: StringWithAggregatesFilter<"Income"> | string
+    income?: FloatWithAggregatesFilter<"Income"> | number
+    extraincome?: FloatWithAggregatesFilter<"Income"> | number
+    otherincome?: FloatWithAggregatesFilter<"Income"> | number
+  }
+
   export type UserCreateInput = {
     id?: string
     name: string
     avatarUrl?: string | null
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
+    incomes?: IncomeCreateNestedManyWithoutUserInput
     balance?: BalanceCreateNestedOneWithoutUserInput
   }
 
@@ -7310,6 +8629,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
+    incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -7319,6 +8639,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUpdateManyWithoutUserNestedInput
     balance?: BalanceUpdateOneWithoutUserNestedInput
   }
 
@@ -7328,6 +8649,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -7594,6 +8916,68 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type IncomeCreateInput = {
+    id?: string
+    date: Date | string
+    income: number
+    extraincome: number
+    otherincome: number
+    user: UserCreateNestedOneWithoutIncomesInput
+  }
+
+  export type IncomeUncheckedCreateInput = {
+    id?: string
+    date: Date | string
+    userId: string
+    income: number
+    extraincome: number
+    otherincome: number
+  }
+
+  export type IncomeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    income?: FloatFieldUpdateOperationsInput | number
+    extraincome?: FloatFieldUpdateOperationsInput | number
+    otherincome?: FloatFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutIncomesNestedInput
+  }
+
+  export type IncomeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    income?: FloatFieldUpdateOperationsInput | number
+    extraincome?: FloatFieldUpdateOperationsInput | number
+    otherincome?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type IncomeCreateManyInput = {
+    id?: string
+    date: Date | string
+    userId: string
+    income: number
+    extraincome: number
+    otherincome: number
+  }
+
+  export type IncomeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    income?: FloatFieldUpdateOperationsInput | number
+    extraincome?: FloatFieldUpdateOperationsInput | number
+    otherincome?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type IncomeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    income?: FloatFieldUpdateOperationsInput | number
+    extraincome?: FloatFieldUpdateOperationsInput | number
+    otherincome?: FloatFieldUpdateOperationsInput | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7636,6 +9020,12 @@ export namespace Prisma {
     none?: GoalWhereInput
   }
 
+  export type IncomeListRelationFilter = {
+    every?: IncomeWhereInput
+    some?: IncomeWhereInput
+    none?: IncomeWhereInput
+  }
+
   export type BalanceNullableScalarRelationFilter = {
     is?: BalanceWhereInput | null
     isNot?: BalanceWhereInput | null
@@ -7651,6 +9041,10 @@ export namespace Prisma {
   }
 
   export type GoalOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IncomeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7962,6 +9356,45 @@ export namespace Prisma {
     value?: SortOrder
   }
 
+  export type IncomeCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    userId?: SortOrder
+    income?: SortOrder
+    extraincome?: SortOrder
+    otherincome?: SortOrder
+  }
+
+  export type IncomeAvgOrderByAggregateInput = {
+    income?: SortOrder
+    extraincome?: SortOrder
+    otherincome?: SortOrder
+  }
+
+  export type IncomeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    userId?: SortOrder
+    income?: SortOrder
+    extraincome?: SortOrder
+    otherincome?: SortOrder
+  }
+
+  export type IncomeMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    userId?: SortOrder
+    income?: SortOrder
+    extraincome?: SortOrder
+    otherincome?: SortOrder
+  }
+
+  export type IncomeSumOrderByAggregateInput = {
+    income?: SortOrder
+    extraincome?: SortOrder
+    otherincome?: SortOrder
+  }
+
   export type ExpenseCreateNestedManyWithoutUserInput = {
     create?: XOR<ExpenseCreateWithoutUserInput, ExpenseUncheckedCreateWithoutUserInput> | ExpenseCreateWithoutUserInput[] | ExpenseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ExpenseCreateOrConnectWithoutUserInput | ExpenseCreateOrConnectWithoutUserInput[]
@@ -7974,6 +9407,13 @@ export namespace Prisma {
     connectOrCreate?: GoalCreateOrConnectWithoutUserInput | GoalCreateOrConnectWithoutUserInput[]
     createMany?: GoalCreateManyUserInputEnvelope
     connect?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
+  }
+
+  export type IncomeCreateNestedManyWithoutUserInput = {
+    create?: XOR<IncomeCreateWithoutUserInput, IncomeUncheckedCreateWithoutUserInput> | IncomeCreateWithoutUserInput[] | IncomeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomeCreateOrConnectWithoutUserInput | IncomeCreateOrConnectWithoutUserInput[]
+    createMany?: IncomeCreateManyUserInputEnvelope
+    connect?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
   }
 
   export type BalanceCreateNestedOneWithoutUserInput = {
@@ -7994,6 +9434,13 @@ export namespace Prisma {
     connectOrCreate?: GoalCreateOrConnectWithoutUserInput | GoalCreateOrConnectWithoutUserInput[]
     createMany?: GoalCreateManyUserInputEnvelope
     connect?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
+  }
+
+  export type IncomeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<IncomeCreateWithoutUserInput, IncomeUncheckedCreateWithoutUserInput> | IncomeCreateWithoutUserInput[] | IncomeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomeCreateOrConnectWithoutUserInput | IncomeCreateOrConnectWithoutUserInput[]
+    createMany?: IncomeCreateManyUserInputEnvelope
+    connect?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
   }
 
   export type BalanceUncheckedCreateNestedOneWithoutUserInput = {
@@ -8038,6 +9485,20 @@ export namespace Prisma {
     deleteMany?: GoalScalarWhereInput | GoalScalarWhereInput[]
   }
 
+  export type IncomeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IncomeCreateWithoutUserInput, IncomeUncheckedCreateWithoutUserInput> | IncomeCreateWithoutUserInput[] | IncomeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomeCreateOrConnectWithoutUserInput | IncomeCreateOrConnectWithoutUserInput[]
+    upsert?: IncomeUpsertWithWhereUniqueWithoutUserInput | IncomeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IncomeCreateManyUserInputEnvelope
+    set?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+    disconnect?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+    delete?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+    connect?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+    update?: IncomeUpdateWithWhereUniqueWithoutUserInput | IncomeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IncomeUpdateManyWithWhereWithoutUserInput | IncomeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IncomeScalarWhereInput | IncomeScalarWhereInput[]
+  }
+
   export type BalanceUpdateOneWithoutUserNestedInput = {
     create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
     connectOrCreate?: BalanceCreateOrConnectWithoutUserInput
@@ -8074,6 +9535,20 @@ export namespace Prisma {
     update?: GoalUpdateWithWhereUniqueWithoutUserInput | GoalUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: GoalUpdateManyWithWhereWithoutUserInput | GoalUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: GoalScalarWhereInput | GoalScalarWhereInput[]
+  }
+
+  export type IncomeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IncomeCreateWithoutUserInput, IncomeUncheckedCreateWithoutUserInput> | IncomeCreateWithoutUserInput[] | IncomeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomeCreateOrConnectWithoutUserInput | IncomeCreateOrConnectWithoutUserInput[]
+    upsert?: IncomeUpsertWithWhereUniqueWithoutUserInput | IncomeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IncomeCreateManyUserInputEnvelope
+    set?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+    disconnect?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+    delete?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+    connect?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+    update?: IncomeUpdateWithWhereUniqueWithoutUserInput | IncomeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IncomeUpdateManyWithWhereWithoutUserInput | IncomeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IncomeScalarWhereInput | IncomeScalarWhereInput[]
   }
 
   export type BalanceUncheckedUpdateOneWithoutUserNestedInput = {
@@ -8210,6 +9685,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutBalanceInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBalanceInput, UserUpdateWithoutBalanceInput>, UserUncheckedUpdateWithoutBalanceInput>
+  }
+
+  export type UserCreateNestedOneWithoutIncomesInput = {
+    create?: XOR<UserCreateWithoutIncomesInput, UserUncheckedCreateWithoutIncomesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIncomesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutIncomesNestedInput = {
+    create?: XOR<UserCreateWithoutIncomesInput, UserUncheckedCreateWithoutIncomesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIncomesInput
+    upsert?: UserUpsertWithoutIncomesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutIncomesInput, UserUpdateWithoutIncomesInput>, UserUncheckedUpdateWithoutIncomesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8465,6 +9954,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type IncomeCreateWithoutUserInput = {
+    id?: string
+    date: Date | string
+    income: number
+    extraincome: number
+    otherincome: number
+  }
+
+  export type IncomeUncheckedCreateWithoutUserInput = {
+    id?: string
+    date: Date | string
+    income: number
+    extraincome: number
+    otherincome: number
+  }
+
+  export type IncomeCreateOrConnectWithoutUserInput = {
+    where: IncomeWhereUniqueInput
+    create: XOR<IncomeCreateWithoutUserInput, IncomeUncheckedCreateWithoutUserInput>
+  }
+
+  export type IncomeCreateManyUserInputEnvelope = {
+    data: IncomeCreateManyUserInput | IncomeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type BalanceCreateWithoutUserInput = {
     id?: string
     value: number
@@ -8542,6 +10057,34 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Goal"> | Date | string
   }
 
+  export type IncomeUpsertWithWhereUniqueWithoutUserInput = {
+    where: IncomeWhereUniqueInput
+    update: XOR<IncomeUpdateWithoutUserInput, IncomeUncheckedUpdateWithoutUserInput>
+    create: XOR<IncomeCreateWithoutUserInput, IncomeUncheckedCreateWithoutUserInput>
+  }
+
+  export type IncomeUpdateWithWhereUniqueWithoutUserInput = {
+    where: IncomeWhereUniqueInput
+    data: XOR<IncomeUpdateWithoutUserInput, IncomeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type IncomeUpdateManyWithWhereWithoutUserInput = {
+    where: IncomeScalarWhereInput
+    data: XOR<IncomeUpdateManyMutationInput, IncomeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type IncomeScalarWhereInput = {
+    AND?: IncomeScalarWhereInput | IncomeScalarWhereInput[]
+    OR?: IncomeScalarWhereInput[]
+    NOT?: IncomeScalarWhereInput | IncomeScalarWhereInput[]
+    id?: StringFilter<"Income"> | string
+    date?: DateTimeFilter<"Income"> | Date | string
+    userId?: StringFilter<"Income"> | string
+    income?: FloatFilter<"Income"> | number
+    extraincome?: FloatFilter<"Income"> | number
+    otherincome?: FloatFilter<"Income"> | number
+  }
+
   export type BalanceUpsertWithoutUserInput = {
     update: XOR<BalanceUpdateWithoutUserInput, BalanceUncheckedUpdateWithoutUserInput>
     create: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
@@ -8587,6 +10130,7 @@ export namespace Prisma {
     name: string
     avatarUrl?: string | null
     goals?: GoalCreateNestedManyWithoutUserInput
+    incomes?: IncomeCreateNestedManyWithoutUserInput
     balance?: BalanceCreateNestedOneWithoutUserInput
   }
 
@@ -8595,6 +10139,7 @@ export namespace Prisma {
     name: string
     avatarUrl?: string | null
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
+    incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -8642,6 +10187,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     goals?: GoalUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUpdateManyWithoutUserNestedInput
     balance?: BalanceUpdateOneWithoutUserNestedInput
   }
 
@@ -8650,6 +10196,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -8706,6 +10253,7 @@ export namespace Prisma {
     name: string
     avatarUrl?: string | null
     expenses?: ExpenseCreateNestedManyWithoutUserInput
+    incomes?: IncomeCreateNestedManyWithoutUserInput
     balance?: BalanceCreateNestedOneWithoutUserInput
   }
 
@@ -8714,6 +10262,7 @@ export namespace Prisma {
     name: string
     avatarUrl?: string | null
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -8738,6 +10287,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUpdateManyWithoutUserNestedInput
     balance?: BalanceUpdateOneWithoutUserNestedInput
   }
 
@@ -8746,6 +10296,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -8755,6 +10306,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
+    incomes?: IncomeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBalanceInput = {
@@ -8763,6 +10315,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
+    incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBalanceInput = {
@@ -8787,6 +10340,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBalanceInput = {
@@ -8795,6 +10349,59 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutIncomesInput = {
+    id?: string
+    name: string
+    avatarUrl?: string | null
+    expenses?: ExpenseCreateNestedManyWithoutUserInput
+    goals?: GoalCreateNestedManyWithoutUserInput
+    balance?: BalanceCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutIncomesInput = {
+    id?: string
+    name: string
+    avatarUrl?: string | null
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    goals?: GoalUncheckedCreateNestedManyWithoutUserInput
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutIncomesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutIncomesInput, UserUncheckedCreateWithoutIncomesInput>
+  }
+
+  export type UserUpsertWithoutIncomesInput = {
+    update: XOR<UserUpdateWithoutIncomesInput, UserUncheckedUpdateWithoutIncomesInput>
+    create: XOR<UserCreateWithoutIncomesInput, UserUncheckedCreateWithoutIncomesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutIncomesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutIncomesInput, UserUncheckedUpdateWithoutIncomesInput>
+  }
+
+  export type UserUpdateWithoutIncomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    goals?: GoalUpdateManyWithoutUserNestedInput
+    balance?: BalanceUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutIncomesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
+    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ExpenseCreateManyUserInput = {
@@ -8815,6 +10422,14 @@ export namespace Prisma {
     progress?: number
     status: $Enums.GoalStatus
     createdAt?: Date | string
+  }
+
+  export type IncomeCreateManyUserInput = {
+    id?: string
+    date: Date | string
+    income: number
+    extraincome: number
+    otherincome: number
   }
 
   export type ExpenseUpdateWithoutUserInput = {
@@ -8875,6 +10490,30 @@ export namespace Prisma {
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    income?: FloatFieldUpdateOperationsInput | number
+    extraincome?: FloatFieldUpdateOperationsInput | number
+    otherincome?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type IncomeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    income?: FloatFieldUpdateOperationsInput | number
+    extraincome?: FloatFieldUpdateOperationsInput | number
+    otherincome?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type IncomeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    income?: FloatFieldUpdateOperationsInput | number
+    extraincome?: FloatFieldUpdateOperationsInput | number
+    otherincome?: FloatFieldUpdateOperationsInput | number
   }
 
   export type ExpenseCreateManyCategoryInput = {

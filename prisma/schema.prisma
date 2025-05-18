@@ -20,6 +20,7 @@ model User {
   avatarUrl String?
   expenses  Expense[]
   goals     Goal[]
+  incomes Income[] 
   balance   Balance?
 }
 
@@ -67,4 +68,14 @@ model Balance {
   date   DateTime
   user   User     @relation(fields: [userId], references: [id])
   userId String   @unique
+}
+
+model Income {
+  id     String   @id @default(uuid())
+  date   DateTime
+  user   User     @relation(fields: [userId], references: [id])
+  userId String   
+  income Float
+  extraincome Float
+  otherincome Float
 }
