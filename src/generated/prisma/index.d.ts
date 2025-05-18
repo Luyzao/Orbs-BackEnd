@@ -43,6 +43,11 @@ export type Balance = $Result.DefaultSelection<Prisma.$BalancePayload>
  * 
  */
 export type Income = $Result.DefaultSelection<Prisma.$IncomePayload>
+/**
+ * Model IncomeSummary
+ * 
+ */
+export type IncomeSummary = $Result.DefaultSelection<Prisma.$IncomeSummaryPayload>
 
 /**
  * Enums
@@ -246,6 +251,16 @@ export class PrismaClient<
     * ```
     */
   get income(): Prisma.IncomeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.incomeSummary`: Exposes CRUD operations for the **IncomeSummary** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IncomeSummaries
+    * const incomeSummaries = await prisma.incomeSummary.findMany()
+    * ```
+    */
+  get incomeSummary(): Prisma.IncomeSummaryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -691,7 +706,8 @@ export namespace Prisma {
     Category: 'Category',
     Goal: 'Goal',
     Balance: 'Balance',
-    Income: 'Income'
+    Income: 'Income',
+    IncomeSummary: 'IncomeSummary'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -710,7 +726,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "expense" | "category" | "goal" | "balance" | "income"
+      modelProps: "user" | "expense" | "category" | "goal" | "balance" | "income" | "incomeSummary"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1158,6 +1174,80 @@ export namespace Prisma {
           }
         }
       }
+      IncomeSummary: {
+        payload: Prisma.$IncomeSummaryPayload<ExtArgs>
+        fields: Prisma.IncomeSummaryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IncomeSummaryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IncomeSummaryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload>
+          }
+          findFirst: {
+            args: Prisma.IncomeSummaryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IncomeSummaryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload>
+          }
+          findMany: {
+            args: Prisma.IncomeSummaryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload>[]
+          }
+          create: {
+            args: Prisma.IncomeSummaryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload>
+          }
+          createMany: {
+            args: Prisma.IncomeSummaryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IncomeSummaryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload>[]
+          }
+          delete: {
+            args: Prisma.IncomeSummaryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload>
+          }
+          update: {
+            args: Prisma.IncomeSummaryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload>
+          }
+          deleteMany: {
+            args: Prisma.IncomeSummaryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IncomeSummaryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IncomeSummaryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload>[]
+          }
+          upsert: {
+            args: Prisma.IncomeSummaryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncomeSummaryPayload>
+          }
+          aggregate: {
+            args: Prisma.IncomeSummaryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIncomeSummary>
+          }
+          groupBy: {
+            args: Prisma.IncomeSummaryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IncomeSummaryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IncomeSummaryCountArgs<ExtArgs>
+            result: $Utils.Optional<IncomeSummaryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1248,6 +1338,7 @@ export namespace Prisma {
     goal?: GoalOmit
     balance?: BalanceOmit
     income?: IncomeOmit
+    incomeSummary?: IncomeSummaryOmit
   }
 
   /* Types for Logging */
@@ -1345,12 +1436,14 @@ export namespace Prisma {
     expenses: number
     goals: number
     incomes: number
+    incomesummary: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     expenses?: boolean | UserCountOutputTypeCountExpensesArgs
     goals?: boolean | UserCountOutputTypeCountGoalsArgs
     incomes?: boolean | UserCountOutputTypeCountIncomesArgs
+    incomesummary?: boolean | UserCountOutputTypeCountIncomesummaryArgs
   }
 
   // Custom InputTypes
@@ -1383,6 +1476,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountIncomesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IncomeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountIncomesummaryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncomeSummaryWhereInput
   }
 
 
@@ -1572,6 +1672,7 @@ export namespace Prisma {
     expenses?: boolean | User$expensesArgs<ExtArgs>
     goals?: boolean | User$goalsArgs<ExtArgs>
     incomes?: boolean | User$incomesArgs<ExtArgs>
+    incomesummary?: boolean | User$incomesummaryArgs<ExtArgs>
     balance?: boolean | User$balanceArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1599,6 +1700,7 @@ export namespace Prisma {
     expenses?: boolean | User$expensesArgs<ExtArgs>
     goals?: boolean | User$goalsArgs<ExtArgs>
     incomes?: boolean | User$incomesArgs<ExtArgs>
+    incomesummary?: boolean | User$incomesummaryArgs<ExtArgs>
     balance?: boolean | User$balanceArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -1611,6 +1713,7 @@ export namespace Prisma {
       expenses: Prisma.$ExpensePayload<ExtArgs>[]
       goals: Prisma.$GoalPayload<ExtArgs>[]
       incomes: Prisma.$IncomePayload<ExtArgs>[]
+      incomesummary: Prisma.$IncomeSummaryPayload<ExtArgs>[]
       balance: Prisma.$BalancePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2014,6 +2117,7 @@ export namespace Prisma {
     expenses<T extends User$expensesArgs<ExtArgs> = {}>(args?: Subset<T, User$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     goals<T extends User$goalsArgs<ExtArgs> = {}>(args?: Subset<T, User$goalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     incomes<T extends User$incomesArgs<ExtArgs> = {}>(args?: Subset<T, User$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    incomesummary<T extends User$incomesummaryArgs<ExtArgs> = {}>(args?: Subset<T, User$incomesummaryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     balance<T extends User$balanceArgs<ExtArgs> = {}>(args?: Subset<T, User$balanceArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2504,6 +2608,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: IncomeScalarFieldEnum | IncomeScalarFieldEnum[]
+  }
+
+  /**
+   * User.incomesummary
+   */
+  export type User$incomesummaryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    where?: IncomeSummaryWhereInput
+    orderBy?: IncomeSummaryOrderByWithRelationInput | IncomeSummaryOrderByWithRelationInput[]
+    cursor?: IncomeSummaryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IncomeSummaryScalarFieldEnum | IncomeSummaryScalarFieldEnum[]
   }
 
   /**
@@ -8063,6 +8191,1102 @@ export namespace Prisma {
 
 
   /**
+   * Model IncomeSummary
+   */
+
+  export type AggregateIncomeSummary = {
+    _count: IncomeSummaryCountAggregateOutputType | null
+    _avg: IncomeSummaryAvgAggregateOutputType | null
+    _sum: IncomeSummarySumAggregateOutputType | null
+    _min: IncomeSummaryMinAggregateOutputType | null
+    _max: IncomeSummaryMaxAggregateOutputType | null
+  }
+
+  export type IncomeSummaryAvgAggregateOutputType = {
+    total: number | null
+    impostoRenda: number | null
+  }
+
+  export type IncomeSummarySumAggregateOutputType = {
+    total: number | null
+    impostoRenda: number | null
+  }
+
+  export type IncomeSummaryMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    total: number | null
+    impostoRenda: number | null
+    createdAt: Date | null
+  }
+
+  export type IncomeSummaryMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    total: number | null
+    impostoRenda: number | null
+    createdAt: Date | null
+  }
+
+  export type IncomeSummaryCountAggregateOutputType = {
+    id: number
+    userId: number
+    total: number
+    impostoRenda: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type IncomeSummaryAvgAggregateInputType = {
+    total?: true
+    impostoRenda?: true
+  }
+
+  export type IncomeSummarySumAggregateInputType = {
+    total?: true
+    impostoRenda?: true
+  }
+
+  export type IncomeSummaryMinAggregateInputType = {
+    id?: true
+    userId?: true
+    total?: true
+    impostoRenda?: true
+    createdAt?: true
+  }
+
+  export type IncomeSummaryMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    total?: true
+    impostoRenda?: true
+    createdAt?: true
+  }
+
+  export type IncomeSummaryCountAggregateInputType = {
+    id?: true
+    userId?: true
+    total?: true
+    impostoRenda?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type IncomeSummaryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IncomeSummary to aggregate.
+     */
+    where?: IncomeSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IncomeSummaries to fetch.
+     */
+    orderBy?: IncomeSummaryOrderByWithRelationInput | IncomeSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IncomeSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IncomeSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IncomeSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IncomeSummaries
+    **/
+    _count?: true | IncomeSummaryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IncomeSummaryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IncomeSummarySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IncomeSummaryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IncomeSummaryMaxAggregateInputType
+  }
+
+  export type GetIncomeSummaryAggregateType<T extends IncomeSummaryAggregateArgs> = {
+        [P in keyof T & keyof AggregateIncomeSummary]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIncomeSummary[P]>
+      : GetScalarType<T[P], AggregateIncomeSummary[P]>
+  }
+
+
+
+
+  export type IncomeSummaryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncomeSummaryWhereInput
+    orderBy?: IncomeSummaryOrderByWithAggregationInput | IncomeSummaryOrderByWithAggregationInput[]
+    by: IncomeSummaryScalarFieldEnum[] | IncomeSummaryScalarFieldEnum
+    having?: IncomeSummaryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IncomeSummaryCountAggregateInputType | true
+    _avg?: IncomeSummaryAvgAggregateInputType
+    _sum?: IncomeSummarySumAggregateInputType
+    _min?: IncomeSummaryMinAggregateInputType
+    _max?: IncomeSummaryMaxAggregateInputType
+  }
+
+  export type IncomeSummaryGroupByOutputType = {
+    id: string
+    userId: string
+    total: number
+    impostoRenda: number
+    createdAt: Date
+    _count: IncomeSummaryCountAggregateOutputType | null
+    _avg: IncomeSummaryAvgAggregateOutputType | null
+    _sum: IncomeSummarySumAggregateOutputType | null
+    _min: IncomeSummaryMinAggregateOutputType | null
+    _max: IncomeSummaryMaxAggregateOutputType | null
+  }
+
+  type GetIncomeSummaryGroupByPayload<T extends IncomeSummaryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IncomeSummaryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IncomeSummaryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IncomeSummaryGroupByOutputType[P]>
+            : GetScalarType<T[P], IncomeSummaryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IncomeSummarySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    total?: boolean
+    impostoRenda?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["incomeSummary"]>
+
+  export type IncomeSummarySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    total?: boolean
+    impostoRenda?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["incomeSummary"]>
+
+  export type IncomeSummarySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    total?: boolean
+    impostoRenda?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["incomeSummary"]>
+
+  export type IncomeSummarySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    total?: boolean
+    impostoRenda?: boolean
+    createdAt?: boolean
+  }
+
+  export type IncomeSummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "total" | "impostoRenda" | "createdAt", ExtArgs["result"]["incomeSummary"]>
+  export type IncomeSummaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IncomeSummaryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IncomeSummaryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $IncomeSummaryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IncomeSummary"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      total: number
+      impostoRenda: number
+      createdAt: Date
+    }, ExtArgs["result"]["incomeSummary"]>
+    composites: {}
+  }
+
+  type IncomeSummaryGetPayload<S extends boolean | null | undefined | IncomeSummaryDefaultArgs> = $Result.GetResult<Prisma.$IncomeSummaryPayload, S>
+
+  type IncomeSummaryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IncomeSummaryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IncomeSummaryCountAggregateInputType | true
+    }
+
+  export interface IncomeSummaryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IncomeSummary'], meta: { name: 'IncomeSummary' } }
+    /**
+     * Find zero or one IncomeSummary that matches the filter.
+     * @param {IncomeSummaryFindUniqueArgs} args - Arguments to find a IncomeSummary
+     * @example
+     * // Get one IncomeSummary
+     * const incomeSummary = await prisma.incomeSummary.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IncomeSummaryFindUniqueArgs>(args: SelectSubset<T, IncomeSummaryFindUniqueArgs<ExtArgs>>): Prisma__IncomeSummaryClient<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IncomeSummary that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IncomeSummaryFindUniqueOrThrowArgs} args - Arguments to find a IncomeSummary
+     * @example
+     * // Get one IncomeSummary
+     * const incomeSummary = await prisma.incomeSummary.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IncomeSummaryFindUniqueOrThrowArgs>(args: SelectSubset<T, IncomeSummaryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IncomeSummaryClient<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IncomeSummary that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeSummaryFindFirstArgs} args - Arguments to find a IncomeSummary
+     * @example
+     * // Get one IncomeSummary
+     * const incomeSummary = await prisma.incomeSummary.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IncomeSummaryFindFirstArgs>(args?: SelectSubset<T, IncomeSummaryFindFirstArgs<ExtArgs>>): Prisma__IncomeSummaryClient<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IncomeSummary that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeSummaryFindFirstOrThrowArgs} args - Arguments to find a IncomeSummary
+     * @example
+     * // Get one IncomeSummary
+     * const incomeSummary = await prisma.incomeSummary.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IncomeSummaryFindFirstOrThrowArgs>(args?: SelectSubset<T, IncomeSummaryFindFirstOrThrowArgs<ExtArgs>>): Prisma__IncomeSummaryClient<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IncomeSummaries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeSummaryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IncomeSummaries
+     * const incomeSummaries = await prisma.incomeSummary.findMany()
+     * 
+     * // Get first 10 IncomeSummaries
+     * const incomeSummaries = await prisma.incomeSummary.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const incomeSummaryWithIdOnly = await prisma.incomeSummary.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IncomeSummaryFindManyArgs>(args?: SelectSubset<T, IncomeSummaryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IncomeSummary.
+     * @param {IncomeSummaryCreateArgs} args - Arguments to create a IncomeSummary.
+     * @example
+     * // Create one IncomeSummary
+     * const IncomeSummary = await prisma.incomeSummary.create({
+     *   data: {
+     *     // ... data to create a IncomeSummary
+     *   }
+     * })
+     * 
+     */
+    create<T extends IncomeSummaryCreateArgs>(args: SelectSubset<T, IncomeSummaryCreateArgs<ExtArgs>>): Prisma__IncomeSummaryClient<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IncomeSummaries.
+     * @param {IncomeSummaryCreateManyArgs} args - Arguments to create many IncomeSummaries.
+     * @example
+     * // Create many IncomeSummaries
+     * const incomeSummary = await prisma.incomeSummary.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IncomeSummaryCreateManyArgs>(args?: SelectSubset<T, IncomeSummaryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IncomeSummaries and returns the data saved in the database.
+     * @param {IncomeSummaryCreateManyAndReturnArgs} args - Arguments to create many IncomeSummaries.
+     * @example
+     * // Create many IncomeSummaries
+     * const incomeSummary = await prisma.incomeSummary.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IncomeSummaries and only return the `id`
+     * const incomeSummaryWithIdOnly = await prisma.incomeSummary.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IncomeSummaryCreateManyAndReturnArgs>(args?: SelectSubset<T, IncomeSummaryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IncomeSummary.
+     * @param {IncomeSummaryDeleteArgs} args - Arguments to delete one IncomeSummary.
+     * @example
+     * // Delete one IncomeSummary
+     * const IncomeSummary = await prisma.incomeSummary.delete({
+     *   where: {
+     *     // ... filter to delete one IncomeSummary
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IncomeSummaryDeleteArgs>(args: SelectSubset<T, IncomeSummaryDeleteArgs<ExtArgs>>): Prisma__IncomeSummaryClient<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IncomeSummary.
+     * @param {IncomeSummaryUpdateArgs} args - Arguments to update one IncomeSummary.
+     * @example
+     * // Update one IncomeSummary
+     * const incomeSummary = await prisma.incomeSummary.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IncomeSummaryUpdateArgs>(args: SelectSubset<T, IncomeSummaryUpdateArgs<ExtArgs>>): Prisma__IncomeSummaryClient<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IncomeSummaries.
+     * @param {IncomeSummaryDeleteManyArgs} args - Arguments to filter IncomeSummaries to delete.
+     * @example
+     * // Delete a few IncomeSummaries
+     * const { count } = await prisma.incomeSummary.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IncomeSummaryDeleteManyArgs>(args?: SelectSubset<T, IncomeSummaryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IncomeSummaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeSummaryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IncomeSummaries
+     * const incomeSummary = await prisma.incomeSummary.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IncomeSummaryUpdateManyArgs>(args: SelectSubset<T, IncomeSummaryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IncomeSummaries and returns the data updated in the database.
+     * @param {IncomeSummaryUpdateManyAndReturnArgs} args - Arguments to update many IncomeSummaries.
+     * @example
+     * // Update many IncomeSummaries
+     * const incomeSummary = await prisma.incomeSummary.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IncomeSummaries and only return the `id`
+     * const incomeSummaryWithIdOnly = await prisma.incomeSummary.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IncomeSummaryUpdateManyAndReturnArgs>(args: SelectSubset<T, IncomeSummaryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IncomeSummary.
+     * @param {IncomeSummaryUpsertArgs} args - Arguments to update or create a IncomeSummary.
+     * @example
+     * // Update or create a IncomeSummary
+     * const incomeSummary = await prisma.incomeSummary.upsert({
+     *   create: {
+     *     // ... data to create a IncomeSummary
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IncomeSummary we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IncomeSummaryUpsertArgs>(args: SelectSubset<T, IncomeSummaryUpsertArgs<ExtArgs>>): Prisma__IncomeSummaryClient<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IncomeSummaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeSummaryCountArgs} args - Arguments to filter IncomeSummaries to count.
+     * @example
+     * // Count the number of IncomeSummaries
+     * const count = await prisma.incomeSummary.count({
+     *   where: {
+     *     // ... the filter for the IncomeSummaries we want to count
+     *   }
+     * })
+    **/
+    count<T extends IncomeSummaryCountArgs>(
+      args?: Subset<T, IncomeSummaryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IncomeSummaryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IncomeSummary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeSummaryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IncomeSummaryAggregateArgs>(args: Subset<T, IncomeSummaryAggregateArgs>): Prisma.PrismaPromise<GetIncomeSummaryAggregateType<T>>
+
+    /**
+     * Group by IncomeSummary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncomeSummaryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IncomeSummaryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IncomeSummaryGroupByArgs['orderBy'] }
+        : { orderBy?: IncomeSummaryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IncomeSummaryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIncomeSummaryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IncomeSummary model
+   */
+  readonly fields: IncomeSummaryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IncomeSummary.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IncomeSummaryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IncomeSummary model
+   */
+  interface IncomeSummaryFieldRefs {
+    readonly id: FieldRef<"IncomeSummary", 'String'>
+    readonly userId: FieldRef<"IncomeSummary", 'String'>
+    readonly total: FieldRef<"IncomeSummary", 'Float'>
+    readonly impostoRenda: FieldRef<"IncomeSummary", 'Float'>
+    readonly createdAt: FieldRef<"IncomeSummary", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IncomeSummary findUnique
+   */
+  export type IncomeSummaryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeSummary to fetch.
+     */
+    where: IncomeSummaryWhereUniqueInput
+  }
+
+  /**
+   * IncomeSummary findUniqueOrThrow
+   */
+  export type IncomeSummaryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeSummary to fetch.
+     */
+    where: IncomeSummaryWhereUniqueInput
+  }
+
+  /**
+   * IncomeSummary findFirst
+   */
+  export type IncomeSummaryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeSummary to fetch.
+     */
+    where?: IncomeSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IncomeSummaries to fetch.
+     */
+    orderBy?: IncomeSummaryOrderByWithRelationInput | IncomeSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IncomeSummaries.
+     */
+    cursor?: IncomeSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IncomeSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IncomeSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IncomeSummaries.
+     */
+    distinct?: IncomeSummaryScalarFieldEnum | IncomeSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * IncomeSummary findFirstOrThrow
+   */
+  export type IncomeSummaryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeSummary to fetch.
+     */
+    where?: IncomeSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IncomeSummaries to fetch.
+     */
+    orderBy?: IncomeSummaryOrderByWithRelationInput | IncomeSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IncomeSummaries.
+     */
+    cursor?: IncomeSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IncomeSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IncomeSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IncomeSummaries.
+     */
+    distinct?: IncomeSummaryScalarFieldEnum | IncomeSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * IncomeSummary findMany
+   */
+  export type IncomeSummaryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which IncomeSummaries to fetch.
+     */
+    where?: IncomeSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IncomeSummaries to fetch.
+     */
+    orderBy?: IncomeSummaryOrderByWithRelationInput | IncomeSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IncomeSummaries.
+     */
+    cursor?: IncomeSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IncomeSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IncomeSummaries.
+     */
+    skip?: number
+    distinct?: IncomeSummaryScalarFieldEnum | IncomeSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * IncomeSummary create
+   */
+  export type IncomeSummaryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a IncomeSummary.
+     */
+    data: XOR<IncomeSummaryCreateInput, IncomeSummaryUncheckedCreateInput>
+  }
+
+  /**
+   * IncomeSummary createMany
+   */
+  export type IncomeSummaryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IncomeSummaries.
+     */
+    data: IncomeSummaryCreateManyInput | IncomeSummaryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IncomeSummary createManyAndReturn
+   */
+  export type IncomeSummaryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * The data used to create many IncomeSummaries.
+     */
+    data: IncomeSummaryCreateManyInput | IncomeSummaryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IncomeSummary update
+   */
+  export type IncomeSummaryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a IncomeSummary.
+     */
+    data: XOR<IncomeSummaryUpdateInput, IncomeSummaryUncheckedUpdateInput>
+    /**
+     * Choose, which IncomeSummary to update.
+     */
+    where: IncomeSummaryWhereUniqueInput
+  }
+
+  /**
+   * IncomeSummary updateMany
+   */
+  export type IncomeSummaryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IncomeSummaries.
+     */
+    data: XOR<IncomeSummaryUpdateManyMutationInput, IncomeSummaryUncheckedUpdateManyInput>
+    /**
+     * Filter which IncomeSummaries to update
+     */
+    where?: IncomeSummaryWhereInput
+    /**
+     * Limit how many IncomeSummaries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IncomeSummary updateManyAndReturn
+   */
+  export type IncomeSummaryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * The data used to update IncomeSummaries.
+     */
+    data: XOR<IncomeSummaryUpdateManyMutationInput, IncomeSummaryUncheckedUpdateManyInput>
+    /**
+     * Filter which IncomeSummaries to update
+     */
+    where?: IncomeSummaryWhereInput
+    /**
+     * Limit how many IncomeSummaries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IncomeSummary upsert
+   */
+  export type IncomeSummaryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the IncomeSummary to update in case it exists.
+     */
+    where: IncomeSummaryWhereUniqueInput
+    /**
+     * In case the IncomeSummary found by the `where` argument doesn't exist, create a new IncomeSummary with this data.
+     */
+    create: XOR<IncomeSummaryCreateInput, IncomeSummaryUncheckedCreateInput>
+    /**
+     * In case the IncomeSummary was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IncomeSummaryUpdateInput, IncomeSummaryUncheckedUpdateInput>
+  }
+
+  /**
+   * IncomeSummary delete
+   */
+  export type IncomeSummaryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+    /**
+     * Filter which IncomeSummary to delete.
+     */
+    where: IncomeSummaryWhereUniqueInput
+  }
+
+  /**
+   * IncomeSummary deleteMany
+   */
+  export type IncomeSummaryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IncomeSummaries to delete
+     */
+    where?: IncomeSummaryWhereInput
+    /**
+     * Limit how many IncomeSummaries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IncomeSummary without action
+   */
+  export type IncomeSummaryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IncomeSummary
+     */
+    select?: IncomeSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IncomeSummary
+     */
+    omit?: IncomeSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncomeSummaryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8142,6 +9366,17 @@ export namespace Prisma {
   };
 
   export type IncomeScalarFieldEnum = (typeof IncomeScalarFieldEnum)[keyof typeof IncomeScalarFieldEnum]
+
+
+  export const IncomeSummaryScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    total: 'total',
+    impostoRenda: 'impostoRenda',
+    createdAt: 'createdAt'
+  };
+
+  export type IncomeSummaryScalarFieldEnum = (typeof IncomeSummaryScalarFieldEnum)[keyof typeof IncomeSummaryScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8263,6 +9498,7 @@ export namespace Prisma {
     expenses?: ExpenseListRelationFilter
     goals?: GoalListRelationFilter
     incomes?: IncomeListRelationFilter
+    incomesummary?: IncomeSummaryListRelationFilter
     balance?: XOR<BalanceNullableScalarRelationFilter, BalanceWhereInput> | null
   }
 
@@ -8273,6 +9509,7 @@ export namespace Prisma {
     expenses?: ExpenseOrderByRelationAggregateInput
     goals?: GoalOrderByRelationAggregateInput
     incomes?: IncomeOrderByRelationAggregateInput
+    incomesummary?: IncomeSummaryOrderByRelationAggregateInput
     balance?: BalanceOrderByWithRelationInput
   }
 
@@ -8286,6 +9523,7 @@ export namespace Prisma {
     expenses?: ExpenseListRelationFilter
     goals?: GoalListRelationFilter
     incomes?: IncomeListRelationFilter
+    incomesummary?: IncomeSummaryListRelationFilter
     balance?: XOR<BalanceNullableScalarRelationFilter, BalanceWhereInput> | null
   }, "id">
 
@@ -8613,6 +9851,63 @@ export namespace Prisma {
     otherincome?: FloatWithAggregatesFilter<"Income"> | number
   }
 
+  export type IncomeSummaryWhereInput = {
+    AND?: IncomeSummaryWhereInput | IncomeSummaryWhereInput[]
+    OR?: IncomeSummaryWhereInput[]
+    NOT?: IncomeSummaryWhereInput | IncomeSummaryWhereInput[]
+    id?: StringFilter<"IncomeSummary"> | string
+    userId?: StringFilter<"IncomeSummary"> | string
+    total?: FloatFilter<"IncomeSummary"> | number
+    impostoRenda?: FloatFilter<"IncomeSummary"> | number
+    createdAt?: DateTimeFilter<"IncomeSummary"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type IncomeSummaryOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    total?: SortOrder
+    impostoRenda?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type IncomeSummaryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IncomeSummaryWhereInput | IncomeSummaryWhereInput[]
+    OR?: IncomeSummaryWhereInput[]
+    NOT?: IncomeSummaryWhereInput | IncomeSummaryWhereInput[]
+    userId?: StringFilter<"IncomeSummary"> | string
+    total?: FloatFilter<"IncomeSummary"> | number
+    impostoRenda?: FloatFilter<"IncomeSummary"> | number
+    createdAt?: DateTimeFilter<"IncomeSummary"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type IncomeSummaryOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    total?: SortOrder
+    impostoRenda?: SortOrder
+    createdAt?: SortOrder
+    _count?: IncomeSummaryCountOrderByAggregateInput
+    _avg?: IncomeSummaryAvgOrderByAggregateInput
+    _max?: IncomeSummaryMaxOrderByAggregateInput
+    _min?: IncomeSummaryMinOrderByAggregateInput
+    _sum?: IncomeSummarySumOrderByAggregateInput
+  }
+
+  export type IncomeSummaryScalarWhereWithAggregatesInput = {
+    AND?: IncomeSummaryScalarWhereWithAggregatesInput | IncomeSummaryScalarWhereWithAggregatesInput[]
+    OR?: IncomeSummaryScalarWhereWithAggregatesInput[]
+    NOT?: IncomeSummaryScalarWhereWithAggregatesInput | IncomeSummaryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IncomeSummary"> | string
+    userId?: StringWithAggregatesFilter<"IncomeSummary"> | string
+    total?: FloatWithAggregatesFilter<"IncomeSummary"> | number
+    impostoRenda?: FloatWithAggregatesFilter<"IncomeSummary"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"IncomeSummary"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name: string
@@ -8620,6 +9915,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
     balance?: BalanceCreateNestedOneWithoutUserInput
   }
 
@@ -8630,6 +9926,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -8640,6 +9937,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
     balance?: BalanceUpdateOneWithoutUserNestedInput
   }
 
@@ -8650,6 +9948,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -8978,6 +10277,61 @@ export namespace Prisma {
     otherincome?: FloatFieldUpdateOperationsInput | number
   }
 
+  export type IncomeSummaryCreateInput = {
+    id?: string
+    total: number
+    impostoRenda: number
+    createdAt: Date | string
+    user: UserCreateNestedOneWithoutIncomesummaryInput
+  }
+
+  export type IncomeSummaryUncheckedCreateInput = {
+    id?: string
+    userId: string
+    total: number
+    impostoRenda: number
+    createdAt: Date | string
+  }
+
+  export type IncomeSummaryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    impostoRenda?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutIncomesummaryNestedInput
+  }
+
+  export type IncomeSummaryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    impostoRenda?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeSummaryCreateManyInput = {
+    id?: string
+    userId: string
+    total: number
+    impostoRenda: number
+    createdAt: Date | string
+  }
+
+  export type IncomeSummaryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    impostoRenda?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeSummaryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    impostoRenda?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -9026,6 +10380,12 @@ export namespace Prisma {
     none?: IncomeWhereInput
   }
 
+  export type IncomeSummaryListRelationFilter = {
+    every?: IncomeSummaryWhereInput
+    some?: IncomeSummaryWhereInput
+    none?: IncomeSummaryWhereInput
+  }
+
   export type BalanceNullableScalarRelationFilter = {
     is?: BalanceWhereInput | null
     isNot?: BalanceWhereInput | null
@@ -9045,6 +10405,10 @@ export namespace Prisma {
   }
 
   export type IncomeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IncomeSummaryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9395,6 +10759,40 @@ export namespace Prisma {
     otherincome?: SortOrder
   }
 
+  export type IncomeSummaryCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    total?: SortOrder
+    impostoRenda?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type IncomeSummaryAvgOrderByAggregateInput = {
+    total?: SortOrder
+    impostoRenda?: SortOrder
+  }
+
+  export type IncomeSummaryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    total?: SortOrder
+    impostoRenda?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type IncomeSummaryMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    total?: SortOrder
+    impostoRenda?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type IncomeSummarySumOrderByAggregateInput = {
+    total?: SortOrder
+    impostoRenda?: SortOrder
+  }
+
   export type ExpenseCreateNestedManyWithoutUserInput = {
     create?: XOR<ExpenseCreateWithoutUserInput, ExpenseUncheckedCreateWithoutUserInput> | ExpenseCreateWithoutUserInput[] | ExpenseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ExpenseCreateOrConnectWithoutUserInput | ExpenseCreateOrConnectWithoutUserInput[]
@@ -9414,6 +10812,13 @@ export namespace Prisma {
     connectOrCreate?: IncomeCreateOrConnectWithoutUserInput | IncomeCreateOrConnectWithoutUserInput[]
     createMany?: IncomeCreateManyUserInputEnvelope
     connect?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+  }
+
+  export type IncomeSummaryCreateNestedManyWithoutUserInput = {
+    create?: XOR<IncomeSummaryCreateWithoutUserInput, IncomeSummaryUncheckedCreateWithoutUserInput> | IncomeSummaryCreateWithoutUserInput[] | IncomeSummaryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomeSummaryCreateOrConnectWithoutUserInput | IncomeSummaryCreateOrConnectWithoutUserInput[]
+    createMany?: IncomeSummaryCreateManyUserInputEnvelope
+    connect?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
   }
 
   export type BalanceCreateNestedOneWithoutUserInput = {
@@ -9441,6 +10846,13 @@ export namespace Prisma {
     connectOrCreate?: IncomeCreateOrConnectWithoutUserInput | IncomeCreateOrConnectWithoutUserInput[]
     createMany?: IncomeCreateManyUserInputEnvelope
     connect?: IncomeWhereUniqueInput | IncomeWhereUniqueInput[]
+  }
+
+  export type IncomeSummaryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<IncomeSummaryCreateWithoutUserInput, IncomeSummaryUncheckedCreateWithoutUserInput> | IncomeSummaryCreateWithoutUserInput[] | IncomeSummaryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomeSummaryCreateOrConnectWithoutUserInput | IncomeSummaryCreateOrConnectWithoutUserInput[]
+    createMany?: IncomeSummaryCreateManyUserInputEnvelope
+    connect?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
   }
 
   export type BalanceUncheckedCreateNestedOneWithoutUserInput = {
@@ -9499,6 +10911,20 @@ export namespace Prisma {
     deleteMany?: IncomeScalarWhereInput | IncomeScalarWhereInput[]
   }
 
+  export type IncomeSummaryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IncomeSummaryCreateWithoutUserInput, IncomeSummaryUncheckedCreateWithoutUserInput> | IncomeSummaryCreateWithoutUserInput[] | IncomeSummaryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomeSummaryCreateOrConnectWithoutUserInput | IncomeSummaryCreateOrConnectWithoutUserInput[]
+    upsert?: IncomeSummaryUpsertWithWhereUniqueWithoutUserInput | IncomeSummaryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IncomeSummaryCreateManyUserInputEnvelope
+    set?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
+    disconnect?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
+    delete?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
+    connect?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
+    update?: IncomeSummaryUpdateWithWhereUniqueWithoutUserInput | IncomeSummaryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IncomeSummaryUpdateManyWithWhereWithoutUserInput | IncomeSummaryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IncomeSummaryScalarWhereInput | IncomeSummaryScalarWhereInput[]
+  }
+
   export type BalanceUpdateOneWithoutUserNestedInput = {
     create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
     connectOrCreate?: BalanceCreateOrConnectWithoutUserInput
@@ -9549,6 +10975,20 @@ export namespace Prisma {
     update?: IncomeUpdateWithWhereUniqueWithoutUserInput | IncomeUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: IncomeUpdateManyWithWhereWithoutUserInput | IncomeUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: IncomeScalarWhereInput | IncomeScalarWhereInput[]
+  }
+
+  export type IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IncomeSummaryCreateWithoutUserInput, IncomeSummaryUncheckedCreateWithoutUserInput> | IncomeSummaryCreateWithoutUserInput[] | IncomeSummaryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomeSummaryCreateOrConnectWithoutUserInput | IncomeSummaryCreateOrConnectWithoutUserInput[]
+    upsert?: IncomeSummaryUpsertWithWhereUniqueWithoutUserInput | IncomeSummaryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IncomeSummaryCreateManyUserInputEnvelope
+    set?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
+    disconnect?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
+    delete?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
+    connect?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
+    update?: IncomeSummaryUpdateWithWhereUniqueWithoutUserInput | IncomeSummaryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IncomeSummaryUpdateManyWithWhereWithoutUserInput | IncomeSummaryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IncomeSummaryScalarWhereInput | IncomeSummaryScalarWhereInput[]
   }
 
   export type BalanceUncheckedUpdateOneWithoutUserNestedInput = {
@@ -9699,6 +11139,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutIncomesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutIncomesInput, UserUpdateWithoutIncomesInput>, UserUncheckedUpdateWithoutIncomesInput>
+  }
+
+  export type UserCreateNestedOneWithoutIncomesummaryInput = {
+    create?: XOR<UserCreateWithoutIncomesummaryInput, UserUncheckedCreateWithoutIncomesummaryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIncomesummaryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutIncomesummaryNestedInput = {
+    create?: XOR<UserCreateWithoutIncomesummaryInput, UserUncheckedCreateWithoutIncomesummaryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIncomesummaryInput
+    upsert?: UserUpsertWithoutIncomesummaryInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutIncomesummaryInput, UserUpdateWithoutIncomesummaryInput>, UserUncheckedUpdateWithoutIncomesummaryInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -9980,6 +11434,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type IncomeSummaryCreateWithoutUserInput = {
+    id?: string
+    total: number
+    impostoRenda: number
+    createdAt: Date | string
+  }
+
+  export type IncomeSummaryUncheckedCreateWithoutUserInput = {
+    id?: string
+    total: number
+    impostoRenda: number
+    createdAt: Date | string
+  }
+
+  export type IncomeSummaryCreateOrConnectWithoutUserInput = {
+    where: IncomeSummaryWhereUniqueInput
+    create: XOR<IncomeSummaryCreateWithoutUserInput, IncomeSummaryUncheckedCreateWithoutUserInput>
+  }
+
+  export type IncomeSummaryCreateManyUserInputEnvelope = {
+    data: IncomeSummaryCreateManyUserInput | IncomeSummaryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type BalanceCreateWithoutUserInput = {
     id?: string
     value: number
@@ -10085,6 +11563,33 @@ export namespace Prisma {
     otherincome?: FloatFilter<"Income"> | number
   }
 
+  export type IncomeSummaryUpsertWithWhereUniqueWithoutUserInput = {
+    where: IncomeSummaryWhereUniqueInput
+    update: XOR<IncomeSummaryUpdateWithoutUserInput, IncomeSummaryUncheckedUpdateWithoutUserInput>
+    create: XOR<IncomeSummaryCreateWithoutUserInput, IncomeSummaryUncheckedCreateWithoutUserInput>
+  }
+
+  export type IncomeSummaryUpdateWithWhereUniqueWithoutUserInput = {
+    where: IncomeSummaryWhereUniqueInput
+    data: XOR<IncomeSummaryUpdateWithoutUserInput, IncomeSummaryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type IncomeSummaryUpdateManyWithWhereWithoutUserInput = {
+    where: IncomeSummaryScalarWhereInput
+    data: XOR<IncomeSummaryUpdateManyMutationInput, IncomeSummaryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type IncomeSummaryScalarWhereInput = {
+    AND?: IncomeSummaryScalarWhereInput | IncomeSummaryScalarWhereInput[]
+    OR?: IncomeSummaryScalarWhereInput[]
+    NOT?: IncomeSummaryScalarWhereInput | IncomeSummaryScalarWhereInput[]
+    id?: StringFilter<"IncomeSummary"> | string
+    userId?: StringFilter<"IncomeSummary"> | string
+    total?: FloatFilter<"IncomeSummary"> | number
+    impostoRenda?: FloatFilter<"IncomeSummary"> | number
+    createdAt?: DateTimeFilter<"IncomeSummary"> | Date | string
+  }
+
   export type BalanceUpsertWithoutUserInput = {
     update: XOR<BalanceUpdateWithoutUserInput, BalanceUncheckedUpdateWithoutUserInput>
     create: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
@@ -10131,6 +11636,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
     balance?: BalanceCreateNestedOneWithoutUserInput
   }
 
@@ -10140,6 +11646,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -10188,6 +11695,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
     balance?: BalanceUpdateOneWithoutUserNestedInput
   }
 
@@ -10197,6 +11705,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -10254,6 +11763,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
     balance?: BalanceCreateNestedOneWithoutUserInput
   }
 
@@ -10263,6 +11773,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -10288,6 +11799,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
     balance?: BalanceUpdateOneWithoutUserNestedInput
   }
 
@@ -10297,6 +11809,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -10307,6 +11820,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBalanceInput = {
@@ -10316,6 +11830,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBalanceInput = {
@@ -10341,6 +11856,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBalanceInput = {
@@ -10350,6 +11866,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutIncomesInput = {
@@ -10358,6 +11875,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
     balance?: BalanceCreateNestedOneWithoutUserInput
   }
 
@@ -10367,6 +11885,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -10392,6 +11911,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
     balance?: BalanceUpdateOneWithoutUserNestedInput
   }
 
@@ -10401,6 +11921,63 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
+    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutIncomesummaryInput = {
+    id?: string
+    name: string
+    avatarUrl?: string | null
+    expenses?: ExpenseCreateNestedManyWithoutUserInput
+    goals?: GoalCreateNestedManyWithoutUserInput
+    incomes?: IncomeCreateNestedManyWithoutUserInput
+    balance?: BalanceCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutIncomesummaryInput = {
+    id?: string
+    name: string
+    avatarUrl?: string | null
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    goals?: GoalUncheckedCreateNestedManyWithoutUserInput
+    incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutIncomesummaryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutIncomesummaryInput, UserUncheckedCreateWithoutIncomesummaryInput>
+  }
+
+  export type UserUpsertWithoutIncomesummaryInput = {
+    update: XOR<UserUpdateWithoutIncomesummaryInput, UserUncheckedUpdateWithoutIncomesummaryInput>
+    create: XOR<UserCreateWithoutIncomesummaryInput, UserUncheckedCreateWithoutIncomesummaryInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutIncomesummaryInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutIncomesummaryInput, UserUncheckedUpdateWithoutIncomesummaryInput>
+  }
+
+  export type UserUpdateWithoutIncomesummaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    goals?: GoalUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUpdateManyWithoutUserNestedInput
+    balance?: BalanceUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutIncomesummaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -10430,6 +12007,13 @@ export namespace Prisma {
     income: number
     extraincome: number
     otherincome: number
+  }
+
+  export type IncomeSummaryCreateManyUserInput = {
+    id?: string
+    total: number
+    impostoRenda: number
+    createdAt: Date | string
   }
 
   export type ExpenseUpdateWithoutUserInput = {
@@ -10514,6 +12098,27 @@ export namespace Prisma {
     income?: FloatFieldUpdateOperationsInput | number
     extraincome?: FloatFieldUpdateOperationsInput | number
     otherincome?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type IncomeSummaryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    impostoRenda?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeSummaryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    impostoRenda?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncomeSummaryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    impostoRenda?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExpenseCreateManyCategoryInput = {

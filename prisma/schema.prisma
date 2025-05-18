@@ -21,6 +21,7 @@ model User {
   expenses  Expense[]
   goals     Goal[]
   incomes Income[] 
+  incomesummary IncomeSummary[]
   balance   Balance?
 }
 
@@ -78,4 +79,14 @@ model Income {
   income Float
   extraincome Float
   otherincome Float
+}
+
+model IncomeSummary {
+  id            String      @id @default(uuid())
+  user   User     @relation(fields: [userId], references: [id])
+  userId String   
+  total         Float
+  impostoRenda  Float
+  createdAt     DateTime 
+  
 }

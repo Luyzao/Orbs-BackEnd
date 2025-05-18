@@ -170,6 +170,14 @@ exports.Prisma.IncomeScalarFieldEnum = {
   otherincome: 'otherincome'
 };
 
+exports.Prisma.IncomeSummaryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  total: 'total',
+  impostoRenda: 'impostoRenda',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -196,7 +204,8 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   Goal: 'Goal',
   Balance: 'Balance',
-  Income: 'Income'
+  Income: 'Income',
+  IncomeSummary: 'IncomeSummary'
 };
 
 /**
