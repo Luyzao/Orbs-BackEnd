@@ -23,6 +23,8 @@ model User {
   incomes Income[] 
   incomesummary IncomeSummary[]
   balance   Balance?
+  expensesAnalysis ExpenseAnalysis[]
+
 }
 
 model Expense {
@@ -89,4 +91,14 @@ model IncomeSummary {
   impostoRenda  Float
   createdAt     DateTime 
   
+}
+
+model ExpenseAnalysis {
+  id            String      @id @default(uuid())
+  user   User     @relation(fields: [userId], references: [id])
+  userId String   
+  total         Float
+  categoriaMaiorGasto  Float
+  diferencamensal Float
+  createdAt     DateTime 
 }
