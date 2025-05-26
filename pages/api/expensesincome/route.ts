@@ -35,14 +35,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const userId = user.user.id
 
     try {
-      const expenses = await prisma.expense.findMany({
-        where: { userId }, // Filtra pelas despesas do usuário logado
-        include: {
-          category: true,
-        },
-      })
+      const { month, year } = req.query
+      console.log('Parâmetros recebidos:', { month, year })
+      if (!month || !year) {
+        return res.status(400).json({ message: 'Parâmetros "month" e "year" são obrigatórios' })
+      }
+
+      const startDate = new Date(`${year}-${month}-01`)
+      const endDate = new Date(startDate)
+      endDate.setMonth(endDate.getMonth() + 1)
+
+      const { data: expenses, error: fetchError } = await supabase
+        .from('Expense') // minúsculo e no plural, se quiser
+        .select('*, category:Category(*)')
+        .gte('date', startDate.toISOString())
+        .lt('date', endDate.toISOString())
+        .eq('userId', userId) 
+
+      if (fetchError) {
+        console.error('Erro ao buscar despesas:', fetchError)
+        return res.status(500).json({ message: 'Erro ao buscar despesas' })
+      }
 
       return res.status(200).json(expenses)
+
+      
     } catch (error) {
       console.error('Erro ao buscar despesas:', error)
       return res.status(500).json({ message: 'Erro interno do servidor' })

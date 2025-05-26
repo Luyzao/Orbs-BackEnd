@@ -97,15 +97,41 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.status(201).json({ newIncome, newIncomeSummary })
     } else if (req.method === 'GET') {
+      const { month, year } = req.query;
+
+       // Verificação básica
+      const parsedMonth = Number(month);
+      const parsedYear = Number(year);
+
+       if (!parsedMonth || !parsedYear) {
+        return res.status(400).json({ message: 'Parâmetros de mês e ano são obrigatórios e devem ser válidos.' });
+      }
+
+       // Cria o intervalo de datas para o mês
+      const startDate = new Date(parsedYear, parsedMonth - 1, 1);
+      const endDate = new Date(parsedYear, parsedMonth, 1); // primeiro dia do próximo mês
+
       // Buscar o último registro de income
       const lastIncome = await prisma.income.findFirst({
-        where: { userId: user.id },
+        where: {
+          userId: user.id,
+          date: {
+            gte: startDate,
+            lt: endDate,
+          },
+        },
         orderBy: { date: 'desc' },
-      })
+      });
 
       // Buscar o último registro de incomeSummary
       const lastIncomeSummary = await prisma.incomeSummary.findFirst({
-        where: { userId: user.id },
+        where: { 
+          userId: user.id,
+          createdAt: {
+            gte: startDate,
+            lt: endDate,
+          },
+        },
         orderBy: { createdAt: 'desc' },
       })
 
