@@ -150,6 +150,8 @@ exports.Prisma.GoalScalarFieldEnum = {
   target: 'target',
   progress: 'progress',
   status: 'status',
+  category: 'category',
+  imageUrl: 'imageUrl',
   userId: 'userId',
   createdAt: 'createdAt'
 };
@@ -167,7 +169,8 @@ exports.Prisma.IncomeScalarFieldEnum = {
   userId: 'userId',
   income: 'income',
   extraincome: 'extraincome',
-  otherincome: 'otherincome'
+  otherincome: 'otherincome',
+  month: 'month'
 };
 
 exports.Prisma.IncomeSummaryScalarFieldEnum = {
@@ -175,7 +178,8 @@ exports.Prisma.IncomeSummaryScalarFieldEnum = {
   userId: 'userId',
   total: 'total',
   impostoRenda: 'impostoRenda',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  month: 'month'
 };
 
 exports.Prisma.ExpenseAnalysisScalarFieldEnum = {

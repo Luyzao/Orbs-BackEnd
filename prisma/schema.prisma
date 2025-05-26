@@ -53,7 +53,9 @@ model Goal {
   title     String
   target    Float
   progress  Float      @default(0)
-  status    GoalStatus
+  status    GoalStatus @default(PENDING)
+  category  String?    // se for nullable, ou o tipo correto
+  imageUrl  String?    // se for nullable, ou o tipo correto
   user      User       @relation(fields: [userId], references: [id])
   userId    String
   createdAt DateTime   @default(now())
@@ -81,6 +83,7 @@ model Income {
   income Float
   extraincome Float
   otherincome Float
+  month DateTime
 }
 
 model IncomeSummary {
@@ -90,6 +93,7 @@ model IncomeSummary {
   total         Float
   impostoRenda  Float
   createdAt     DateTime 
+  month DateTime
   
 }
 

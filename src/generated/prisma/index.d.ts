@@ -5032,6 +5032,8 @@ export namespace Prisma {
     target: number | null
     progress: number | null
     status: $Enums.GoalStatus | null
+    category: string | null
+    imageUrl: string | null
     userId: string | null
     createdAt: Date | null
   }
@@ -5042,6 +5044,8 @@ export namespace Prisma {
     target: number | null
     progress: number | null
     status: $Enums.GoalStatus | null
+    category: string | null
+    imageUrl: string | null
     userId: string | null
     createdAt: Date | null
   }
@@ -5052,6 +5056,8 @@ export namespace Prisma {
     target: number
     progress: number
     status: number
+    category: number
+    imageUrl: number
     userId: number
     createdAt: number
     _all: number
@@ -5074,6 +5080,8 @@ export namespace Prisma {
     target?: true
     progress?: true
     status?: true
+    category?: true
+    imageUrl?: true
     userId?: true
     createdAt?: true
   }
@@ -5084,6 +5092,8 @@ export namespace Prisma {
     target?: true
     progress?: true
     status?: true
+    category?: true
+    imageUrl?: true
     userId?: true
     createdAt?: true
   }
@@ -5094,6 +5104,8 @@ export namespace Prisma {
     target?: true
     progress?: true
     status?: true
+    category?: true
+    imageUrl?: true
     userId?: true
     createdAt?: true
     _all?: true
@@ -5191,6 +5203,8 @@ export namespace Prisma {
     target: number
     progress: number
     status: $Enums.GoalStatus
+    category: string | null
+    imageUrl: string | null
     userId: string
     createdAt: Date
     _count: GoalCountAggregateOutputType | null
@@ -5220,6 +5234,8 @@ export namespace Prisma {
     target?: boolean
     progress?: boolean
     status?: boolean
+    category?: boolean
+    imageUrl?: boolean
     userId?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5231,6 +5247,8 @@ export namespace Prisma {
     target?: boolean
     progress?: boolean
     status?: boolean
+    category?: boolean
+    imageUrl?: boolean
     userId?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5242,6 +5260,8 @@ export namespace Prisma {
     target?: boolean
     progress?: boolean
     status?: boolean
+    category?: boolean
+    imageUrl?: boolean
     userId?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5253,11 +5273,13 @@ export namespace Prisma {
     target?: boolean
     progress?: boolean
     status?: boolean
+    category?: boolean
+    imageUrl?: boolean
     userId?: boolean
     createdAt?: boolean
   }
 
-  export type GoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "target" | "progress" | "status" | "userId" | "createdAt", ExtArgs["result"]["goal"]>
+  export type GoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "target" | "progress" | "status" | "category" | "imageUrl" | "userId" | "createdAt", ExtArgs["result"]["goal"]>
   export type GoalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5279,6 +5301,8 @@ export namespace Prisma {
       target: number
       progress: number
       status: $Enums.GoalStatus
+      category: string | null
+      imageUrl: string | null
       userId: string
       createdAt: Date
     }, ExtArgs["result"]["goal"]>
@@ -5710,6 +5734,8 @@ export namespace Prisma {
     readonly target: FieldRef<"Goal", 'Float'>
     readonly progress: FieldRef<"Goal", 'Float'>
     readonly status: FieldRef<"Goal", 'GoalStatus'>
+    readonly category: FieldRef<"Goal", 'String'>
+    readonly imageUrl: FieldRef<"Goal", 'String'>
     readonly userId: FieldRef<"Goal", 'String'>
     readonly createdAt: FieldRef<"Goal", 'DateTime'>
   }
@@ -7236,6 +7262,7 @@ export namespace Prisma {
     income: number | null
     extraincome: number | null
     otherincome: number | null
+    month: Date | null
   }
 
   export type IncomeMaxAggregateOutputType = {
@@ -7245,6 +7272,7 @@ export namespace Prisma {
     income: number | null
     extraincome: number | null
     otherincome: number | null
+    month: Date | null
   }
 
   export type IncomeCountAggregateOutputType = {
@@ -7254,6 +7282,7 @@ export namespace Prisma {
     income: number
     extraincome: number
     otherincome: number
+    month: number
     _all: number
   }
 
@@ -7277,6 +7306,7 @@ export namespace Prisma {
     income?: true
     extraincome?: true
     otherincome?: true
+    month?: true
   }
 
   export type IncomeMaxAggregateInputType = {
@@ -7286,6 +7316,7 @@ export namespace Prisma {
     income?: true
     extraincome?: true
     otherincome?: true
+    month?: true
   }
 
   export type IncomeCountAggregateInputType = {
@@ -7295,6 +7326,7 @@ export namespace Prisma {
     income?: true
     extraincome?: true
     otherincome?: true
+    month?: true
     _all?: true
   }
 
@@ -7391,6 +7423,7 @@ export namespace Prisma {
     income: number
     extraincome: number
     otherincome: number
+    month: Date
     _count: IncomeCountAggregateOutputType | null
     _avg: IncomeAvgAggregateOutputType | null
     _sum: IncomeSumAggregateOutputType | null
@@ -7419,6 +7452,7 @@ export namespace Prisma {
     income?: boolean
     extraincome?: boolean
     otherincome?: boolean
+    month?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["income"]>
 
@@ -7429,6 +7463,7 @@ export namespace Prisma {
     income?: boolean
     extraincome?: boolean
     otherincome?: boolean
+    month?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["income"]>
 
@@ -7439,6 +7474,7 @@ export namespace Prisma {
     income?: boolean
     extraincome?: boolean
     otherincome?: boolean
+    month?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["income"]>
 
@@ -7449,9 +7485,10 @@ export namespace Prisma {
     income?: boolean
     extraincome?: boolean
     otherincome?: boolean
+    month?: boolean
   }
 
-  export type IncomeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "userId" | "income" | "extraincome" | "otherincome", ExtArgs["result"]["income"]>
+  export type IncomeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "userId" | "income" | "extraincome" | "otherincome" | "month", ExtArgs["result"]["income"]>
   export type IncomeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -7474,6 +7511,7 @@ export namespace Prisma {
       income: number
       extraincome: number
       otherincome: number
+      month: Date
     }, ExtArgs["result"]["income"]>
     composites: {}
   }
@@ -7904,6 +7942,7 @@ export namespace Prisma {
     readonly income: FieldRef<"Income", 'Float'>
     readonly extraincome: FieldRef<"Income", 'Float'>
     readonly otherincome: FieldRef<"Income", 'Float'>
+    readonly month: FieldRef<"Income", 'DateTime'>
   }
     
 
@@ -8346,6 +8385,7 @@ export namespace Prisma {
     total: number | null
     impostoRenda: number | null
     createdAt: Date | null
+    month: Date | null
   }
 
   export type IncomeSummaryMaxAggregateOutputType = {
@@ -8354,6 +8394,7 @@ export namespace Prisma {
     total: number | null
     impostoRenda: number | null
     createdAt: Date | null
+    month: Date | null
   }
 
   export type IncomeSummaryCountAggregateOutputType = {
@@ -8362,6 +8403,7 @@ export namespace Prisma {
     total: number
     impostoRenda: number
     createdAt: number
+    month: number
     _all: number
   }
 
@@ -8382,6 +8424,7 @@ export namespace Prisma {
     total?: true
     impostoRenda?: true
     createdAt?: true
+    month?: true
   }
 
   export type IncomeSummaryMaxAggregateInputType = {
@@ -8390,6 +8433,7 @@ export namespace Prisma {
     total?: true
     impostoRenda?: true
     createdAt?: true
+    month?: true
   }
 
   export type IncomeSummaryCountAggregateInputType = {
@@ -8398,6 +8442,7 @@ export namespace Prisma {
     total?: true
     impostoRenda?: true
     createdAt?: true
+    month?: true
     _all?: true
   }
 
@@ -8493,6 +8538,7 @@ export namespace Prisma {
     total: number
     impostoRenda: number
     createdAt: Date
+    month: Date
     _count: IncomeSummaryCountAggregateOutputType | null
     _avg: IncomeSummaryAvgAggregateOutputType | null
     _sum: IncomeSummarySumAggregateOutputType | null
@@ -8520,6 +8566,7 @@ export namespace Prisma {
     total?: boolean
     impostoRenda?: boolean
     createdAt?: boolean
+    month?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["incomeSummary"]>
 
@@ -8529,6 +8576,7 @@ export namespace Prisma {
     total?: boolean
     impostoRenda?: boolean
     createdAt?: boolean
+    month?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["incomeSummary"]>
 
@@ -8538,6 +8586,7 @@ export namespace Prisma {
     total?: boolean
     impostoRenda?: boolean
     createdAt?: boolean
+    month?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["incomeSummary"]>
 
@@ -8547,9 +8596,10 @@ export namespace Prisma {
     total?: boolean
     impostoRenda?: boolean
     createdAt?: boolean
+    month?: boolean
   }
 
-  export type IncomeSummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "total" | "impostoRenda" | "createdAt", ExtArgs["result"]["incomeSummary"]>
+  export type IncomeSummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "total" | "impostoRenda" | "createdAt" | "month", ExtArgs["result"]["incomeSummary"]>
   export type IncomeSummaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -8571,6 +8621,7 @@ export namespace Prisma {
       total: number
       impostoRenda: number
       createdAt: Date
+      month: Date
     }, ExtArgs["result"]["incomeSummary"]>
     composites: {}
   }
@@ -9000,6 +9051,7 @@ export namespace Prisma {
     readonly total: FieldRef<"IncomeSummary", 'Float'>
     readonly impostoRenda: FieldRef<"IncomeSummary", 'Float'>
     readonly createdAt: FieldRef<"IncomeSummary", 'DateTime'>
+    readonly month: FieldRef<"IncomeSummary", 'DateTime'>
   }
     
 
@@ -10580,6 +10632,8 @@ export namespace Prisma {
     target: 'target',
     progress: 'progress',
     status: 'status',
+    category: 'category',
+    imageUrl: 'imageUrl',
     userId: 'userId',
     createdAt: 'createdAt'
   };
@@ -10603,7 +10657,8 @@ export namespace Prisma {
     userId: 'userId',
     income: 'income',
     extraincome: 'extraincome',
-    otherincome: 'otherincome'
+    otherincome: 'otherincome',
+    month: 'month'
   };
 
   export type IncomeScalarFieldEnum = (typeof IncomeScalarFieldEnum)[keyof typeof IncomeScalarFieldEnum]
@@ -10614,7 +10669,8 @@ export namespace Prisma {
     userId: 'userId',
     total: 'total',
     impostoRenda: 'impostoRenda',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    month: 'month'
   };
 
   export type IncomeSummaryScalarFieldEnum = (typeof IncomeSummaryScalarFieldEnum)[keyof typeof IncomeSummaryScalarFieldEnum]
@@ -10935,6 +10991,8 @@ export namespace Prisma {
     target?: FloatFilter<"Goal"> | number
     progress?: FloatFilter<"Goal"> | number
     status?: EnumGoalStatusFilter<"Goal"> | $Enums.GoalStatus
+    category?: StringNullableFilter<"Goal"> | string | null
+    imageUrl?: StringNullableFilter<"Goal"> | string | null
     userId?: StringFilter<"Goal"> | string
     createdAt?: DateTimeFilter<"Goal"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -10946,6 +11004,8 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
+    category?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -10960,6 +11020,8 @@ export namespace Prisma {
     target?: FloatFilter<"Goal"> | number
     progress?: FloatFilter<"Goal"> | number
     status?: EnumGoalStatusFilter<"Goal"> | $Enums.GoalStatus
+    category?: StringNullableFilter<"Goal"> | string | null
+    imageUrl?: StringNullableFilter<"Goal"> | string | null
     userId?: StringFilter<"Goal"> | string
     createdAt?: DateTimeFilter<"Goal"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -10971,6 +11033,8 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
+    category?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     _count?: GoalCountOrderByAggregateInput
@@ -10989,6 +11053,8 @@ export namespace Prisma {
     target?: FloatWithAggregatesFilter<"Goal"> | number
     progress?: FloatWithAggregatesFilter<"Goal"> | number
     status?: EnumGoalStatusWithAggregatesFilter<"Goal"> | $Enums.GoalStatus
+    category?: StringNullableWithAggregatesFilter<"Goal"> | string | null
+    imageUrl?: StringNullableWithAggregatesFilter<"Goal"> | string | null
     userId?: StringWithAggregatesFilter<"Goal"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Goal"> | Date | string
   }
@@ -11055,6 +11121,7 @@ export namespace Prisma {
     income?: FloatFilter<"Income"> | number
     extraincome?: FloatFilter<"Income"> | number
     otherincome?: FloatFilter<"Income"> | number
+    month?: DateTimeFilter<"Income"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -11065,6 +11132,7 @@ export namespace Prisma {
     income?: SortOrder
     extraincome?: SortOrder
     otherincome?: SortOrder
+    month?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -11078,6 +11146,7 @@ export namespace Prisma {
     income?: FloatFilter<"Income"> | number
     extraincome?: FloatFilter<"Income"> | number
     otherincome?: FloatFilter<"Income"> | number
+    month?: DateTimeFilter<"Income"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -11088,6 +11157,7 @@ export namespace Prisma {
     income?: SortOrder
     extraincome?: SortOrder
     otherincome?: SortOrder
+    month?: SortOrder
     _count?: IncomeCountOrderByAggregateInput
     _avg?: IncomeAvgOrderByAggregateInput
     _max?: IncomeMaxOrderByAggregateInput
@@ -11105,6 +11175,7 @@ export namespace Prisma {
     income?: FloatWithAggregatesFilter<"Income"> | number
     extraincome?: FloatWithAggregatesFilter<"Income"> | number
     otherincome?: FloatWithAggregatesFilter<"Income"> | number
+    month?: DateTimeWithAggregatesFilter<"Income"> | Date | string
   }
 
   export type IncomeSummaryWhereInput = {
@@ -11116,6 +11187,7 @@ export namespace Prisma {
     total?: FloatFilter<"IncomeSummary"> | number
     impostoRenda?: FloatFilter<"IncomeSummary"> | number
     createdAt?: DateTimeFilter<"IncomeSummary"> | Date | string
+    month?: DateTimeFilter<"IncomeSummary"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -11125,6 +11197,7 @@ export namespace Prisma {
     total?: SortOrder
     impostoRenda?: SortOrder
     createdAt?: SortOrder
+    month?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -11137,6 +11210,7 @@ export namespace Prisma {
     total?: FloatFilter<"IncomeSummary"> | number
     impostoRenda?: FloatFilter<"IncomeSummary"> | number
     createdAt?: DateTimeFilter<"IncomeSummary"> | Date | string
+    month?: DateTimeFilter<"IncomeSummary"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -11146,6 +11220,7 @@ export namespace Prisma {
     total?: SortOrder
     impostoRenda?: SortOrder
     createdAt?: SortOrder
+    month?: SortOrder
     _count?: IncomeSummaryCountOrderByAggregateInput
     _avg?: IncomeSummaryAvgOrderByAggregateInput
     _max?: IncomeSummaryMaxOrderByAggregateInput
@@ -11162,6 +11237,7 @@ export namespace Prisma {
     total?: FloatWithAggregatesFilter<"IncomeSummary"> | number
     impostoRenda?: FloatWithAggregatesFilter<"IncomeSummary"> | number
     createdAt?: DateTimeWithAggregatesFilter<"IncomeSummary"> | Date | string
+    month?: DateTimeWithAggregatesFilter<"IncomeSummary"> | Date | string
   }
 
   export type ExpenseAnalysisWhereInput = {
@@ -11425,7 +11501,9 @@ export namespace Prisma {
     title: string
     target: number
     progress?: number
-    status: $Enums.GoalStatus
+    status?: $Enums.GoalStatus
+    category?: string | null
+    imageUrl?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutGoalsInput
   }
@@ -11435,7 +11513,9 @@ export namespace Prisma {
     title: string
     target: number
     progress?: number
-    status: $Enums.GoalStatus
+    status?: $Enums.GoalStatus
+    category?: string | null
+    imageUrl?: string | null
     userId: string
     createdAt?: Date | string
   }
@@ -11446,6 +11526,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutGoalsNestedInput
   }
@@ -11456,6 +11538,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11465,7 +11549,9 @@ export namespace Prisma {
     title: string
     target: number
     progress?: number
-    status: $Enums.GoalStatus
+    status?: $Enums.GoalStatus
+    category?: string | null
+    imageUrl?: string | null
     userId: string
     createdAt?: Date | string
   }
@@ -11476,6 +11562,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -11485,6 +11573,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11543,6 +11633,7 @@ export namespace Prisma {
     income: number
     extraincome: number
     otherincome: number
+    month: Date | string
     user: UserCreateNestedOneWithoutIncomesInput
   }
 
@@ -11553,6 +11644,7 @@ export namespace Prisma {
     income: number
     extraincome: number
     otherincome: number
+    month: Date | string
   }
 
   export type IncomeUpdateInput = {
@@ -11561,6 +11653,7 @@ export namespace Prisma {
     income?: FloatFieldUpdateOperationsInput | number
     extraincome?: FloatFieldUpdateOperationsInput | number
     otherincome?: FloatFieldUpdateOperationsInput | number
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutIncomesNestedInput
   }
 
@@ -11571,6 +11664,7 @@ export namespace Prisma {
     income?: FloatFieldUpdateOperationsInput | number
     extraincome?: FloatFieldUpdateOperationsInput | number
     otherincome?: FloatFieldUpdateOperationsInput | number
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeCreateManyInput = {
@@ -11580,6 +11674,7 @@ export namespace Prisma {
     income: number
     extraincome: number
     otherincome: number
+    month: Date | string
   }
 
   export type IncomeUpdateManyMutationInput = {
@@ -11588,6 +11683,7 @@ export namespace Prisma {
     income?: FloatFieldUpdateOperationsInput | number
     extraincome?: FloatFieldUpdateOperationsInput | number
     otherincome?: FloatFieldUpdateOperationsInput | number
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeUncheckedUpdateManyInput = {
@@ -11597,6 +11693,7 @@ export namespace Prisma {
     income?: FloatFieldUpdateOperationsInput | number
     extraincome?: FloatFieldUpdateOperationsInput | number
     otherincome?: FloatFieldUpdateOperationsInput | number
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeSummaryCreateInput = {
@@ -11604,6 +11701,7 @@ export namespace Prisma {
     total: number
     impostoRenda: number
     createdAt: Date | string
+    month: Date | string
     user: UserCreateNestedOneWithoutIncomesummaryInput
   }
 
@@ -11613,6 +11711,7 @@ export namespace Prisma {
     total: number
     impostoRenda: number
     createdAt: Date | string
+    month: Date | string
   }
 
   export type IncomeSummaryUpdateInput = {
@@ -11620,6 +11719,7 @@ export namespace Prisma {
     total?: FloatFieldUpdateOperationsInput | number
     impostoRenda?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutIncomesummaryNestedInput
   }
 
@@ -11629,6 +11729,7 @@ export namespace Prisma {
     total?: FloatFieldUpdateOperationsInput | number
     impostoRenda?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeSummaryCreateManyInput = {
@@ -11637,6 +11738,7 @@ export namespace Prisma {
     total: number
     impostoRenda: number
     createdAt: Date | string
+    month: Date | string
   }
 
   export type IncomeSummaryUpdateManyMutationInput = {
@@ -11644,6 +11746,7 @@ export namespace Prisma {
     total?: FloatFieldUpdateOperationsInput | number
     impostoRenda?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeSummaryUncheckedUpdateManyInput = {
@@ -11652,6 +11755,7 @@ export namespace Prisma {
     total?: FloatFieldUpdateOperationsInput | number
     impostoRenda?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExpenseAnalysisCreateInput = {
@@ -12041,6 +12145,8 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
+    category?: SortOrder
+    imageUrl?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
   }
@@ -12056,6 +12162,8 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
+    category?: SortOrder
+    imageUrl?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
   }
@@ -12066,6 +12174,8 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
+    category?: SortOrder
+    imageUrl?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
   }
@@ -12121,6 +12231,7 @@ export namespace Prisma {
     income?: SortOrder
     extraincome?: SortOrder
     otherincome?: SortOrder
+    month?: SortOrder
   }
 
   export type IncomeAvgOrderByAggregateInput = {
@@ -12136,6 +12247,7 @@ export namespace Prisma {
     income?: SortOrder
     extraincome?: SortOrder
     otherincome?: SortOrder
+    month?: SortOrder
   }
 
   export type IncomeMinOrderByAggregateInput = {
@@ -12145,6 +12257,7 @@ export namespace Prisma {
     income?: SortOrder
     extraincome?: SortOrder
     otherincome?: SortOrder
+    month?: SortOrder
   }
 
   export type IncomeSumOrderByAggregateInput = {
@@ -12159,6 +12272,7 @@ export namespace Prisma {
     total?: SortOrder
     impostoRenda?: SortOrder
     createdAt?: SortOrder
+    month?: SortOrder
   }
 
   export type IncomeSummaryAvgOrderByAggregateInput = {
@@ -12172,6 +12286,7 @@ export namespace Prisma {
     total?: SortOrder
     impostoRenda?: SortOrder
     createdAt?: SortOrder
+    month?: SortOrder
   }
 
   export type IncomeSummaryMinOrderByAggregateInput = {
@@ -12180,6 +12295,7 @@ export namespace Prisma {
     total?: SortOrder
     impostoRenda?: SortOrder
     createdAt?: SortOrder
+    month?: SortOrder
   }
 
   export type IncomeSummarySumOrderByAggregateInput = {
@@ -12874,7 +12990,9 @@ export namespace Prisma {
     title: string
     target: number
     progress?: number
-    status: $Enums.GoalStatus
+    status?: $Enums.GoalStatus
+    category?: string | null
+    imageUrl?: string | null
     createdAt?: Date | string
   }
 
@@ -12883,7 +13001,9 @@ export namespace Prisma {
     title: string
     target: number
     progress?: number
-    status: $Enums.GoalStatus
+    status?: $Enums.GoalStatus
+    category?: string | null
+    imageUrl?: string | null
     createdAt?: Date | string
   }
 
@@ -12903,6 +13023,7 @@ export namespace Prisma {
     income: number
     extraincome: number
     otherincome: number
+    month: Date | string
   }
 
   export type IncomeUncheckedCreateWithoutUserInput = {
@@ -12911,6 +13032,7 @@ export namespace Prisma {
     income: number
     extraincome: number
     otherincome: number
+    month: Date | string
   }
 
   export type IncomeCreateOrConnectWithoutUserInput = {
@@ -12928,6 +13050,7 @@ export namespace Prisma {
     total: number
     impostoRenda: number
     createdAt: Date | string
+    month: Date | string
   }
 
   export type IncomeSummaryUncheckedCreateWithoutUserInput = {
@@ -12935,6 +13058,7 @@ export namespace Prisma {
     total: number
     impostoRenda: number
     createdAt: Date | string
+    month: Date | string
   }
 
   export type IncomeSummaryCreateOrConnectWithoutUserInput = {
@@ -13046,6 +13170,8 @@ export namespace Prisma {
     target?: FloatFilter<"Goal"> | number
     progress?: FloatFilter<"Goal"> | number
     status?: EnumGoalStatusFilter<"Goal"> | $Enums.GoalStatus
+    category?: StringNullableFilter<"Goal"> | string | null
+    imageUrl?: StringNullableFilter<"Goal"> | string | null
     userId?: StringFilter<"Goal"> | string
     createdAt?: DateTimeFilter<"Goal"> | Date | string
   }
@@ -13076,6 +13202,7 @@ export namespace Prisma {
     income?: FloatFilter<"Income"> | number
     extraincome?: FloatFilter<"Income"> | number
     otherincome?: FloatFilter<"Income"> | number
+    month?: DateTimeFilter<"Income"> | Date | string
   }
 
   export type IncomeSummaryUpsertWithWhereUniqueWithoutUserInput = {
@@ -13103,6 +13230,7 @@ export namespace Prisma {
     total?: FloatFilter<"IncomeSummary"> | number
     impostoRenda?: FloatFilter<"IncomeSummary"> | number
     createdAt?: DateTimeFilter<"IncomeSummary"> | Date | string
+    month?: DateTimeFilter<"IncomeSummary"> | Date | string
   }
 
   export type BalanceUpsertWithoutUserInput = {
@@ -13620,7 +13748,9 @@ export namespace Prisma {
     title: string
     target: number
     progress?: number
-    status: $Enums.GoalStatus
+    status?: $Enums.GoalStatus
+    category?: string | null
+    imageUrl?: string | null
     createdAt?: Date | string
   }
 
@@ -13630,6 +13760,7 @@ export namespace Prisma {
     income: number
     extraincome: number
     otherincome: number
+    month: Date | string
   }
 
   export type IncomeSummaryCreateManyUserInput = {
@@ -13637,6 +13768,7 @@ export namespace Prisma {
     total: number
     impostoRenda: number
     createdAt: Date | string
+    month: Date | string
   }
 
   export type ExpenseAnalysisCreateManyUserInput = {
@@ -13686,6 +13818,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13695,6 +13829,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13704,6 +13840,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13713,6 +13851,7 @@ export namespace Prisma {
     income?: FloatFieldUpdateOperationsInput | number
     extraincome?: FloatFieldUpdateOperationsInput | number
     otherincome?: FloatFieldUpdateOperationsInput | number
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeUncheckedUpdateWithoutUserInput = {
@@ -13721,6 +13860,7 @@ export namespace Prisma {
     income?: FloatFieldUpdateOperationsInput | number
     extraincome?: FloatFieldUpdateOperationsInput | number
     otherincome?: FloatFieldUpdateOperationsInput | number
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeUncheckedUpdateManyWithoutUserInput = {
@@ -13729,6 +13869,7 @@ export namespace Prisma {
     income?: FloatFieldUpdateOperationsInput | number
     extraincome?: FloatFieldUpdateOperationsInput | number
     otherincome?: FloatFieldUpdateOperationsInput | number
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeSummaryUpdateWithoutUserInput = {
@@ -13736,6 +13877,7 @@ export namespace Prisma {
     total?: FloatFieldUpdateOperationsInput | number
     impostoRenda?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeSummaryUncheckedUpdateWithoutUserInput = {
@@ -13743,6 +13885,7 @@ export namespace Prisma {
     total?: FloatFieldUpdateOperationsInput | number
     impostoRenda?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeSummaryUncheckedUpdateManyWithoutUserInput = {
@@ -13750,6 +13893,7 @@ export namespace Prisma {
     total?: FloatFieldUpdateOperationsInput | number
     impostoRenda?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    month?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExpenseAnalysisUpdateWithoutUserInput = {

@@ -11,6 +11,7 @@ const incomeSchema = z.object({
   income: z.number().nonnegative(),
   extraincome: z.number().nonnegative().default(0),
   otherincome: z.number().nonnegative().default(0),
+  month: z.string().datetime().optional(), // data no formato ISO string
 })
 
 // Função para calcular o imposto de renda conforme tabela progressiva
@@ -68,7 +69,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     if (req.method === 'POST') {
       // Validar e extrair dados
-      const { income, extraincome, otherincome } = incomeSchema.parse(req.body)
+      const { income, extraincome, otherincome, month } = incomeSchema.parse(req.body)
 
       // Calcular total e imposto
       const total = income + extraincome + otherincome
@@ -83,6 +84,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             otherincome,
             userId: user.id,
             date: new Date(),
+            month: month ? new Date(month) : new Date(),
           },
         }),
         prisma.incomeSummary.create({
@@ -91,6 +93,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             total,
             impostoRenda,
             createdAt: new Date(),
+            month: month ? new Date(month) : new Date(),
           },
         }),
       ])
