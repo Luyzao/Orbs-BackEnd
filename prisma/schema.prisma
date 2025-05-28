@@ -106,3 +106,15 @@ model ExpenseAnalysis {
   diferencamensal Float
   createdAt     DateTime 
 }
+
+model Forms {
+  id                 String   @id @default(uuid())
+  media_salarial     String
+  idade              String
+  filhos             String
+  quantidade_filhos  String?  
+  dinheiro           String
+  dinheiro_outro     String?  
+  createdAt          DateTime @default(now())
+}
+
