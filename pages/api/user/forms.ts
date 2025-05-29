@@ -6,10 +6,8 @@ const formSchema = z.object({
     userId: z.string(), 
     media_salarial: z.string(),
     idade: z.string(),
-    filhos: z.string(),
-    quantidade_filhos: z.string().optional(),
+    quantidade_filhos: z.string(),
     dinheiro: z.string(),
-    dinheiro_outro: z.string().optional(),
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -44,10 +42,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 userId: data.userId,
                 media_salarial: data.media_salarial,
                 idade: data.idade,
-                filhos: data.filhos,
                 quantidade_filhos: data.quantidade_filhos ?? null,
                 dinheiro: data.dinheiro,
-                dinheiro_outro: data.dinheiro_outro ?? null,
             }
         });
 

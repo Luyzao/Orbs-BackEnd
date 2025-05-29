@@ -113,10 +113,8 @@ model Forms {
   userId String  
   media_salarial     String
   idade              String
-  filhos             String
-  quantidade_filhos  String?  
+  quantidade_filhos  String  
   dinheiro           String
-  dinheiro_outro     String?  
   createdAt          DateTime @default(now())
 }
 

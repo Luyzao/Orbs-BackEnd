@@ -10722,10 +10722,8 @@ export namespace Prisma {
     userId: string | null
     media_salarial: string | null
     idade: string | null
-    filhos: string | null
     quantidade_filhos: string | null
     dinheiro: string | null
-    dinheiro_outro: string | null
     createdAt: Date | null
   }
 
@@ -10734,10 +10732,8 @@ export namespace Prisma {
     userId: string | null
     media_salarial: string | null
     idade: string | null
-    filhos: string | null
     quantidade_filhos: string | null
     dinheiro: string | null
-    dinheiro_outro: string | null
     createdAt: Date | null
   }
 
@@ -10746,10 +10742,8 @@ export namespace Prisma {
     userId: number
     media_salarial: number
     idade: number
-    filhos: number
     quantidade_filhos: number
     dinheiro: number
-    dinheiro_outro: number
     createdAt: number
     _all: number
   }
@@ -10760,10 +10754,8 @@ export namespace Prisma {
     userId?: true
     media_salarial?: true
     idade?: true
-    filhos?: true
     quantidade_filhos?: true
     dinheiro?: true
-    dinheiro_outro?: true
     createdAt?: true
   }
 
@@ -10772,10 +10764,8 @@ export namespace Prisma {
     userId?: true
     media_salarial?: true
     idade?: true
-    filhos?: true
     quantidade_filhos?: true
     dinheiro?: true
-    dinheiro_outro?: true
     createdAt?: true
   }
 
@@ -10784,10 +10774,8 @@ export namespace Prisma {
     userId?: true
     media_salarial?: true
     idade?: true
-    filhos?: true
     quantidade_filhos?: true
     dinheiro?: true
-    dinheiro_outro?: true
     createdAt?: true
     _all?: true
   }
@@ -10869,10 +10857,8 @@ export namespace Prisma {
     userId: string
     media_salarial: string
     idade: string
-    filhos: string
-    quantidade_filhos: string | null
+    quantidade_filhos: string
     dinheiro: string
-    dinheiro_outro: string | null
     createdAt: Date
     _count: FormsCountAggregateOutputType | null
     _min: FormsMinAggregateOutputType | null
@@ -10898,10 +10884,8 @@ export namespace Prisma {
     userId?: boolean
     media_salarial?: boolean
     idade?: boolean
-    filhos?: boolean
     quantidade_filhos?: boolean
     dinheiro?: boolean
-    dinheiro_outro?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["forms"]>
@@ -10911,10 +10895,8 @@ export namespace Prisma {
     userId?: boolean
     media_salarial?: boolean
     idade?: boolean
-    filhos?: boolean
     quantidade_filhos?: boolean
     dinheiro?: boolean
-    dinheiro_outro?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["forms"]>
@@ -10924,10 +10906,8 @@ export namespace Prisma {
     userId?: boolean
     media_salarial?: boolean
     idade?: boolean
-    filhos?: boolean
     quantidade_filhos?: boolean
     dinheiro?: boolean
-    dinheiro_outro?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["forms"]>
@@ -10937,14 +10917,12 @@ export namespace Prisma {
     userId?: boolean
     media_salarial?: boolean
     idade?: boolean
-    filhos?: boolean
     quantidade_filhos?: boolean
     dinheiro?: boolean
-    dinheiro_outro?: boolean
     createdAt?: boolean
   }
 
-  export type FormsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "media_salarial" | "idade" | "filhos" | "quantidade_filhos" | "dinheiro" | "dinheiro_outro" | "createdAt", ExtArgs["result"]["forms"]>
+  export type FormsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "media_salarial" | "idade" | "quantidade_filhos" | "dinheiro" | "createdAt", ExtArgs["result"]["forms"]>
   export type FormsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -10965,10 +10943,8 @@ export namespace Prisma {
       userId: string
       media_salarial: string
       idade: string
-      filhos: string
-      quantidade_filhos: string | null
+      quantidade_filhos: string
       dinheiro: string
-      dinheiro_outro: string | null
       createdAt: Date
     }, ExtArgs["result"]["forms"]>
     composites: {}
@@ -11398,10 +11374,8 @@ export namespace Prisma {
     readonly userId: FieldRef<"Forms", 'String'>
     readonly media_salarial: FieldRef<"Forms", 'String'>
     readonly idade: FieldRef<"Forms", 'String'>
-    readonly filhos: FieldRef<"Forms", 'String'>
     readonly quantidade_filhos: FieldRef<"Forms", 'String'>
     readonly dinheiro: FieldRef<"Forms", 'String'>
-    readonly dinheiro_outro: FieldRef<"Forms", 'String'>
     readonly createdAt: FieldRef<"Forms", 'DateTime'>
   }
     
@@ -11931,10 +11905,8 @@ export namespace Prisma {
     userId: 'userId',
     media_salarial: 'media_salarial',
     idade: 'idade',
-    filhos: 'filhos',
     quantidade_filhos: 'quantidade_filhos',
     dinheiro: 'dinheiro',
-    dinheiro_outro: 'dinheiro_outro',
     createdAt: 'createdAt'
   };
 
@@ -12566,10 +12538,8 @@ export namespace Prisma {
     userId?: StringFilter<"Forms"> | string
     media_salarial?: StringFilter<"Forms"> | string
     idade?: StringFilter<"Forms"> | string
-    filhos?: StringFilter<"Forms"> | string
-    quantidade_filhos?: StringNullableFilter<"Forms"> | string | null
+    quantidade_filhos?: StringFilter<"Forms"> | string
     dinheiro?: StringFilter<"Forms"> | string
-    dinheiro_outro?: StringNullableFilter<"Forms"> | string | null
     createdAt?: DateTimeFilter<"Forms"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -12579,10 +12549,8 @@ export namespace Prisma {
     userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
-    filhos?: SortOrder
-    quantidade_filhos?: SortOrderInput | SortOrder
+    quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
-    dinheiro_outro?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -12595,10 +12563,8 @@ export namespace Prisma {
     userId?: StringFilter<"Forms"> | string
     media_salarial?: StringFilter<"Forms"> | string
     idade?: StringFilter<"Forms"> | string
-    filhos?: StringFilter<"Forms"> | string
-    quantidade_filhos?: StringNullableFilter<"Forms"> | string | null
+    quantidade_filhos?: StringFilter<"Forms"> | string
     dinheiro?: StringFilter<"Forms"> | string
-    dinheiro_outro?: StringNullableFilter<"Forms"> | string | null
     createdAt?: DateTimeFilter<"Forms"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -12608,10 +12574,8 @@ export namespace Prisma {
     userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
-    filhos?: SortOrder
-    quantidade_filhos?: SortOrderInput | SortOrder
+    quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
-    dinheiro_outro?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: FormsCountOrderByAggregateInput
     _max?: FormsMaxOrderByAggregateInput
@@ -12626,10 +12590,8 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Forms"> | string
     media_salarial?: StringWithAggregatesFilter<"Forms"> | string
     idade?: StringWithAggregatesFilter<"Forms"> | string
-    filhos?: StringWithAggregatesFilter<"Forms"> | string
-    quantidade_filhos?: StringNullableWithAggregatesFilter<"Forms"> | string | null
+    quantidade_filhos?: StringWithAggregatesFilter<"Forms"> | string
     dinheiro?: StringWithAggregatesFilter<"Forms"> | string
-    dinheiro_outro?: StringNullableWithAggregatesFilter<"Forms"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Forms"> | Date | string
   }
 
@@ -13159,10 +13121,8 @@ export namespace Prisma {
     id?: string
     media_salarial: string
     idade: string
-    filhos: string
-    quantidade_filhos?: string | null
+    quantidade_filhos: string
     dinheiro: string
-    dinheiro_outro?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutFormsInput
   }
@@ -13172,10 +13132,8 @@ export namespace Prisma {
     userId: string
     media_salarial: string
     idade: string
-    filhos: string
-    quantidade_filhos?: string | null
+    quantidade_filhos: string
     dinheiro: string
-    dinheiro_outro?: string | null
     createdAt?: Date | string
   }
 
@@ -13183,10 +13141,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     media_salarial?: StringFieldUpdateOperationsInput | string
     idade?: StringFieldUpdateOperationsInput | string
-    filhos?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: NullableStringFieldUpdateOperationsInput | string | null
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
-    dinheiro_outro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutFormsNestedInput
   }
@@ -13196,10 +13152,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     media_salarial?: StringFieldUpdateOperationsInput | string
     idade?: StringFieldUpdateOperationsInput | string
-    filhos?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: NullableStringFieldUpdateOperationsInput | string | null
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
-    dinheiro_outro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13208,10 +13162,8 @@ export namespace Prisma {
     userId: string
     media_salarial: string
     idade: string
-    filhos: string
-    quantidade_filhos?: string | null
+    quantidade_filhos: string
     dinheiro: string
-    dinheiro_outro?: string | null
     createdAt?: Date | string
   }
 
@@ -13219,10 +13171,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     media_salarial?: StringFieldUpdateOperationsInput | string
     idade?: StringFieldUpdateOperationsInput | string
-    filhos?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: NullableStringFieldUpdateOperationsInput | string | null
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
-    dinheiro_outro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13231,10 +13181,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     media_salarial?: StringFieldUpdateOperationsInput | string
     idade?: StringFieldUpdateOperationsInput | string
-    filhos?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: NullableStringFieldUpdateOperationsInput | string | null
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
-    dinheiro_outro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13775,10 +13723,8 @@ export namespace Prisma {
     userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
-    filhos?: SortOrder
     quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
-    dinheiro_outro?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -13787,10 +13733,8 @@ export namespace Prisma {
     userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
-    filhos?: SortOrder
     quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
-    dinheiro_outro?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -13799,10 +13743,8 @@ export namespace Prisma {
     userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
-    filhos?: SortOrder
     quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
-    dinheiro_outro?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14638,10 +14580,8 @@ export namespace Prisma {
     id?: string
     media_salarial: string
     idade: string
-    filhos: string
-    quantidade_filhos?: string | null
+    quantidade_filhos: string
     dinheiro: string
-    dinheiro_outro?: string | null
     createdAt?: Date | string
   }
 
@@ -14649,10 +14589,8 @@ export namespace Prisma {
     id?: string
     media_salarial: string
     idade: string
-    filhos: string
-    quantidade_filhos?: string | null
+    quantidade_filhos: string
     dinheiro: string
-    dinheiro_outro?: string | null
     createdAt?: Date | string
   }
 
@@ -14860,10 +14798,8 @@ export namespace Prisma {
     userId?: StringFilter<"Forms"> | string
     media_salarial?: StringFilter<"Forms"> | string
     idade?: StringFilter<"Forms"> | string
-    filhos?: StringFilter<"Forms"> | string
-    quantidade_filhos?: StringNullableFilter<"Forms"> | string | null
+    quantidade_filhos?: StringFilter<"Forms"> | string
     dinheiro?: StringFilter<"Forms"> | string
-    dinheiro_outro?: StringNullableFilter<"Forms"> | string | null
     createdAt?: DateTimeFilter<"Forms"> | Date | string
   }
 
@@ -15454,10 +15390,8 @@ export namespace Prisma {
     id?: string
     media_salarial: string
     idade: string
-    filhos: string
-    quantidade_filhos?: string | null
+    quantidade_filhos: string
     dinheiro: string
-    dinheiro_outro?: string | null
     createdAt?: Date | string
   }
 
@@ -15606,10 +15540,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     media_salarial?: StringFieldUpdateOperationsInput | string
     idade?: StringFieldUpdateOperationsInput | string
-    filhos?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: NullableStringFieldUpdateOperationsInput | string | null
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
-    dinheiro_outro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15617,10 +15549,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     media_salarial?: StringFieldUpdateOperationsInput | string
     idade?: StringFieldUpdateOperationsInput | string
-    filhos?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: NullableStringFieldUpdateOperationsInput | string | null
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
-    dinheiro_outro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15628,10 +15558,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     media_salarial?: StringFieldUpdateOperationsInput | string
     idade?: StringFieldUpdateOperationsInput | string
-    filhos?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: NullableStringFieldUpdateOperationsInput | string | null
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
-    dinheiro_outro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

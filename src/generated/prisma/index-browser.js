@@ -196,10 +196,8 @@ exports.Prisma.FormsScalarFieldEnum = {
   userId: 'userId',
   media_salarial: 'media_salarial',
   idade: 'idade',
-  filhos: 'filhos',
   quantidade_filhos: 'quantidade_filhos',
   dinheiro: 'dinheiro',
-  dinheiro_outro: 'dinheiro_outro',
   createdAt: 'createdAt'
 };
 
