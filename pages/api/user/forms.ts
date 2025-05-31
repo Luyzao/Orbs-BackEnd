@@ -3,10 +3,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from "zod";
 
 const formSchema = z.object({
-    userId: z.string(), 
-    media_salarial: z.string(),
-    idade: z.string(),
-    quantidade_filhos: z.string(),
+    userId: z.string(),
+    media_salarial: z
+        .string()
+        .regex(/^\d+(\.\d{1,2})?$/, "media_salarial deve ser número com até 2 casas decimais"),
+    idade: z.number().int().nonnegative(),
+    quantidade_filhos: z.string().optional().nullable(),
     dinheiro: z.string(),
 });
 
@@ -29,6 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const body = req.body;
         const data = formSchema.parse(body);
+
         const userExists = await prisma.user.findUnique({
             where: { id: data.userId },
         });
@@ -42,20 +45,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 userId: data.userId, 
             },
             update: {
-                media_salarial: data.media_salarial,
+                media_salarial: parseFloat(data.media_salarial),
                 idade: data.idade,
-                quantidade_filhos: data.quantidade_filhos ?? null,
+                quantidade_filhos: data.quantidade_filhos ?? '',
                 dinheiro: data.dinheiro,
             },
             create: {
                 userId: data.userId,
-                media_salarial: data.media_salarial,
+                media_salarial: parseFloat(data.media_salarial),
                 idade: data.idade,
-                quantidade_filhos: data.quantidade_filhos ?? null,
+                quantidade_filhos: data.quantidade_filhos ?? '',
                 dinheiro: data.dinheiro,
             },
         });
-
 
         return res.status(201).json({ form: formEntry, message: "Formulário salvo com sucesso!" });
     } catch (error) {

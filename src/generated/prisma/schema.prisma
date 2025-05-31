@@ -16,7 +16,7 @@ model User {
   expenses          Expense[]
   expensesAnalysis  ExpenseAnalysis[]
   financialAnalysis FinancialAnalysis[]
-  Forms             Forms[]
+  Forms             Forms?
   goals             Goal[]
   incomes           Income[]
   incomesummary     IncomeSummary[]
@@ -97,8 +97,8 @@ model ExpenseAnalysis {
 
 model Forms {
   id                String   @id @default(uuid())
-  media_salarial    String
-  idade             String
+  media_salarial    Decimal  @db.Decimal(10, 2)
+  idade             Int
   quantidade_filhos String
   dinheiro          String
   createdAt         DateTime @default(now())

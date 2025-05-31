@@ -1709,7 +1709,6 @@ export namespace Prisma {
     expenses: number
     expensesAnalysis: number
     financialAnalysis: number
-    Forms: number
     goals: number
     incomes: number
     incomesummary: number
@@ -1719,7 +1718,6 @@ export namespace Prisma {
     expenses?: boolean | UserCountOutputTypeCountExpensesArgs
     expensesAnalysis?: boolean | UserCountOutputTypeCountExpensesAnalysisArgs
     financialAnalysis?: boolean | UserCountOutputTypeCountFinancialAnalysisArgs
-    Forms?: boolean | UserCountOutputTypeCountFormsArgs
     goals?: boolean | UserCountOutputTypeCountGoalsArgs
     incomes?: boolean | UserCountOutputTypeCountIncomesArgs
     incomesummary?: boolean | UserCountOutputTypeCountIncomesummaryArgs
@@ -1755,13 +1753,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountFinancialAnalysisArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FinancialAnalysisWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountFormsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FormsWhereInput
   }
 
   /**
@@ -2020,7 +2011,7 @@ export namespace Prisma {
       expenses: Prisma.$ExpensePayload<ExtArgs>[]
       expensesAnalysis: Prisma.$ExpenseAnalysisPayload<ExtArgs>[]
       financialAnalysis: Prisma.$FinancialAnalysisPayload<ExtArgs>[]
-      Forms: Prisma.$FormsPayload<ExtArgs>[]
+      Forms: Prisma.$FormsPayload<ExtArgs> | null
       goals: Prisma.$GoalPayload<ExtArgs>[]
       incomes: Prisma.$IncomePayload<ExtArgs>[]
       incomesummary: Prisma.$IncomeSummaryPayload<ExtArgs>[]
@@ -2427,7 +2418,7 @@ export namespace Prisma {
     expenses<T extends User$expensesArgs<ExtArgs> = {}>(args?: Subset<T, User$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expensesAnalysis<T extends User$expensesAnalysisArgs<ExtArgs> = {}>(args?: Subset<T, User$expensesAnalysisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     financialAnalysis<T extends User$financialAnalysisArgs<ExtArgs> = {}>(args?: Subset<T, User$financialAnalysisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Forms<T extends User$FormsArgs<ExtArgs> = {}>(args?: Subset<T, User$FormsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Forms<T extends User$FormsArgs<ExtArgs> = {}>(args?: Subset<T, User$FormsArgs<ExtArgs>>): Prisma__FormsClient<$Result.GetResult<Prisma.$FormsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     goals<T extends User$goalsArgs<ExtArgs> = {}>(args?: Subset<T, User$goalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     incomes<T extends User$incomesArgs<ExtArgs> = {}>(args?: Subset<T, User$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     incomesummary<T extends User$incomesummaryArgs<ExtArgs> = {}>(args?: Subset<T, User$incomesummaryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2958,11 +2949,6 @@ export namespace Prisma {
      */
     include?: FormsInclude<ExtArgs> | null
     where?: FormsWhereInput
-    orderBy?: FormsOrderByWithRelationInput | FormsOrderByWithRelationInput[]
-    cursor?: FormsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: FormsScalarFieldEnum | FormsScalarFieldEnum[]
   }
 
   /**
@@ -10841,14 +10827,26 @@ export namespace Prisma {
 
   export type AggregateForms = {
     _count: FormsCountAggregateOutputType | null
+    _avg: FormsAvgAggregateOutputType | null
+    _sum: FormsSumAggregateOutputType | null
     _min: FormsMinAggregateOutputType | null
     _max: FormsMaxAggregateOutputType | null
   }
 
+  export type FormsAvgAggregateOutputType = {
+    media_salarial: Decimal | null
+    idade: number | null
+  }
+
+  export type FormsSumAggregateOutputType = {
+    media_salarial: Decimal | null
+    idade: number | null
+  }
+
   export type FormsMinAggregateOutputType = {
     id: string | null
-    media_salarial: string | null
-    idade: string | null
+    media_salarial: Decimal | null
+    idade: number | null
     quantidade_filhos: string | null
     dinheiro: string | null
     createdAt: Date | null
@@ -10857,8 +10855,8 @@ export namespace Prisma {
 
   export type FormsMaxAggregateOutputType = {
     id: string | null
-    media_salarial: string | null
-    idade: string | null
+    media_salarial: Decimal | null
+    idade: number | null
     quantidade_filhos: string | null
     dinheiro: string | null
     createdAt: Date | null
@@ -10876,6 +10874,16 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type FormsAvgAggregateInputType = {
+    media_salarial?: true
+    idade?: true
+  }
+
+  export type FormsSumAggregateInputType = {
+    media_salarial?: true
+    idade?: true
+  }
 
   export type FormsMinAggregateInputType = {
     id?: true
@@ -10946,6 +10954,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: FormsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FormsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: FormsMinAggregateInputType
@@ -10976,19 +10996,23 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: FormsCountAggregateInputType | true
+    _avg?: FormsAvgAggregateInputType
+    _sum?: FormsSumAggregateInputType
     _min?: FormsMinAggregateInputType
     _max?: FormsMaxAggregateInputType
   }
 
   export type FormsGroupByOutputType = {
     id: string
-    media_salarial: string
-    idade: string
+    media_salarial: Decimal
+    idade: number
     quantidade_filhos: string
     dinheiro: string
     createdAt: Date
     userId: string
     _count: FormsCountAggregateOutputType | null
+    _avg: FormsAvgAggregateOutputType | null
+    _sum: FormsSumAggregateOutputType | null
     _min: FormsMinAggregateOutputType | null
     _max: FormsMaxAggregateOutputType | null
   }
@@ -11068,8 +11092,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      media_salarial: string
-      idade: string
+      media_salarial: Prisma.Decimal
+      idade: number
       quantidade_filhos: string
       dinheiro: string
       createdAt: Date
@@ -11499,8 +11523,8 @@ export namespace Prisma {
    */
   interface FormsFieldRefs {
     readonly id: FieldRef<"Forms", 'String'>
-    readonly media_salarial: FieldRef<"Forms", 'String'>
-    readonly idade: FieldRef<"Forms", 'String'>
+    readonly media_salarial: FieldRef<"Forms", 'Decimal'>
+    readonly idade: FieldRef<"Forms", 'Int'>
     readonly quantidade_filhos: FieldRef<"Forms", 'String'>
     readonly dinheiro: FieldRef<"Forms", 'String'>
     readonly createdAt: FieldRef<"Forms", 'DateTime'>
@@ -13281,6 +13305,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -13308,7 +13346,7 @@ export namespace Prisma {
     expenses?: ExpenseListRelationFilter
     expensesAnalysis?: ExpenseAnalysisListRelationFilter
     financialAnalysis?: FinancialAnalysisListRelationFilter
-    Forms?: FormsListRelationFilter
+    Forms?: XOR<FormsNullableScalarRelationFilter, FormsWhereInput> | null
     goals?: GoalListRelationFilter
     incomes?: IncomeListRelationFilter
     incomesummary?: IncomeSummaryListRelationFilter
@@ -13322,7 +13360,7 @@ export namespace Prisma {
     expenses?: ExpenseOrderByRelationAggregateInput
     expensesAnalysis?: ExpenseAnalysisOrderByRelationAggregateInput
     financialAnalysis?: FinancialAnalysisOrderByRelationAggregateInput
-    Forms?: FormsOrderByRelationAggregateInput
+    Forms?: FormsOrderByWithRelationInput
     goals?: GoalOrderByRelationAggregateInput
     incomes?: IncomeOrderByRelationAggregateInput
     incomesummary?: IncomeSummaryOrderByRelationAggregateInput
@@ -13339,7 +13377,7 @@ export namespace Prisma {
     expenses?: ExpenseListRelationFilter
     expensesAnalysis?: ExpenseAnalysisListRelationFilter
     financialAnalysis?: FinancialAnalysisListRelationFilter
-    Forms?: FormsListRelationFilter
+    Forms?: XOR<FormsNullableScalarRelationFilter, FormsWhereInput> | null
     goals?: GoalListRelationFilter
     incomes?: IncomeListRelationFilter
     incomesummary?: IncomeSummaryListRelationFilter
@@ -13813,8 +13851,8 @@ export namespace Prisma {
     OR?: FormsWhereInput[]
     NOT?: FormsWhereInput | FormsWhereInput[]
     id?: StringFilter<"Forms"> | string
-    media_salarial?: StringFilter<"Forms"> | string
-    idade?: StringFilter<"Forms"> | string
+    media_salarial?: DecimalFilter<"Forms"> | Decimal | DecimalJsLike | number | string
+    idade?: IntFilter<"Forms"> | number
     quantidade_filhos?: StringFilter<"Forms"> | string
     dinheiro?: StringFilter<"Forms"> | string
     createdAt?: DateTimeFilter<"Forms"> | Date | string
@@ -13839,8 +13877,8 @@ export namespace Prisma {
     AND?: FormsWhereInput | FormsWhereInput[]
     OR?: FormsWhereInput[]
     NOT?: FormsWhereInput | FormsWhereInput[]
-    media_salarial?: StringFilter<"Forms"> | string
-    idade?: StringFilter<"Forms"> | string
+    media_salarial?: DecimalFilter<"Forms"> | Decimal | DecimalJsLike | number | string
+    idade?: IntFilter<"Forms"> | number
     quantidade_filhos?: StringFilter<"Forms"> | string
     dinheiro?: StringFilter<"Forms"> | string
     createdAt?: DateTimeFilter<"Forms"> | Date | string
@@ -13856,8 +13894,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     userId?: SortOrder
     _count?: FormsCountOrderByAggregateInput
+    _avg?: FormsAvgOrderByAggregateInput
     _max?: FormsMaxOrderByAggregateInput
     _min?: FormsMinOrderByAggregateInput
+    _sum?: FormsSumOrderByAggregateInput
   }
 
   export type FormsScalarWhereWithAggregatesInput = {
@@ -13865,8 +13905,8 @@ export namespace Prisma {
     OR?: FormsScalarWhereWithAggregatesInput[]
     NOT?: FormsScalarWhereWithAggregatesInput | FormsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Forms"> | string
-    media_salarial?: StringWithAggregatesFilter<"Forms"> | string
-    idade?: StringWithAggregatesFilter<"Forms"> | string
+    media_salarial?: DecimalWithAggregatesFilter<"Forms"> | Decimal | DecimalJsLike | number | string
+    idade?: IntWithAggregatesFilter<"Forms"> | number
     quantidade_filhos?: StringWithAggregatesFilter<"Forms"> | string
     dinheiro?: StringWithAggregatesFilter<"Forms"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Forms"> | Date | string
@@ -13943,7 +13983,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedOneWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
@@ -13957,7 +13997,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedOneWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
@@ -13971,7 +14011,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateOneWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
@@ -13985,7 +14025,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateOneWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
@@ -14463,8 +14503,8 @@ export namespace Prisma {
 
   export type FormsCreateInput = {
     id?: string
-    media_salarial: string
-    idade: string
+    media_salarial: Decimal | DecimalJsLike | number | string
+    idade: number
     quantidade_filhos: string
     dinheiro: string
     createdAt?: Date | string
@@ -14473,8 +14513,8 @@ export namespace Prisma {
 
   export type FormsUncheckedCreateInput = {
     id?: string
-    media_salarial: string
-    idade: string
+    media_salarial: Decimal | DecimalJsLike | number | string
+    idade: number
     quantidade_filhos: string
     dinheiro: string
     createdAt?: Date | string
@@ -14483,8 +14523,8 @@ export namespace Prisma {
 
   export type FormsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
+    media_salarial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    idade?: IntFieldUpdateOperationsInput | number
     quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14493,8 +14533,8 @@ export namespace Prisma {
 
   export type FormsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
+    media_salarial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    idade?: IntFieldUpdateOperationsInput | number
     quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14503,8 +14543,8 @@ export namespace Prisma {
 
   export type FormsCreateManyInput = {
     id?: string
-    media_salarial: string
-    idade: string
+    media_salarial: Decimal | DecimalJsLike | number | string
+    idade: number
     quantidade_filhos: string
     dinheiro: string
     createdAt?: Date | string
@@ -14513,8 +14553,8 @@ export namespace Prisma {
 
   export type FormsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
+    media_salarial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    idade?: IntFieldUpdateOperationsInput | number
     quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14522,8 +14562,8 @@ export namespace Prisma {
 
   export type FormsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
+    media_salarial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    idade?: IntFieldUpdateOperationsInput | number
     quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14645,10 +14685,9 @@ export namespace Prisma {
     none?: FinancialAnalysisWhereInput
   }
 
-  export type FormsListRelationFilter = {
-    every?: FormsWhereInput
-    some?: FormsWhereInput
-    none?: FormsWhereInput
+  export type FormsNullableScalarRelationFilter = {
+    is?: FormsWhereInput | null
+    isNot?: FormsWhereInput | null
   }
 
   export type GoalListRelationFilter = {
@@ -14683,10 +14722,6 @@ export namespace Prisma {
   }
 
   export type FinancialAnalysisOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type FormsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15134,6 +15169,28 @@ export namespace Prisma {
     diferencamensal?: SortOrder
   }
 
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type FormsCountOrderByAggregateInput = {
     id?: SortOrder
     media_salarial?: SortOrder
@@ -15142,6 +15199,11 @@ export namespace Prisma {
     dinheiro?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+  }
+
+  export type FormsAvgOrderByAggregateInput = {
+    media_salarial?: SortOrder
+    idade?: SortOrder
   }
 
   export type FormsMaxOrderByAggregateInput = {
@@ -15164,7 +15226,28 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
+  export type FormsSumOrderByAggregateInput = {
+    media_salarial?: SortOrder
+    idade?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -15172,7 +15255,12 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
   export type JsonFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -15232,22 +15320,6 @@ export namespace Prisma {
     month?: SortOrder
     year?: SortOrder
   }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
@@ -15302,11 +15374,10 @@ export namespace Prisma {
     connect?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
   }
 
-  export type FormsCreateNestedManyWithoutUserInput = {
-    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
-    createMany?: FormsCreateManyUserInputEnvelope
-    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+  export type FormsCreateNestedOneWithoutUserInput = {
+    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: FormsCreateOrConnectWithoutUserInput
+    connect?: FormsWhereUniqueInput
   }
 
   export type GoalCreateNestedManyWithoutUserInput = {
@@ -15357,11 +15428,10 @@ export namespace Prisma {
     connect?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
   }
 
-  export type FormsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
-    createMany?: FormsCreateManyUserInputEnvelope
-    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+  export type FormsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: FormsCreateOrConnectWithoutUserInput
+    connect?: FormsWhereUniqueInput
   }
 
   export type GoalUncheckedCreateNestedManyWithoutUserInput = {
@@ -15445,18 +15515,14 @@ export namespace Prisma {
     deleteMany?: FinancialAnalysisScalarWhereInput | FinancialAnalysisScalarWhereInput[]
   }
 
-  export type FormsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
-    upsert?: FormsUpsertWithWhereUniqueWithoutUserInput | FormsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FormsCreateManyUserInputEnvelope
-    set?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    disconnect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    delete?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    update?: FormsUpdateWithWhereUniqueWithoutUserInput | FormsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FormsUpdateManyWithWhereWithoutUserInput | FormsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FormsScalarWhereInput | FormsScalarWhereInput[]
+  export type FormsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: FormsCreateOrConnectWithoutUserInput
+    upsert?: FormsUpsertWithoutUserInput
+    disconnect?: FormsWhereInput | boolean
+    delete?: FormsWhereInput | boolean
+    connect?: FormsWhereUniqueInput
+    update?: XOR<XOR<FormsUpdateToOneWithWhereWithoutUserInput, FormsUpdateWithoutUserInput>, FormsUncheckedUpdateWithoutUserInput>
   }
 
   export type GoalUpdateManyWithoutUserNestedInput = {
@@ -15553,18 +15619,14 @@ export namespace Prisma {
     deleteMany?: FinancialAnalysisScalarWhereInput | FinancialAnalysisScalarWhereInput[]
   }
 
-  export type FormsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
-    upsert?: FormsUpsertWithWhereUniqueWithoutUserInput | FormsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FormsCreateManyUserInputEnvelope
-    set?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    disconnect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    delete?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    update?: FormsUpdateWithWhereUniqueWithoutUserInput | FormsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FormsUpdateManyWithWhereWithoutUserInput | FormsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FormsScalarWhereInput | FormsScalarWhereInput[]
+  export type FormsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: FormsCreateOrConnectWithoutUserInput
+    upsert?: FormsUpsertWithoutUserInput
+    disconnect?: FormsWhereInput | boolean
+    delete?: FormsWhereInput | boolean
+    connect?: FormsWhereUniqueInput
+    update?: XOR<XOR<FormsUpdateToOneWithWhereWithoutUserInput, FormsUpdateWithoutUserInput>, FormsUncheckedUpdateWithoutUserInput>
   }
 
   export type GoalUncheckedUpdateManyWithoutUserNestedInput = {
@@ -15783,6 +15845,22 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateOneRequiredWithoutFormsNestedInput = {
     create?: XOR<UserCreateWithoutFormsInput, UserUncheckedCreateWithoutFormsInput>
     connectOrCreate?: UserCreateOrConnectWithoutFormsInput
@@ -15795,14 +15873,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutFinancialAnalysisInput, UserUncheckedCreateWithoutFinancialAnalysisInput>
     connectOrCreate?: UserCreateOrConnectWithoutFinancialAnalysisInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutFinancialAnalysisNestedInput = {
@@ -16006,6 +16076,33 @@ export namespace Prisma {
     _max?: NestedEnumGoalStatusFilter<$PrismaModel>
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -16148,8 +16245,8 @@ export namespace Prisma {
 
   export type FormsCreateWithoutUserInput = {
     id?: string
-    media_salarial: string
-    idade: string
+    media_salarial: Decimal | DecimalJsLike | number | string
+    idade: number
     quantidade_filhos: string
     dinheiro: string
     createdAt?: Date | string
@@ -16157,8 +16254,8 @@ export namespace Prisma {
 
   export type FormsUncheckedCreateWithoutUserInput = {
     id?: string
-    media_salarial: string
-    idade: string
+    media_salarial: Decimal | DecimalJsLike | number | string
+    idade: number
     quantidade_filhos: string
     dinheiro: string
     createdAt?: Date | string
@@ -16167,11 +16264,6 @@ export namespace Prisma {
   export type FormsCreateOrConnectWithoutUserInput = {
     where: FormsWhereUniqueInput
     create: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
-  }
-
-  export type FormsCreateManyUserInputEnvelope = {
-    data: FormsCreateManyUserInput | FormsCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type GoalCreateWithoutUserInput = {
@@ -16370,33 +16462,33 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"FinancialAnalysis"> | Date | string
   }
 
-  export type FormsUpsertWithWhereUniqueWithoutUserInput = {
-    where: FormsWhereUniqueInput
+  export type FormsUpsertWithoutUserInput = {
     update: XOR<FormsUpdateWithoutUserInput, FormsUncheckedUpdateWithoutUserInput>
     create: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
+    where?: FormsWhereInput
   }
 
-  export type FormsUpdateWithWhereUniqueWithoutUserInput = {
-    where: FormsWhereUniqueInput
+  export type FormsUpdateToOneWithWhereWithoutUserInput = {
+    where?: FormsWhereInput
     data: XOR<FormsUpdateWithoutUserInput, FormsUncheckedUpdateWithoutUserInput>
   }
 
-  export type FormsUpdateManyWithWhereWithoutUserInput = {
-    where: FormsScalarWhereInput
-    data: XOR<FormsUpdateManyMutationInput, FormsUncheckedUpdateManyWithoutUserInput>
+  export type FormsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    media_salarial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    idade?: IntFieldUpdateOperationsInput | number
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
+    dinheiro?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type FormsScalarWhereInput = {
-    AND?: FormsScalarWhereInput | FormsScalarWhereInput[]
-    OR?: FormsScalarWhereInput[]
-    NOT?: FormsScalarWhereInput | FormsScalarWhereInput[]
-    id?: StringFilter<"Forms"> | string
-    media_salarial?: StringFilter<"Forms"> | string
-    idade?: StringFilter<"Forms"> | string
-    quantidade_filhos?: StringFilter<"Forms"> | string
-    dinheiro?: StringFilter<"Forms"> | string
-    createdAt?: DateTimeFilter<"Forms"> | Date | string
-    userId?: StringFilter<"Forms"> | string
+  export type FormsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    media_salarial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    idade?: IntFieldUpdateOperationsInput | number
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
+    dinheiro?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GoalUpsertWithWhereUniqueWithoutUserInput = {
@@ -16511,7 +16603,7 @@ export namespace Prisma {
     balance?: BalanceCreateNestedOneWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedOneWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
@@ -16524,7 +16616,7 @@ export namespace Prisma {
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedOneWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
@@ -16576,7 +16668,7 @@ export namespace Prisma {
     balance?: BalanceUpdateOneWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateOneWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
@@ -16589,7 +16681,7 @@ export namespace Prisma {
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateOneWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
@@ -16651,7 +16743,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedOneWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
   }
@@ -16664,7 +16756,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedOneWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
   }
@@ -16693,7 +16785,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateOneWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
   }
@@ -16706,7 +16798,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateOneWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -16718,7 +16810,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedOneWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
@@ -16731,7 +16823,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedOneWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
@@ -16760,7 +16852,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateOneWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
@@ -16773,7 +16865,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateOneWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
@@ -16787,7 +16879,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedOneWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
   }
@@ -16800,7 +16892,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedOneWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
   }
@@ -16829,7 +16921,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateOneWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
   }
@@ -16842,7 +16934,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateOneWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -16855,7 +16947,7 @@ export namespace Prisma {
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedOneWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
   }
@@ -16868,7 +16960,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedOneWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
   }
@@ -16897,7 +16989,7 @@ export namespace Prisma {
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateOneWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
   }
@@ -16910,7 +17002,7 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateOneWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -16922,7 +17014,7 @@ export namespace Prisma {
     balance?: BalanceCreateNestedOneWithoutUserInput
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedOneWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
@@ -16935,7 +17027,7 @@ export namespace Prisma {
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedOneWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
@@ -16964,7 +17056,7 @@ export namespace Prisma {
     balance?: BalanceUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateOneWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
@@ -16977,7 +17069,7 @@ export namespace Prisma {
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateOneWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
@@ -17058,7 +17150,7 @@ export namespace Prisma {
     balance?: BalanceCreateNestedOneWithoutUserInput
     expenses?: ExpenseCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedOneWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
@@ -17071,7 +17163,7 @@ export namespace Prisma {
     balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
     expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedOneWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
@@ -17100,7 +17192,7 @@ export namespace Prisma {
     balance?: BalanceUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateOneWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
@@ -17113,7 +17205,7 @@ export namespace Prisma {
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateOneWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
@@ -17143,15 +17235,6 @@ export namespace Prisma {
     month: number
     year: number
     data: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-  }
-
-  export type FormsCreateManyUserInput = {
-    id?: string
-    media_salarial: string
-    idade: string
-    quantidade_filhos: string
-    dinheiro: string
     createdAt?: Date | string
   }
 
@@ -17261,33 +17344,6 @@ export namespace Prisma {
     month?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
     data?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FormsUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: StringFieldUpdateOperationsInput | string
-    dinheiro?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FormsUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: StringFieldUpdateOperationsInput | string
-    dinheiro?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FormsUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: StringFieldUpdateOperationsInput | string
-    dinheiro?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
