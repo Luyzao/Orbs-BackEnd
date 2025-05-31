@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.7.0
- * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+ * Prisma Client JS version: 6.8.2
+ * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
  */
 Prisma.prismaVersion = {
-  client: "6.7.0",
-  engine: "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed"
+  client: "6.8.2",
+  engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -150,10 +150,10 @@ exports.Prisma.GoalScalarFieldEnum = {
   target: 'target',
   progress: 'progress',
   status: 'status',
-  category: 'category',
-  imageUrl: 'imageUrl',
   userId: 'userId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  category: 'category',
+  imageUrl: 'imageUrl'
 };
 
 exports.Prisma.BalanceScalarFieldEnum = {
@@ -193,17 +193,30 @@ exports.Prisma.ExpenseAnalysisScalarFieldEnum = {
 
 exports.Prisma.FormsScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   media_salarial: 'media_salarial',
   idade: 'idade',
   quantidade_filhos: 'quantidade_filhos',
   dinheiro: 'dinheiro',
+  createdAt: 'createdAt',
+  userId: 'userId'
+};
+
+exports.Prisma.FinancialAnalysisScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  month: 'month',
+  year: 'year',
+  data: 'data',
   createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -214,6 +227,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.GoalStatus = exports.$Enums.GoalStatus = {
   PENDING: 'PENDING',
@@ -230,7 +249,8 @@ exports.Prisma.ModelName = {
   Income: 'Income',
   IncomeSummary: 'IncomeSummary',
   ExpenseAnalysis: 'ExpenseAnalysis',
-  Forms: 'Forms'
+  Forms: 'Forms',
+  FinancialAnalysis: 'FinancialAnalysis'
 };
 
 /**

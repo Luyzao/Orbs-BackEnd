@@ -58,6 +58,11 @@ export type ExpenseAnalysis = $Result.DefaultSelection<Prisma.$ExpenseAnalysisPa
  * 
  */
 export type Forms = $Result.DefaultSelection<Prisma.$FormsPayload>
+/**
+ * Model FinancialAnalysis
+ * 
+ */
+export type FinancialAnalysis = $Result.DefaultSelection<Prisma.$FinancialAnalysisPayload>
 
 /**
  * Enums
@@ -291,6 +296,16 @@ export class PrismaClient<
     * ```
     */
   get forms(): Prisma.FormsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.financialAnalysis`: Exposes CRUD operations for the **FinancialAnalysis** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FinancialAnalyses
+    * const financialAnalyses = await prisma.financialAnalysis.findMany()
+    * ```
+    */
+  get financialAnalysis(): Prisma.FinancialAnalysisDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -349,8 +364,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -739,7 +754,8 @@ export namespace Prisma {
     Income: 'Income',
     IncomeSummary: 'IncomeSummary',
     ExpenseAnalysis: 'ExpenseAnalysis',
-    Forms: 'Forms'
+    Forms: 'Forms',
+    FinancialAnalysis: 'FinancialAnalysis'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -758,7 +774,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "expense" | "category" | "goal" | "balance" | "income" | "incomeSummary" | "expenseAnalysis" | "forms"
+      modelProps: "user" | "expense" | "category" | "goal" | "balance" | "income" | "incomeSummary" | "expenseAnalysis" | "forms" | "financialAnalysis"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1428,6 +1444,80 @@ export namespace Prisma {
           }
         }
       }
+      FinancialAnalysis: {
+        payload: Prisma.$FinancialAnalysisPayload<ExtArgs>
+        fields: Prisma.FinancialAnalysisFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FinancialAnalysisFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FinancialAnalysisFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload>
+          }
+          findFirst: {
+            args: Prisma.FinancialAnalysisFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FinancialAnalysisFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload>
+          }
+          findMany: {
+            args: Prisma.FinancialAnalysisFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload>[]
+          }
+          create: {
+            args: Prisma.FinancialAnalysisCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload>
+          }
+          createMany: {
+            args: Prisma.FinancialAnalysisCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FinancialAnalysisCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload>[]
+          }
+          delete: {
+            args: Prisma.FinancialAnalysisDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload>
+          }
+          update: {
+            args: Prisma.FinancialAnalysisUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload>
+          }
+          deleteMany: {
+            args: Prisma.FinancialAnalysisDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FinancialAnalysisUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FinancialAnalysisUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload>[]
+          }
+          upsert: {
+            args: Prisma.FinancialAnalysisUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAnalysisPayload>
+          }
+          aggregate: {
+            args: Prisma.FinancialAnalysisAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFinancialAnalysis>
+          }
+          groupBy: {
+            args: Prisma.FinancialAnalysisGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FinancialAnalysisGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FinancialAnalysisCountArgs<ExtArgs>
+            result: $Utils.Optional<FinancialAnalysisCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1521,6 +1611,7 @@ export namespace Prisma {
     incomeSummary?: IncomeSummaryOmit
     expenseAnalysis?: ExpenseAnalysisOmit
     forms?: FormsOmit
+    financialAnalysis?: FinancialAnalysisOmit
   }
 
   /* Types for Logging */
@@ -1616,20 +1707,22 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     expenses: number
+    expensesAnalysis: number
+    financialAnalysis: number
+    Forms: number
     goals: number
     incomes: number
     incomesummary: number
-    expensesAnalysis: number
-    Forms: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     expenses?: boolean | UserCountOutputTypeCountExpensesArgs
+    expensesAnalysis?: boolean | UserCountOutputTypeCountExpensesAnalysisArgs
+    financialAnalysis?: boolean | UserCountOutputTypeCountFinancialAnalysisArgs
+    Forms?: boolean | UserCountOutputTypeCountFormsArgs
     goals?: boolean | UserCountOutputTypeCountGoalsArgs
     incomes?: boolean | UserCountOutputTypeCountIncomesArgs
     incomesummary?: boolean | UserCountOutputTypeCountIncomesummaryArgs
-    expensesAnalysis?: boolean | UserCountOutputTypeCountExpensesAnalysisArgs
-    Forms?: boolean | UserCountOutputTypeCountFormsArgs
   }
 
   // Custom InputTypes
@@ -1653,6 +1746,27 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountExpensesAnalysisArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseAnalysisWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFinancialAnalysisArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FinancialAnalysisWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFormsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormsWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountGoalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: GoalWhereInput
   }
@@ -1669,20 +1783,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountIncomesummaryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IncomeSummaryWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountExpensesAnalysisArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ExpenseAnalysisWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountFormsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FormsWhereInput
   }
 
 
@@ -1869,13 +1969,14 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     avatarUrl?: boolean
+    balance?: boolean | User$balanceArgs<ExtArgs>
     expenses?: boolean | User$expensesArgs<ExtArgs>
+    expensesAnalysis?: boolean | User$expensesAnalysisArgs<ExtArgs>
+    financialAnalysis?: boolean | User$financialAnalysisArgs<ExtArgs>
+    Forms?: boolean | User$FormsArgs<ExtArgs>
     goals?: boolean | User$goalsArgs<ExtArgs>
     incomes?: boolean | User$incomesArgs<ExtArgs>
     incomesummary?: boolean | User$incomesummaryArgs<ExtArgs>
-    balance?: boolean | User$balanceArgs<ExtArgs>
-    expensesAnalysis?: boolean | User$expensesAnalysisArgs<ExtArgs>
-    Forms?: boolean | User$FormsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1899,13 +2000,14 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "avatarUrl", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    balance?: boolean | User$balanceArgs<ExtArgs>
     expenses?: boolean | User$expensesArgs<ExtArgs>
+    expensesAnalysis?: boolean | User$expensesAnalysisArgs<ExtArgs>
+    financialAnalysis?: boolean | User$financialAnalysisArgs<ExtArgs>
+    Forms?: boolean | User$FormsArgs<ExtArgs>
     goals?: boolean | User$goalsArgs<ExtArgs>
     incomes?: boolean | User$incomesArgs<ExtArgs>
     incomesummary?: boolean | User$incomesummaryArgs<ExtArgs>
-    balance?: boolean | User$balanceArgs<ExtArgs>
-    expensesAnalysis?: boolean | User$expensesAnalysisArgs<ExtArgs>
-    Forms?: boolean | User$FormsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1914,13 +2016,14 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      balance: Prisma.$BalancePayload<ExtArgs> | null
       expenses: Prisma.$ExpensePayload<ExtArgs>[]
+      expensesAnalysis: Prisma.$ExpenseAnalysisPayload<ExtArgs>[]
+      financialAnalysis: Prisma.$FinancialAnalysisPayload<ExtArgs>[]
+      Forms: Prisma.$FormsPayload<ExtArgs>[]
       goals: Prisma.$GoalPayload<ExtArgs>[]
       incomes: Prisma.$IncomePayload<ExtArgs>[]
       incomesummary: Prisma.$IncomeSummaryPayload<ExtArgs>[]
-      balance: Prisma.$BalancePayload<ExtArgs> | null
-      expensesAnalysis: Prisma.$ExpenseAnalysisPayload<ExtArgs>[]
-      Forms: Prisma.$FormsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2320,13 +2423,14 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    balance<T extends User$balanceArgs<ExtArgs> = {}>(args?: Subset<T, User$balanceArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     expenses<T extends User$expensesArgs<ExtArgs> = {}>(args?: Subset<T, User$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    expensesAnalysis<T extends User$expensesAnalysisArgs<ExtArgs> = {}>(args?: Subset<T, User$expensesAnalysisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    financialAnalysis<T extends User$financialAnalysisArgs<ExtArgs> = {}>(args?: Subset<T, User$financialAnalysisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Forms<T extends User$FormsArgs<ExtArgs> = {}>(args?: Subset<T, User$FormsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     goals<T extends User$goalsArgs<ExtArgs> = {}>(args?: Subset<T, User$goalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     incomes<T extends User$incomesArgs<ExtArgs> = {}>(args?: Subset<T, User$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     incomesummary<T extends User$incomesummaryArgs<ExtArgs> = {}>(args?: Subset<T, User$incomesummaryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncomeSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    balance<T extends User$balanceArgs<ExtArgs> = {}>(args?: Subset<T, User$balanceArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    expensesAnalysis<T extends User$expensesAnalysisArgs<ExtArgs> = {}>(args?: Subset<T, User$expensesAnalysisArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Forms<T extends User$FormsArgs<ExtArgs> = {}>(args?: Subset<T, User$FormsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2747,6 +2851,25 @@ export namespace Prisma {
   }
 
   /**
+   * User.balance
+   */
+  export type User$balanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    where?: BalanceWhereInput
+  }
+
+  /**
    * User.expenses
    */
   export type User$expensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2768,6 +2891,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * User.expensesAnalysis
+   */
+  export type User$expensesAnalysisArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseAnalysis
+     */
+    select?: ExpenseAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseAnalysis
+     */
+    omit?: ExpenseAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseAnalysisInclude<ExtArgs> | null
+    where?: ExpenseAnalysisWhereInput
+    orderBy?: ExpenseAnalysisOrderByWithRelationInput | ExpenseAnalysisOrderByWithRelationInput[]
+    cursor?: ExpenseAnalysisWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseAnalysisScalarFieldEnum | ExpenseAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * User.financialAnalysis
+   */
+  export type User$financialAnalysisArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    where?: FinancialAnalysisWhereInput
+    orderBy?: FinancialAnalysisOrderByWithRelationInput | FinancialAnalysisOrderByWithRelationInput[]
+    cursor?: FinancialAnalysisWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FinancialAnalysisScalarFieldEnum | FinancialAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * User.Forms
+   */
+  export type User$FormsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Forms
+     */
+    select?: FormsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Forms
+     */
+    omit?: FormsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormsInclude<ExtArgs> | null
+    where?: FormsWhereInput
+    orderBy?: FormsOrderByWithRelationInput | FormsOrderByWithRelationInput[]
+    cursor?: FormsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FormsScalarFieldEnum | FormsScalarFieldEnum[]
   }
 
   /**
@@ -2840,73 +3035,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: IncomeSummaryScalarFieldEnum | IncomeSummaryScalarFieldEnum[]
-  }
-
-  /**
-   * User.balance
-   */
-  export type User$balanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Balance
-     */
-    select?: BalanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Balance
-     */
-    omit?: BalanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BalanceInclude<ExtArgs> | null
-    where?: BalanceWhereInput
-  }
-
-  /**
-   * User.expensesAnalysis
-   */
-  export type User$expensesAnalysisArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ExpenseAnalysis
-     */
-    select?: ExpenseAnalysisSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ExpenseAnalysis
-     */
-    omit?: ExpenseAnalysisOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ExpenseAnalysisInclude<ExtArgs> | null
-    where?: ExpenseAnalysisWhereInput
-    orderBy?: ExpenseAnalysisOrderByWithRelationInput | ExpenseAnalysisOrderByWithRelationInput[]
-    cursor?: ExpenseAnalysisWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ExpenseAnalysisScalarFieldEnum | ExpenseAnalysisScalarFieldEnum[]
-  }
-
-  /**
-   * User.Forms
-   */
-  export type User$FormsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Forms
-     */
-    select?: FormsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Forms
-     */
-    omit?: FormsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FormsInclude<ExtArgs> | null
-    where?: FormsWhereInput
-    orderBy?: FormsOrderByWithRelationInput | FormsOrderByWithRelationInput[]
-    cursor?: FormsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: FormsScalarFieldEnum | FormsScalarFieldEnum[]
   }
 
   /**
@@ -5160,10 +5288,10 @@ export namespace Prisma {
     target: number | null
     progress: number | null
     status: $Enums.GoalStatus | null
-    category: string | null
-    imageUrl: string | null
     userId: string | null
     createdAt: Date | null
+    category: string | null
+    imageUrl: string | null
   }
 
   export type GoalMaxAggregateOutputType = {
@@ -5172,10 +5300,10 @@ export namespace Prisma {
     target: number | null
     progress: number | null
     status: $Enums.GoalStatus | null
-    category: string | null
-    imageUrl: string | null
     userId: string | null
     createdAt: Date | null
+    category: string | null
+    imageUrl: string | null
   }
 
   export type GoalCountAggregateOutputType = {
@@ -5184,10 +5312,10 @@ export namespace Prisma {
     target: number
     progress: number
     status: number
-    category: number
-    imageUrl: number
     userId: number
     createdAt: number
+    category: number
+    imageUrl: number
     _all: number
   }
 
@@ -5208,10 +5336,10 @@ export namespace Prisma {
     target?: true
     progress?: true
     status?: true
-    category?: true
-    imageUrl?: true
     userId?: true
     createdAt?: true
+    category?: true
+    imageUrl?: true
   }
 
   export type GoalMaxAggregateInputType = {
@@ -5220,10 +5348,10 @@ export namespace Prisma {
     target?: true
     progress?: true
     status?: true
-    category?: true
-    imageUrl?: true
     userId?: true
     createdAt?: true
+    category?: true
+    imageUrl?: true
   }
 
   export type GoalCountAggregateInputType = {
@@ -5232,10 +5360,10 @@ export namespace Prisma {
     target?: true
     progress?: true
     status?: true
-    category?: true
-    imageUrl?: true
     userId?: true
     createdAt?: true
+    category?: true
+    imageUrl?: true
     _all?: true
   }
 
@@ -5331,10 +5459,10 @@ export namespace Prisma {
     target: number
     progress: number
     status: $Enums.GoalStatus
-    category: string | null
-    imageUrl: string | null
     userId: string
     createdAt: Date
+    category: string | null
+    imageUrl: string | null
     _count: GoalCountAggregateOutputType | null
     _avg: GoalAvgAggregateOutputType | null
     _sum: GoalSumAggregateOutputType | null
@@ -5362,10 +5490,10 @@ export namespace Prisma {
     target?: boolean
     progress?: boolean
     status?: boolean
-    category?: boolean
-    imageUrl?: boolean
     userId?: boolean
     createdAt?: boolean
+    category?: boolean
+    imageUrl?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["goal"]>
 
@@ -5375,10 +5503,10 @@ export namespace Prisma {
     target?: boolean
     progress?: boolean
     status?: boolean
-    category?: boolean
-    imageUrl?: boolean
     userId?: boolean
     createdAt?: boolean
+    category?: boolean
+    imageUrl?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["goal"]>
 
@@ -5388,10 +5516,10 @@ export namespace Prisma {
     target?: boolean
     progress?: boolean
     status?: boolean
-    category?: boolean
-    imageUrl?: boolean
     userId?: boolean
     createdAt?: boolean
+    category?: boolean
+    imageUrl?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["goal"]>
 
@@ -5401,13 +5529,13 @@ export namespace Prisma {
     target?: boolean
     progress?: boolean
     status?: boolean
-    category?: boolean
-    imageUrl?: boolean
     userId?: boolean
     createdAt?: boolean
+    category?: boolean
+    imageUrl?: boolean
   }
 
-  export type GoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "target" | "progress" | "status" | "category" | "imageUrl" | "userId" | "createdAt", ExtArgs["result"]["goal"]>
+  export type GoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "target" | "progress" | "status" | "userId" | "createdAt" | "category" | "imageUrl", ExtArgs["result"]["goal"]>
   export type GoalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5429,10 +5557,10 @@ export namespace Prisma {
       target: number
       progress: number
       status: $Enums.GoalStatus
-      category: string | null
-      imageUrl: string | null
       userId: string
       createdAt: Date
+      category: string | null
+      imageUrl: string | null
     }, ExtArgs["result"]["goal"]>
     composites: {}
   }
@@ -5862,10 +5990,10 @@ export namespace Prisma {
     readonly target: FieldRef<"Goal", 'Float'>
     readonly progress: FieldRef<"Goal", 'Float'>
     readonly status: FieldRef<"Goal", 'GoalStatus'>
-    readonly category: FieldRef<"Goal", 'String'>
-    readonly imageUrl: FieldRef<"Goal", 'String'>
     readonly userId: FieldRef<"Goal", 'String'>
     readonly createdAt: FieldRef<"Goal", 'DateTime'>
+    readonly category: FieldRef<"Goal", 'String'>
+    readonly imageUrl: FieldRef<"Goal", 'String'>
   }
     
 
@@ -10719,64 +10847,64 @@ export namespace Prisma {
 
   export type FormsMinAggregateOutputType = {
     id: string | null
-    userId: string | null
     media_salarial: string | null
     idade: string | null
     quantidade_filhos: string | null
     dinheiro: string | null
     createdAt: Date | null
+    userId: string | null
   }
 
   export type FormsMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
     media_salarial: string | null
     idade: string | null
     quantidade_filhos: string | null
     dinheiro: string | null
     createdAt: Date | null
+    userId: string | null
   }
 
   export type FormsCountAggregateOutputType = {
     id: number
-    userId: number
     media_salarial: number
     idade: number
     quantidade_filhos: number
     dinheiro: number
     createdAt: number
+    userId: number
     _all: number
   }
 
 
   export type FormsMinAggregateInputType = {
     id?: true
-    userId?: true
     media_salarial?: true
     idade?: true
     quantidade_filhos?: true
     dinheiro?: true
     createdAt?: true
+    userId?: true
   }
 
   export type FormsMaxAggregateInputType = {
     id?: true
-    userId?: true
     media_salarial?: true
     idade?: true
     quantidade_filhos?: true
     dinheiro?: true
     createdAt?: true
+    userId?: true
   }
 
   export type FormsCountAggregateInputType = {
     id?: true
-    userId?: true
     media_salarial?: true
     idade?: true
     quantidade_filhos?: true
     dinheiro?: true
     createdAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -10854,12 +10982,12 @@ export namespace Prisma {
 
   export type FormsGroupByOutputType = {
     id: string
-    userId: string
     media_salarial: string
     idade: string
     quantidade_filhos: string
     dinheiro: string
     createdAt: Date
+    userId: string
     _count: FormsCountAggregateOutputType | null
     _min: FormsMinAggregateOutputType | null
     _max: FormsMaxAggregateOutputType | null
@@ -10881,48 +11009,48 @@ export namespace Prisma {
 
   export type FormsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     media_salarial?: boolean
     idade?: boolean
     quantidade_filhos?: boolean
     dinheiro?: boolean
     createdAt?: boolean
+    userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["forms"]>
 
   export type FormsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     media_salarial?: boolean
     idade?: boolean
     quantidade_filhos?: boolean
     dinheiro?: boolean
     createdAt?: boolean
+    userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["forms"]>
 
   export type FormsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     media_salarial?: boolean
     idade?: boolean
     quantidade_filhos?: boolean
     dinheiro?: boolean
     createdAt?: boolean
+    userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["forms"]>
 
   export type FormsSelectScalar = {
     id?: boolean
-    userId?: boolean
     media_salarial?: boolean
     idade?: boolean
     quantidade_filhos?: boolean
     dinheiro?: boolean
     createdAt?: boolean
+    userId?: boolean
   }
 
-  export type FormsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "media_salarial" | "idade" | "quantidade_filhos" | "dinheiro" | "createdAt", ExtArgs["result"]["forms"]>
+  export type FormsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "media_salarial" | "idade" | "quantidade_filhos" | "dinheiro" | "createdAt" | "userId", ExtArgs["result"]["forms"]>
   export type FormsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -10940,12 +11068,12 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
       media_salarial: string
       idade: string
       quantidade_filhos: string
       dinheiro: string
       createdAt: Date
+      userId: string
     }, ExtArgs["result"]["forms"]>
     composites: {}
   }
@@ -11371,12 +11499,12 @@ export namespace Prisma {
    */
   interface FormsFieldRefs {
     readonly id: FieldRef<"Forms", 'String'>
-    readonly userId: FieldRef<"Forms", 'String'>
     readonly media_salarial: FieldRef<"Forms", 'String'>
     readonly idade: FieldRef<"Forms", 'String'>
     readonly quantidade_filhos: FieldRef<"Forms", 'String'>
     readonly dinheiro: FieldRef<"Forms", 'String'>
     readonly createdAt: FieldRef<"Forms", 'DateTime'>
+    readonly userId: FieldRef<"Forms", 'String'>
   }
     
 
@@ -11792,6 +11920,1111 @@ export namespace Prisma {
 
 
   /**
+   * Model FinancialAnalysis
+   */
+
+  export type AggregateFinancialAnalysis = {
+    _count: FinancialAnalysisCountAggregateOutputType | null
+    _avg: FinancialAnalysisAvgAggregateOutputType | null
+    _sum: FinancialAnalysisSumAggregateOutputType | null
+    _min: FinancialAnalysisMinAggregateOutputType | null
+    _max: FinancialAnalysisMaxAggregateOutputType | null
+  }
+
+  export type FinancialAnalysisAvgAggregateOutputType = {
+    month: number | null
+    year: number | null
+  }
+
+  export type FinancialAnalysisSumAggregateOutputType = {
+    month: number | null
+    year: number | null
+  }
+
+  export type FinancialAnalysisMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    month: number | null
+    year: number | null
+    createdAt: Date | null
+  }
+
+  export type FinancialAnalysisMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    month: number | null
+    year: number | null
+    createdAt: Date | null
+  }
+
+  export type FinancialAnalysisCountAggregateOutputType = {
+    id: number
+    userId: number
+    month: number
+    year: number
+    data: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type FinancialAnalysisAvgAggregateInputType = {
+    month?: true
+    year?: true
+  }
+
+  export type FinancialAnalysisSumAggregateInputType = {
+    month?: true
+    year?: true
+  }
+
+  export type FinancialAnalysisMinAggregateInputType = {
+    id?: true
+    userId?: true
+    month?: true
+    year?: true
+    createdAt?: true
+  }
+
+  export type FinancialAnalysisMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    month?: true
+    year?: true
+    createdAt?: true
+  }
+
+  export type FinancialAnalysisCountAggregateInputType = {
+    id?: true
+    userId?: true
+    month?: true
+    year?: true
+    data?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type FinancialAnalysisAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinancialAnalysis to aggregate.
+     */
+    where?: FinancialAnalysisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinancialAnalyses to fetch.
+     */
+    orderBy?: FinancialAnalysisOrderByWithRelationInput | FinancialAnalysisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FinancialAnalysisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinancialAnalyses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinancialAnalyses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FinancialAnalyses
+    **/
+    _count?: true | FinancialAnalysisCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FinancialAnalysisAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FinancialAnalysisSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FinancialAnalysisMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FinancialAnalysisMaxAggregateInputType
+  }
+
+  export type GetFinancialAnalysisAggregateType<T extends FinancialAnalysisAggregateArgs> = {
+        [P in keyof T & keyof AggregateFinancialAnalysis]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFinancialAnalysis[P]>
+      : GetScalarType<T[P], AggregateFinancialAnalysis[P]>
+  }
+
+
+
+
+  export type FinancialAnalysisGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FinancialAnalysisWhereInput
+    orderBy?: FinancialAnalysisOrderByWithAggregationInput | FinancialAnalysisOrderByWithAggregationInput[]
+    by: FinancialAnalysisScalarFieldEnum[] | FinancialAnalysisScalarFieldEnum
+    having?: FinancialAnalysisScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FinancialAnalysisCountAggregateInputType | true
+    _avg?: FinancialAnalysisAvgAggregateInputType
+    _sum?: FinancialAnalysisSumAggregateInputType
+    _min?: FinancialAnalysisMinAggregateInputType
+    _max?: FinancialAnalysisMaxAggregateInputType
+  }
+
+  export type FinancialAnalysisGroupByOutputType = {
+    id: string
+    userId: string
+    month: number
+    year: number
+    data: JsonValue
+    createdAt: Date
+    _count: FinancialAnalysisCountAggregateOutputType | null
+    _avg: FinancialAnalysisAvgAggregateOutputType | null
+    _sum: FinancialAnalysisSumAggregateOutputType | null
+    _min: FinancialAnalysisMinAggregateOutputType | null
+    _max: FinancialAnalysisMaxAggregateOutputType | null
+  }
+
+  type GetFinancialAnalysisGroupByPayload<T extends FinancialAnalysisGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FinancialAnalysisGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FinancialAnalysisGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FinancialAnalysisGroupByOutputType[P]>
+            : GetScalarType<T[P], FinancialAnalysisGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FinancialAnalysisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    month?: boolean
+    year?: boolean
+    data?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["financialAnalysis"]>
+
+  export type FinancialAnalysisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    month?: boolean
+    year?: boolean
+    data?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["financialAnalysis"]>
+
+  export type FinancialAnalysisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    month?: boolean
+    year?: boolean
+    data?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["financialAnalysis"]>
+
+  export type FinancialAnalysisSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    month?: boolean
+    year?: boolean
+    data?: boolean
+    createdAt?: boolean
+  }
+
+  export type FinancialAnalysisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "month" | "year" | "data" | "createdAt", ExtArgs["result"]["financialAnalysis"]>
+  export type FinancialAnalysisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FinancialAnalysisIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FinancialAnalysisIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $FinancialAnalysisPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FinancialAnalysis"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      month: number
+      year: number
+      data: Prisma.JsonValue
+      createdAt: Date
+    }, ExtArgs["result"]["financialAnalysis"]>
+    composites: {}
+  }
+
+  type FinancialAnalysisGetPayload<S extends boolean | null | undefined | FinancialAnalysisDefaultArgs> = $Result.GetResult<Prisma.$FinancialAnalysisPayload, S>
+
+  type FinancialAnalysisCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FinancialAnalysisFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FinancialAnalysisCountAggregateInputType | true
+    }
+
+  export interface FinancialAnalysisDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FinancialAnalysis'], meta: { name: 'FinancialAnalysis' } }
+    /**
+     * Find zero or one FinancialAnalysis that matches the filter.
+     * @param {FinancialAnalysisFindUniqueArgs} args - Arguments to find a FinancialAnalysis
+     * @example
+     * // Get one FinancialAnalysis
+     * const financialAnalysis = await prisma.financialAnalysis.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FinancialAnalysisFindUniqueArgs>(args: SelectSubset<T, FinancialAnalysisFindUniqueArgs<ExtArgs>>): Prisma__FinancialAnalysisClient<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FinancialAnalysis that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FinancialAnalysisFindUniqueOrThrowArgs} args - Arguments to find a FinancialAnalysis
+     * @example
+     * // Get one FinancialAnalysis
+     * const financialAnalysis = await prisma.financialAnalysis.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FinancialAnalysisFindUniqueOrThrowArgs>(args: SelectSubset<T, FinancialAnalysisFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FinancialAnalysisClient<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FinancialAnalysis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAnalysisFindFirstArgs} args - Arguments to find a FinancialAnalysis
+     * @example
+     * // Get one FinancialAnalysis
+     * const financialAnalysis = await prisma.financialAnalysis.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FinancialAnalysisFindFirstArgs>(args?: SelectSubset<T, FinancialAnalysisFindFirstArgs<ExtArgs>>): Prisma__FinancialAnalysisClient<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FinancialAnalysis that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAnalysisFindFirstOrThrowArgs} args - Arguments to find a FinancialAnalysis
+     * @example
+     * // Get one FinancialAnalysis
+     * const financialAnalysis = await prisma.financialAnalysis.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FinancialAnalysisFindFirstOrThrowArgs>(args?: SelectSubset<T, FinancialAnalysisFindFirstOrThrowArgs<ExtArgs>>): Prisma__FinancialAnalysisClient<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FinancialAnalyses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAnalysisFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FinancialAnalyses
+     * const financialAnalyses = await prisma.financialAnalysis.findMany()
+     * 
+     * // Get first 10 FinancialAnalyses
+     * const financialAnalyses = await prisma.financialAnalysis.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const financialAnalysisWithIdOnly = await prisma.financialAnalysis.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FinancialAnalysisFindManyArgs>(args?: SelectSubset<T, FinancialAnalysisFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FinancialAnalysis.
+     * @param {FinancialAnalysisCreateArgs} args - Arguments to create a FinancialAnalysis.
+     * @example
+     * // Create one FinancialAnalysis
+     * const FinancialAnalysis = await prisma.financialAnalysis.create({
+     *   data: {
+     *     // ... data to create a FinancialAnalysis
+     *   }
+     * })
+     * 
+     */
+    create<T extends FinancialAnalysisCreateArgs>(args: SelectSubset<T, FinancialAnalysisCreateArgs<ExtArgs>>): Prisma__FinancialAnalysisClient<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FinancialAnalyses.
+     * @param {FinancialAnalysisCreateManyArgs} args - Arguments to create many FinancialAnalyses.
+     * @example
+     * // Create many FinancialAnalyses
+     * const financialAnalysis = await prisma.financialAnalysis.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FinancialAnalysisCreateManyArgs>(args?: SelectSubset<T, FinancialAnalysisCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FinancialAnalyses and returns the data saved in the database.
+     * @param {FinancialAnalysisCreateManyAndReturnArgs} args - Arguments to create many FinancialAnalyses.
+     * @example
+     * // Create many FinancialAnalyses
+     * const financialAnalysis = await prisma.financialAnalysis.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FinancialAnalyses and only return the `id`
+     * const financialAnalysisWithIdOnly = await prisma.financialAnalysis.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FinancialAnalysisCreateManyAndReturnArgs>(args?: SelectSubset<T, FinancialAnalysisCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FinancialAnalysis.
+     * @param {FinancialAnalysisDeleteArgs} args - Arguments to delete one FinancialAnalysis.
+     * @example
+     * // Delete one FinancialAnalysis
+     * const FinancialAnalysis = await prisma.financialAnalysis.delete({
+     *   where: {
+     *     // ... filter to delete one FinancialAnalysis
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FinancialAnalysisDeleteArgs>(args: SelectSubset<T, FinancialAnalysisDeleteArgs<ExtArgs>>): Prisma__FinancialAnalysisClient<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FinancialAnalysis.
+     * @param {FinancialAnalysisUpdateArgs} args - Arguments to update one FinancialAnalysis.
+     * @example
+     * // Update one FinancialAnalysis
+     * const financialAnalysis = await prisma.financialAnalysis.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FinancialAnalysisUpdateArgs>(args: SelectSubset<T, FinancialAnalysisUpdateArgs<ExtArgs>>): Prisma__FinancialAnalysisClient<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FinancialAnalyses.
+     * @param {FinancialAnalysisDeleteManyArgs} args - Arguments to filter FinancialAnalyses to delete.
+     * @example
+     * // Delete a few FinancialAnalyses
+     * const { count } = await prisma.financialAnalysis.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FinancialAnalysisDeleteManyArgs>(args?: SelectSubset<T, FinancialAnalysisDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FinancialAnalyses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAnalysisUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FinancialAnalyses
+     * const financialAnalysis = await prisma.financialAnalysis.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FinancialAnalysisUpdateManyArgs>(args: SelectSubset<T, FinancialAnalysisUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FinancialAnalyses and returns the data updated in the database.
+     * @param {FinancialAnalysisUpdateManyAndReturnArgs} args - Arguments to update many FinancialAnalyses.
+     * @example
+     * // Update many FinancialAnalyses
+     * const financialAnalysis = await prisma.financialAnalysis.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FinancialAnalyses and only return the `id`
+     * const financialAnalysisWithIdOnly = await prisma.financialAnalysis.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FinancialAnalysisUpdateManyAndReturnArgs>(args: SelectSubset<T, FinancialAnalysisUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FinancialAnalysis.
+     * @param {FinancialAnalysisUpsertArgs} args - Arguments to update or create a FinancialAnalysis.
+     * @example
+     * // Update or create a FinancialAnalysis
+     * const financialAnalysis = await prisma.financialAnalysis.upsert({
+     *   create: {
+     *     // ... data to create a FinancialAnalysis
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FinancialAnalysis we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FinancialAnalysisUpsertArgs>(args: SelectSubset<T, FinancialAnalysisUpsertArgs<ExtArgs>>): Prisma__FinancialAnalysisClient<$Result.GetResult<Prisma.$FinancialAnalysisPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FinancialAnalyses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAnalysisCountArgs} args - Arguments to filter FinancialAnalyses to count.
+     * @example
+     * // Count the number of FinancialAnalyses
+     * const count = await prisma.financialAnalysis.count({
+     *   where: {
+     *     // ... the filter for the FinancialAnalyses we want to count
+     *   }
+     * })
+    **/
+    count<T extends FinancialAnalysisCountArgs>(
+      args?: Subset<T, FinancialAnalysisCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FinancialAnalysisCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FinancialAnalysis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAnalysisAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FinancialAnalysisAggregateArgs>(args: Subset<T, FinancialAnalysisAggregateArgs>): Prisma.PrismaPromise<GetFinancialAnalysisAggregateType<T>>
+
+    /**
+     * Group by FinancialAnalysis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAnalysisGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FinancialAnalysisGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FinancialAnalysisGroupByArgs['orderBy'] }
+        : { orderBy?: FinancialAnalysisGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FinancialAnalysisGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFinancialAnalysisGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FinancialAnalysis model
+   */
+  readonly fields: FinancialAnalysisFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FinancialAnalysis.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FinancialAnalysisClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FinancialAnalysis model
+   */
+  interface FinancialAnalysisFieldRefs {
+    readonly id: FieldRef<"FinancialAnalysis", 'String'>
+    readonly userId: FieldRef<"FinancialAnalysis", 'String'>
+    readonly month: FieldRef<"FinancialAnalysis", 'Int'>
+    readonly year: FieldRef<"FinancialAnalysis", 'Int'>
+    readonly data: FieldRef<"FinancialAnalysis", 'Json'>
+    readonly createdAt: FieldRef<"FinancialAnalysis", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FinancialAnalysis findUnique
+   */
+  export type FinancialAnalysisFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which FinancialAnalysis to fetch.
+     */
+    where: FinancialAnalysisWhereUniqueInput
+  }
+
+  /**
+   * FinancialAnalysis findUniqueOrThrow
+   */
+  export type FinancialAnalysisFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which FinancialAnalysis to fetch.
+     */
+    where: FinancialAnalysisWhereUniqueInput
+  }
+
+  /**
+   * FinancialAnalysis findFirst
+   */
+  export type FinancialAnalysisFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which FinancialAnalysis to fetch.
+     */
+    where?: FinancialAnalysisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinancialAnalyses to fetch.
+     */
+    orderBy?: FinancialAnalysisOrderByWithRelationInput | FinancialAnalysisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FinancialAnalyses.
+     */
+    cursor?: FinancialAnalysisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinancialAnalyses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinancialAnalyses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinancialAnalyses.
+     */
+    distinct?: FinancialAnalysisScalarFieldEnum | FinancialAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * FinancialAnalysis findFirstOrThrow
+   */
+  export type FinancialAnalysisFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which FinancialAnalysis to fetch.
+     */
+    where?: FinancialAnalysisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinancialAnalyses to fetch.
+     */
+    orderBy?: FinancialAnalysisOrderByWithRelationInput | FinancialAnalysisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FinancialAnalyses.
+     */
+    cursor?: FinancialAnalysisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinancialAnalyses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinancialAnalyses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinancialAnalyses.
+     */
+    distinct?: FinancialAnalysisScalarFieldEnum | FinancialAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * FinancialAnalysis findMany
+   */
+  export type FinancialAnalysisFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which FinancialAnalyses to fetch.
+     */
+    where?: FinancialAnalysisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinancialAnalyses to fetch.
+     */
+    orderBy?: FinancialAnalysisOrderByWithRelationInput | FinancialAnalysisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FinancialAnalyses.
+     */
+    cursor?: FinancialAnalysisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinancialAnalyses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinancialAnalyses.
+     */
+    skip?: number
+    distinct?: FinancialAnalysisScalarFieldEnum | FinancialAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * FinancialAnalysis create
+   */
+  export type FinancialAnalysisCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FinancialAnalysis.
+     */
+    data: XOR<FinancialAnalysisCreateInput, FinancialAnalysisUncheckedCreateInput>
+  }
+
+  /**
+   * FinancialAnalysis createMany
+   */
+  export type FinancialAnalysisCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FinancialAnalyses.
+     */
+    data: FinancialAnalysisCreateManyInput | FinancialAnalysisCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FinancialAnalysis createManyAndReturn
+   */
+  export type FinancialAnalysisCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * The data used to create many FinancialAnalyses.
+     */
+    data: FinancialAnalysisCreateManyInput | FinancialAnalysisCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FinancialAnalysis update
+   */
+  export type FinancialAnalysisUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FinancialAnalysis.
+     */
+    data: XOR<FinancialAnalysisUpdateInput, FinancialAnalysisUncheckedUpdateInput>
+    /**
+     * Choose, which FinancialAnalysis to update.
+     */
+    where: FinancialAnalysisWhereUniqueInput
+  }
+
+  /**
+   * FinancialAnalysis updateMany
+   */
+  export type FinancialAnalysisUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FinancialAnalyses.
+     */
+    data: XOR<FinancialAnalysisUpdateManyMutationInput, FinancialAnalysisUncheckedUpdateManyInput>
+    /**
+     * Filter which FinancialAnalyses to update
+     */
+    where?: FinancialAnalysisWhereInput
+    /**
+     * Limit how many FinancialAnalyses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FinancialAnalysis updateManyAndReturn
+   */
+  export type FinancialAnalysisUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * The data used to update FinancialAnalyses.
+     */
+    data: XOR<FinancialAnalysisUpdateManyMutationInput, FinancialAnalysisUncheckedUpdateManyInput>
+    /**
+     * Filter which FinancialAnalyses to update
+     */
+    where?: FinancialAnalysisWhereInput
+    /**
+     * Limit how many FinancialAnalyses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FinancialAnalysis upsert
+   */
+  export type FinancialAnalysisUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FinancialAnalysis to update in case it exists.
+     */
+    where: FinancialAnalysisWhereUniqueInput
+    /**
+     * In case the FinancialAnalysis found by the `where` argument doesn't exist, create a new FinancialAnalysis with this data.
+     */
+    create: XOR<FinancialAnalysisCreateInput, FinancialAnalysisUncheckedCreateInput>
+    /**
+     * In case the FinancialAnalysis was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FinancialAnalysisUpdateInput, FinancialAnalysisUncheckedUpdateInput>
+  }
+
+  /**
+   * FinancialAnalysis delete
+   */
+  export type FinancialAnalysisDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter which FinancialAnalysis to delete.
+     */
+    where: FinancialAnalysisWhereUniqueInput
+  }
+
+  /**
+   * FinancialAnalysis deleteMany
+   */
+  export type FinancialAnalysisDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinancialAnalyses to delete
+     */
+    where?: FinancialAnalysisWhereInput
+    /**
+     * Limit how many FinancialAnalyses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FinancialAnalysis without action
+   */
+  export type FinancialAnalysisDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAnalysis
+     */
+    select?: FinancialAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAnalysis
+     */
+    omit?: FinancialAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAnalysisInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11844,10 +13077,10 @@ export namespace Prisma {
     target: 'target',
     progress: 'progress',
     status: 'status',
-    category: 'category',
-    imageUrl: 'imageUrl',
     userId: 'userId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    category: 'category',
+    imageUrl: 'imageUrl'
   };
 
   export type GoalScalarFieldEnum = (typeof GoalScalarFieldEnum)[keyof typeof GoalScalarFieldEnum]
@@ -11902,15 +13135,27 @@ export namespace Prisma {
 
   export const FormsScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
     media_salarial: 'media_salarial',
     idade: 'idade',
     quantidade_filhos: 'quantidade_filhos',
     dinheiro: 'dinheiro',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    userId: 'userId'
   };
 
   export type FormsScalarFieldEnum = (typeof FormsScalarFieldEnum)[keyof typeof FormsScalarFieldEnum]
+
+
+  export const FinancialAnalysisScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    month: 'month',
+    year: 'year',
+    data: 'data',
+    createdAt: 'createdAt'
+  };
+
+  export type FinancialAnalysisScalarFieldEnum = (typeof FinancialAnalysisScalarFieldEnum)[keyof typeof FinancialAnalysisScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11919,6 +13164,13 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -11935,6 +13187,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -12017,6 +13278,20 @@ export namespace Prisma {
    */
   export type ListEnumGoalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GoalStatus[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
   /**
    * Deep Input Types
    */
@@ -12029,26 +13304,28 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
     avatarUrl?: StringNullableFilter<"User"> | string | null
+    balance?: XOR<BalanceNullableScalarRelationFilter, BalanceWhereInput> | null
     expenses?: ExpenseListRelationFilter
+    expensesAnalysis?: ExpenseAnalysisListRelationFilter
+    financialAnalysis?: FinancialAnalysisListRelationFilter
+    Forms?: FormsListRelationFilter
     goals?: GoalListRelationFilter
     incomes?: IncomeListRelationFilter
     incomesummary?: IncomeSummaryListRelationFilter
-    balance?: XOR<BalanceNullableScalarRelationFilter, BalanceWhereInput> | null
-    expensesAnalysis?: ExpenseAnalysisListRelationFilter
-    Forms?: FormsListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     avatarUrl?: SortOrderInput | SortOrder
+    balance?: BalanceOrderByWithRelationInput
     expenses?: ExpenseOrderByRelationAggregateInput
+    expensesAnalysis?: ExpenseAnalysisOrderByRelationAggregateInput
+    financialAnalysis?: FinancialAnalysisOrderByRelationAggregateInput
+    Forms?: FormsOrderByRelationAggregateInput
     goals?: GoalOrderByRelationAggregateInput
     incomes?: IncomeOrderByRelationAggregateInput
     incomesummary?: IncomeSummaryOrderByRelationAggregateInput
-    balance?: BalanceOrderByWithRelationInput
-    expensesAnalysis?: ExpenseAnalysisOrderByRelationAggregateInput
-    Forms?: FormsOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12058,13 +13335,14 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
     avatarUrl?: StringNullableFilter<"User"> | string | null
+    balance?: XOR<BalanceNullableScalarRelationFilter, BalanceWhereInput> | null
     expenses?: ExpenseListRelationFilter
+    expensesAnalysis?: ExpenseAnalysisListRelationFilter
+    financialAnalysis?: FinancialAnalysisListRelationFilter
+    Forms?: FormsListRelationFilter
     goals?: GoalListRelationFilter
     incomes?: IncomeListRelationFilter
     incomesummary?: IncomeSummaryListRelationFilter
-    balance?: XOR<BalanceNullableScalarRelationFilter, BalanceWhereInput> | null
-    expensesAnalysis?: ExpenseAnalysisListRelationFilter
-    Forms?: FormsListRelationFilter
   }, "id">
 
   export type UserOrderByWithAggregationInput = {
@@ -12219,10 +13497,10 @@ export namespace Prisma {
     target?: FloatFilter<"Goal"> | number
     progress?: FloatFilter<"Goal"> | number
     status?: EnumGoalStatusFilter<"Goal"> | $Enums.GoalStatus
-    category?: StringNullableFilter<"Goal"> | string | null
-    imageUrl?: StringNullableFilter<"Goal"> | string | null
     userId?: StringFilter<"Goal"> | string
     createdAt?: DateTimeFilter<"Goal"> | Date | string
+    category?: StringNullableFilter<"Goal"> | string | null
+    imageUrl?: StringNullableFilter<"Goal"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -12232,10 +13510,10 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
-    category?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    category?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -12248,10 +13526,10 @@ export namespace Prisma {
     target?: FloatFilter<"Goal"> | number
     progress?: FloatFilter<"Goal"> | number
     status?: EnumGoalStatusFilter<"Goal"> | $Enums.GoalStatus
-    category?: StringNullableFilter<"Goal"> | string | null
-    imageUrl?: StringNullableFilter<"Goal"> | string | null
     userId?: StringFilter<"Goal"> | string
     createdAt?: DateTimeFilter<"Goal"> | Date | string
+    category?: StringNullableFilter<"Goal"> | string | null
+    imageUrl?: StringNullableFilter<"Goal"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -12261,10 +13539,10 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
-    category?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    category?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     _count?: GoalCountOrderByAggregateInput
     _avg?: GoalAvgOrderByAggregateInput
     _max?: GoalMaxOrderByAggregateInput
@@ -12281,10 +13559,10 @@ export namespace Prisma {
     target?: FloatWithAggregatesFilter<"Goal"> | number
     progress?: FloatWithAggregatesFilter<"Goal"> | number
     status?: EnumGoalStatusWithAggregatesFilter<"Goal"> | $Enums.GoalStatus
-    category?: StringNullableWithAggregatesFilter<"Goal"> | string | null
-    imageUrl?: StringNullableWithAggregatesFilter<"Goal"> | string | null
     userId?: StringWithAggregatesFilter<"Goal"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Goal"> | Date | string
+    category?: StringNullableWithAggregatesFilter<"Goal"> | string | null
+    imageUrl?: StringNullableWithAggregatesFilter<"Goal"> | string | null
   }
 
   export type BalanceWhereInput = {
@@ -12535,48 +13813,48 @@ export namespace Prisma {
     OR?: FormsWhereInput[]
     NOT?: FormsWhereInput | FormsWhereInput[]
     id?: StringFilter<"Forms"> | string
-    userId?: StringFilter<"Forms"> | string
     media_salarial?: StringFilter<"Forms"> | string
     idade?: StringFilter<"Forms"> | string
     quantidade_filhos?: StringFilter<"Forms"> | string
     dinheiro?: StringFilter<"Forms"> | string
     createdAt?: DateTimeFilter<"Forms"> | Date | string
+    userId?: StringFilter<"Forms"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type FormsOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
     quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type FormsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId?: string
     AND?: FormsWhereInput | FormsWhereInput[]
     OR?: FormsWhereInput[]
     NOT?: FormsWhereInput | FormsWhereInput[]
-    userId?: StringFilter<"Forms"> | string
     media_salarial?: StringFilter<"Forms"> | string
     idade?: StringFilter<"Forms"> | string
     quantidade_filhos?: StringFilter<"Forms"> | string
     dinheiro?: StringFilter<"Forms"> | string
     createdAt?: DateTimeFilter<"Forms"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "userId">
 
   export type FormsOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
     quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
     _count?: FormsCountOrderByAggregateInput
     _max?: FormsMaxOrderByAggregateInput
     _min?: FormsMinOrderByAggregateInput
@@ -12587,64 +13865,130 @@ export namespace Prisma {
     OR?: FormsScalarWhereWithAggregatesInput[]
     NOT?: FormsScalarWhereWithAggregatesInput | FormsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Forms"> | string
-    userId?: StringWithAggregatesFilter<"Forms"> | string
     media_salarial?: StringWithAggregatesFilter<"Forms"> | string
     idade?: StringWithAggregatesFilter<"Forms"> | string
     quantidade_filhos?: StringWithAggregatesFilter<"Forms"> | string
     dinheiro?: StringWithAggregatesFilter<"Forms"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Forms"> | Date | string
+    userId?: StringWithAggregatesFilter<"Forms"> | string
+  }
+
+  export type FinancialAnalysisWhereInput = {
+    AND?: FinancialAnalysisWhereInput | FinancialAnalysisWhereInput[]
+    OR?: FinancialAnalysisWhereInput[]
+    NOT?: FinancialAnalysisWhereInput | FinancialAnalysisWhereInput[]
+    id?: StringFilter<"FinancialAnalysis"> | string
+    userId?: StringFilter<"FinancialAnalysis"> | string
+    month?: IntFilter<"FinancialAnalysis"> | number
+    year?: IntFilter<"FinancialAnalysis"> | number
+    data?: JsonFilter<"FinancialAnalysis">
+    createdAt?: DateTimeFilter<"FinancialAnalysis"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type FinancialAnalysisOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    data?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type FinancialAnalysisWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FinancialAnalysisWhereInput | FinancialAnalysisWhereInput[]
+    OR?: FinancialAnalysisWhereInput[]
+    NOT?: FinancialAnalysisWhereInput | FinancialAnalysisWhereInput[]
+    userId?: StringFilter<"FinancialAnalysis"> | string
+    month?: IntFilter<"FinancialAnalysis"> | number
+    year?: IntFilter<"FinancialAnalysis"> | number
+    data?: JsonFilter<"FinancialAnalysis">
+    createdAt?: DateTimeFilter<"FinancialAnalysis"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type FinancialAnalysisOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    data?: SortOrder
+    createdAt?: SortOrder
+    _count?: FinancialAnalysisCountOrderByAggregateInput
+    _avg?: FinancialAnalysisAvgOrderByAggregateInput
+    _max?: FinancialAnalysisMaxOrderByAggregateInput
+    _min?: FinancialAnalysisMinOrderByAggregateInput
+    _sum?: FinancialAnalysisSumOrderByAggregateInput
+  }
+
+  export type FinancialAnalysisScalarWhereWithAggregatesInput = {
+    AND?: FinancialAnalysisScalarWhereWithAggregatesInput | FinancialAnalysisScalarWhereWithAggregatesInput[]
+    OR?: FinancialAnalysisScalarWhereWithAggregatesInput[]
+    NOT?: FinancialAnalysisScalarWhereWithAggregatesInput | FinancialAnalysisScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FinancialAnalysis"> | string
+    userId?: StringWithAggregatesFilter<"FinancialAnalysis"> | string
+    month?: IntWithAggregatesFilter<"FinancialAnalysis"> | number
+    year?: IntWithAggregatesFilter<"FinancialAnalysis"> | number
+    data?: JsonWithAggregatesFilter<"FinancialAnalysis">
+    createdAt?: DateTimeWithAggregatesFilter<"FinancialAnalysis"> | Date | string
   }
 
   export type UserCreateInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceCreateNestedOneWithoutUserInput
     expenses?: ExpenseCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
-    balance?: BalanceCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
-    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
-    balance?: BalanceUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
-    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12799,9 +14143,9 @@ export namespace Prisma {
     target: number
     progress?: number
     status?: $Enums.GoalStatus
+    createdAt?: Date | string
     category?: string | null
     imageUrl?: string | null
-    createdAt?: Date | string
     user: UserCreateNestedOneWithoutGoalsInput
   }
 
@@ -12811,10 +14155,10 @@ export namespace Prisma {
     target: number
     progress?: number
     status?: $Enums.GoalStatus
-    category?: string | null
-    imageUrl?: string | null
     userId: string
     createdAt?: Date | string
+    category?: string | null
+    imageUrl?: string | null
   }
 
   export type GoalUpdateInput = {
@@ -12823,9 +14167,9 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutGoalsNestedInput
   }
 
@@ -12835,10 +14179,10 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GoalCreateManyInput = {
@@ -12847,10 +14191,10 @@ export namespace Prisma {
     target: number
     progress?: number
     status?: $Enums.GoalStatus
-    category?: string | null
-    imageUrl?: string | null
     userId: string
     createdAt?: Date | string
+    category?: string | null
+    imageUrl?: string | null
   }
 
   export type GoalUpdateManyMutationInput = {
@@ -12859,9 +14203,9 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GoalUncheckedUpdateManyInput = {
@@ -12870,10 +14214,10 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BalanceCreateInput = {
@@ -13129,12 +14473,12 @@ export namespace Prisma {
 
   export type FormsUncheckedCreateInput = {
     id?: string
-    userId: string
     media_salarial: string
     idade: string
     quantidade_filhos: string
     dinheiro: string
     createdAt?: Date | string
+    userId: string
   }
 
   export type FormsUpdateInput = {
@@ -13149,22 +14493,22 @@ export namespace Prisma {
 
   export type FormsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     media_salarial?: StringFieldUpdateOperationsInput | string
     idade?: StringFieldUpdateOperationsInput | string
     quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type FormsCreateManyInput = {
     id?: string
-    userId: string
     media_salarial: string
     idade: string
     quantidade_filhos: string
     dinheiro: string
     createdAt?: Date | string
+    userId: string
   }
 
   export type FormsUpdateManyMutationInput = {
@@ -13178,11 +14522,73 @@ export namespace Prisma {
 
   export type FormsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     media_salarial?: StringFieldUpdateOperationsInput | string
     idade?: StringFieldUpdateOperationsInput | string
     quantidade_filhos?: StringFieldUpdateOperationsInput | string
     dinheiro?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FinancialAnalysisCreateInput = {
+    id?: string
+    month: number
+    year: number
+    data: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutFinancialAnalysisInput
+  }
+
+  export type FinancialAnalysisUncheckedCreateInput = {
+    id?: string
+    userId: string
+    month: number
+    year: number
+    data: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FinancialAnalysisUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    data?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFinancialAnalysisNestedInput
+  }
+
+  export type FinancialAnalysisUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    data?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAnalysisCreateManyInput = {
+    id?: string
+    userId: string
+    month: number
+    year: number
+    data: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FinancialAnalysisUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    data?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAnalysisUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    data?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13216,10 +14622,33 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BalanceNullableScalarRelationFilter = {
+    is?: BalanceWhereInput | null
+    isNot?: BalanceWhereInput | null
+  }
+
   export type ExpenseListRelationFilter = {
     every?: ExpenseWhereInput
     some?: ExpenseWhereInput
     none?: ExpenseWhereInput
+  }
+
+  export type ExpenseAnalysisListRelationFilter = {
+    every?: ExpenseAnalysisWhereInput
+    some?: ExpenseAnalysisWhereInput
+    none?: ExpenseAnalysisWhereInput
+  }
+
+  export type FinancialAnalysisListRelationFilter = {
+    every?: FinancialAnalysisWhereInput
+    some?: FinancialAnalysisWhereInput
+    none?: FinancialAnalysisWhereInput
+  }
+
+  export type FormsListRelationFilter = {
+    every?: FormsWhereInput
+    some?: FormsWhereInput
+    none?: FormsWhereInput
   }
 
   export type GoalListRelationFilter = {
@@ -13240,29 +14669,24 @@ export namespace Prisma {
     none?: IncomeSummaryWhereInput
   }
 
-  export type BalanceNullableScalarRelationFilter = {
-    is?: BalanceWhereInput | null
-    isNot?: BalanceWhereInput | null
-  }
-
-  export type ExpenseAnalysisListRelationFilter = {
-    every?: ExpenseAnalysisWhereInput
-    some?: ExpenseAnalysisWhereInput
-    none?: ExpenseAnalysisWhereInput
-  }
-
-  export type FormsListRelationFilter = {
-    every?: FormsWhereInput
-    some?: FormsWhereInput
-    none?: FormsWhereInput
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type ExpenseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExpenseAnalysisOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FinancialAnalysisOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FormsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13275,14 +14699,6 @@ export namespace Prisma {
   }
 
   export type IncomeSummaryOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ExpenseAnalysisOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type FormsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13521,10 +14937,10 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
-    category?: SortOrder
-    imageUrl?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    category?: SortOrder
+    imageUrl?: SortOrder
   }
 
   export type GoalAvgOrderByAggregateInput = {
@@ -13538,10 +14954,10 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
-    category?: SortOrder
-    imageUrl?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    category?: SortOrder
+    imageUrl?: SortOrder
   }
 
   export type GoalMinOrderByAggregateInput = {
@@ -13550,10 +14966,10 @@ export namespace Prisma {
     target?: SortOrder
     progress?: SortOrder
     status?: SortOrder
-    category?: SortOrder
-    imageUrl?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    category?: SortOrder
+    imageUrl?: SortOrder
   }
 
   export type GoalSumOrderByAggregateInput = {
@@ -13720,32 +15136,149 @@ export namespace Prisma {
 
   export type FormsCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
     quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type FormsMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
     quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type FormsMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     media_salarial?: SortOrder
     idade?: SortOrder
     quantidade_filhos?: SortOrder
     dinheiro?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type FinancialAnalysisCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    data?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FinancialAnalysisAvgOrderByAggregateInput = {
+    month?: SortOrder
+    year?: SortOrder
+  }
+
+  export type FinancialAnalysisMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FinancialAnalysisMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FinancialAnalysisSumOrderByAggregateInput = {
+    month?: SortOrder
+    year?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type BalanceCreateNestedOneWithoutUserInput = {
+    create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BalanceCreateOrConnectWithoutUserInput
+    connect?: BalanceWhereUniqueInput
   }
 
   export type ExpenseCreateNestedManyWithoutUserInput = {
@@ -13753,6 +15286,27 @@ export namespace Prisma {
     connectOrCreate?: ExpenseCreateOrConnectWithoutUserInput | ExpenseCreateOrConnectWithoutUserInput[]
     createMany?: ExpenseCreateManyUserInputEnvelope
     connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+  }
+
+  export type ExpenseAnalysisCreateNestedManyWithoutUserInput = {
+    create?: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput> | ExpenseAnalysisCreateWithoutUserInput[] | ExpenseAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseAnalysisCreateOrConnectWithoutUserInput | ExpenseAnalysisCreateOrConnectWithoutUserInput[]
+    createMany?: ExpenseAnalysisCreateManyUserInputEnvelope
+    connect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+  }
+
+  export type FinancialAnalysisCreateNestedManyWithoutUserInput = {
+    create?: XOR<FinancialAnalysisCreateWithoutUserInput, FinancialAnalysisUncheckedCreateWithoutUserInput> | FinancialAnalysisCreateWithoutUserInput[] | FinancialAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FinancialAnalysisCreateOrConnectWithoutUserInput | FinancialAnalysisCreateOrConnectWithoutUserInput[]
+    createMany?: FinancialAnalysisCreateManyUserInputEnvelope
+    connect?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+  }
+
+  export type FormsCreateNestedManyWithoutUserInput = {
+    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
+    createMany?: FormsCreateManyUserInputEnvelope
+    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
   }
 
   export type GoalCreateNestedManyWithoutUserInput = {
@@ -13776,24 +15330,10 @@ export namespace Prisma {
     connect?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
   }
 
-  export type BalanceCreateNestedOneWithoutUserInput = {
+  export type BalanceUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
     connectOrCreate?: BalanceCreateOrConnectWithoutUserInput
     connect?: BalanceWhereUniqueInput
-  }
-
-  export type ExpenseAnalysisCreateNestedManyWithoutUserInput = {
-    create?: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput> | ExpenseAnalysisCreateWithoutUserInput[] | ExpenseAnalysisUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ExpenseAnalysisCreateOrConnectWithoutUserInput | ExpenseAnalysisCreateOrConnectWithoutUserInput[]
-    createMany?: ExpenseAnalysisCreateManyUserInputEnvelope
-    connect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-  }
-
-  export type FormsCreateNestedManyWithoutUserInput = {
-    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
-    createMany?: FormsCreateManyUserInputEnvelope
-    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
   }
 
   export type ExpenseUncheckedCreateNestedManyWithoutUserInput = {
@@ -13801,6 +15341,27 @@ export namespace Prisma {
     connectOrCreate?: ExpenseCreateOrConnectWithoutUserInput | ExpenseCreateOrConnectWithoutUserInput[]
     createMany?: ExpenseCreateManyUserInputEnvelope
     connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+  }
+
+  export type ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput> | ExpenseAnalysisCreateWithoutUserInput[] | ExpenseAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseAnalysisCreateOrConnectWithoutUserInput | ExpenseAnalysisCreateOrConnectWithoutUserInput[]
+    createMany?: ExpenseAnalysisCreateManyUserInputEnvelope
+    connect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+  }
+
+  export type FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FinancialAnalysisCreateWithoutUserInput, FinancialAnalysisUncheckedCreateWithoutUserInput> | FinancialAnalysisCreateWithoutUserInput[] | FinancialAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FinancialAnalysisCreateOrConnectWithoutUserInput | FinancialAnalysisCreateOrConnectWithoutUserInput[]
+    createMany?: FinancialAnalysisCreateManyUserInputEnvelope
+    connect?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+  }
+
+  export type FormsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
+    createMany?: FormsCreateManyUserInputEnvelope
+    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
   }
 
   export type GoalUncheckedCreateNestedManyWithoutUserInput = {
@@ -13824,32 +15385,22 @@ export namespace Prisma {
     connect?: IncomeSummaryWhereUniqueInput | IncomeSummaryWhereUniqueInput[]
   }
 
-  export type BalanceUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
-    connectOrCreate?: BalanceCreateOrConnectWithoutUserInput
-    connect?: BalanceWhereUniqueInput
-  }
-
-  export type ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput> | ExpenseAnalysisCreateWithoutUserInput[] | ExpenseAnalysisUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ExpenseAnalysisCreateOrConnectWithoutUserInput | ExpenseAnalysisCreateOrConnectWithoutUserInput[]
-    createMany?: ExpenseAnalysisCreateManyUserInputEnvelope
-    connect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-  }
-
-  export type FormsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
-    createMany?: FormsCreateManyUserInputEnvelope
-    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type BalanceUpdateOneWithoutUserNestedInput = {
+    create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BalanceCreateOrConnectWithoutUserInput
+    upsert?: BalanceUpsertWithoutUserInput
+    disconnect?: BalanceWhereInput | boolean
+    delete?: BalanceWhereInput | boolean
+    connect?: BalanceWhereUniqueInput
+    update?: XOR<XOR<BalanceUpdateToOneWithWhereWithoutUserInput, BalanceUpdateWithoutUserInput>, BalanceUncheckedUpdateWithoutUserInput>
   }
 
   export type ExpenseUpdateManyWithoutUserNestedInput = {
@@ -13864,6 +15415,48 @@ export namespace Prisma {
     update?: ExpenseUpdateWithWhereUniqueWithoutUserInput | ExpenseUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseUpdateManyWithWhereWithoutUserInput | ExpenseUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+  }
+
+  export type ExpenseAnalysisUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput> | ExpenseAnalysisCreateWithoutUserInput[] | ExpenseAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseAnalysisCreateOrConnectWithoutUserInput | ExpenseAnalysisCreateOrConnectWithoutUserInput[]
+    upsert?: ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput | ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ExpenseAnalysisCreateManyUserInputEnvelope
+    set?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+    disconnect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+    delete?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+    connect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+    update?: ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput | ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ExpenseAnalysisUpdateManyWithWhereWithoutUserInput | ExpenseAnalysisUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ExpenseAnalysisScalarWhereInput | ExpenseAnalysisScalarWhereInput[]
+  }
+
+  export type FinancialAnalysisUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FinancialAnalysisCreateWithoutUserInput, FinancialAnalysisUncheckedCreateWithoutUserInput> | FinancialAnalysisCreateWithoutUserInput[] | FinancialAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FinancialAnalysisCreateOrConnectWithoutUserInput | FinancialAnalysisCreateOrConnectWithoutUserInput[]
+    upsert?: FinancialAnalysisUpsertWithWhereUniqueWithoutUserInput | FinancialAnalysisUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FinancialAnalysisCreateManyUserInputEnvelope
+    set?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+    disconnect?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+    delete?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+    connect?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+    update?: FinancialAnalysisUpdateWithWhereUniqueWithoutUserInput | FinancialAnalysisUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FinancialAnalysisUpdateManyWithWhereWithoutUserInput | FinancialAnalysisUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FinancialAnalysisScalarWhereInput | FinancialAnalysisScalarWhereInput[]
+  }
+
+  export type FormsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
+    upsert?: FormsUpsertWithWhereUniqueWithoutUserInput | FormsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FormsCreateManyUserInputEnvelope
+    set?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+    disconnect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+    delete?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+    update?: FormsUpdateWithWhereUniqueWithoutUserInput | FormsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FormsUpdateManyWithWhereWithoutUserInput | FormsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FormsScalarWhereInput | FormsScalarWhereInput[]
   }
 
   export type GoalUpdateManyWithoutUserNestedInput = {
@@ -13908,7 +15501,7 @@ export namespace Prisma {
     deleteMany?: IncomeSummaryScalarWhereInput | IncomeSummaryScalarWhereInput[]
   }
 
-  export type BalanceUpdateOneWithoutUserNestedInput = {
+  export type BalanceUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
     connectOrCreate?: BalanceCreateOrConnectWithoutUserInput
     upsert?: BalanceUpsertWithoutUserInput
@@ -13916,34 +15509,6 @@ export namespace Prisma {
     delete?: BalanceWhereInput | boolean
     connect?: BalanceWhereUniqueInput
     update?: XOR<XOR<BalanceUpdateToOneWithWhereWithoutUserInput, BalanceUpdateWithoutUserInput>, BalanceUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ExpenseAnalysisUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput> | ExpenseAnalysisCreateWithoutUserInput[] | ExpenseAnalysisUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ExpenseAnalysisCreateOrConnectWithoutUserInput | ExpenseAnalysisCreateOrConnectWithoutUserInput[]
-    upsert?: ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput | ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ExpenseAnalysisCreateManyUserInputEnvelope
-    set?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-    disconnect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-    delete?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-    connect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-    update?: ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput | ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ExpenseAnalysisUpdateManyWithWhereWithoutUserInput | ExpenseAnalysisUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ExpenseAnalysisScalarWhereInput | ExpenseAnalysisScalarWhereInput[]
-  }
-
-  export type FormsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
-    upsert?: FormsUpsertWithWhereUniqueWithoutUserInput | FormsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FormsCreateManyUserInputEnvelope
-    set?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    disconnect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    delete?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    update?: FormsUpdateWithWhereUniqueWithoutUserInput | FormsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FormsUpdateManyWithWhereWithoutUserInput | FormsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FormsScalarWhereInput | FormsScalarWhereInput[]
   }
 
   export type ExpenseUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13958,6 +15523,48 @@ export namespace Prisma {
     update?: ExpenseUpdateWithWhereUniqueWithoutUserInput | ExpenseUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseUpdateManyWithWhereWithoutUserInput | ExpenseUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+  }
+
+  export type ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput> | ExpenseAnalysisCreateWithoutUserInput[] | ExpenseAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseAnalysisCreateOrConnectWithoutUserInput | ExpenseAnalysisCreateOrConnectWithoutUserInput[]
+    upsert?: ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput | ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ExpenseAnalysisCreateManyUserInputEnvelope
+    set?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+    disconnect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+    delete?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+    connect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
+    update?: ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput | ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ExpenseAnalysisUpdateManyWithWhereWithoutUserInput | ExpenseAnalysisUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ExpenseAnalysisScalarWhereInput | ExpenseAnalysisScalarWhereInput[]
+  }
+
+  export type FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FinancialAnalysisCreateWithoutUserInput, FinancialAnalysisUncheckedCreateWithoutUserInput> | FinancialAnalysisCreateWithoutUserInput[] | FinancialAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FinancialAnalysisCreateOrConnectWithoutUserInput | FinancialAnalysisCreateOrConnectWithoutUserInput[]
+    upsert?: FinancialAnalysisUpsertWithWhereUniqueWithoutUserInput | FinancialAnalysisUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FinancialAnalysisCreateManyUserInputEnvelope
+    set?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+    disconnect?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+    delete?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+    connect?: FinancialAnalysisWhereUniqueInput | FinancialAnalysisWhereUniqueInput[]
+    update?: FinancialAnalysisUpdateWithWhereUniqueWithoutUserInput | FinancialAnalysisUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FinancialAnalysisUpdateManyWithWhereWithoutUserInput | FinancialAnalysisUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FinancialAnalysisScalarWhereInput | FinancialAnalysisScalarWhereInput[]
+  }
+
+  export type FormsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
+    upsert?: FormsUpsertWithWhereUniqueWithoutUserInput | FormsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FormsCreateManyUserInputEnvelope
+    set?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+    disconnect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+    delete?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
+    update?: FormsUpdateWithWhereUniqueWithoutUserInput | FormsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FormsUpdateManyWithWhereWithoutUserInput | FormsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FormsScalarWhereInput | FormsScalarWhereInput[]
   }
 
   export type GoalUncheckedUpdateManyWithoutUserNestedInput = {
@@ -14000,44 +15607,6 @@ export namespace Prisma {
     update?: IncomeSummaryUpdateWithWhereUniqueWithoutUserInput | IncomeSummaryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: IncomeSummaryUpdateManyWithWhereWithoutUserInput | IncomeSummaryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: IncomeSummaryScalarWhereInput | IncomeSummaryScalarWhereInput[]
-  }
-
-  export type BalanceUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
-    connectOrCreate?: BalanceCreateOrConnectWithoutUserInput
-    upsert?: BalanceUpsertWithoutUserInput
-    disconnect?: BalanceWhereInput | boolean
-    delete?: BalanceWhereInput | boolean
-    connect?: BalanceWhereUniqueInput
-    update?: XOR<XOR<BalanceUpdateToOneWithWhereWithoutUserInput, BalanceUpdateWithoutUserInput>, BalanceUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput> | ExpenseAnalysisCreateWithoutUserInput[] | ExpenseAnalysisUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ExpenseAnalysisCreateOrConnectWithoutUserInput | ExpenseAnalysisCreateOrConnectWithoutUserInput[]
-    upsert?: ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput | ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ExpenseAnalysisCreateManyUserInputEnvelope
-    set?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-    disconnect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-    delete?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-    connect?: ExpenseAnalysisWhereUniqueInput | ExpenseAnalysisWhereUniqueInput[]
-    update?: ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput | ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ExpenseAnalysisUpdateManyWithWhereWithoutUserInput | ExpenseAnalysisUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ExpenseAnalysisScalarWhereInput | ExpenseAnalysisScalarWhereInput[]
-  }
-
-  export type FormsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput> | FormsCreateWithoutUserInput[] | FormsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FormsCreateOrConnectWithoutUserInput | FormsCreateOrConnectWithoutUserInput[]
-    upsert?: FormsUpsertWithWhereUniqueWithoutUserInput | FormsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FormsCreateManyUserInputEnvelope
-    set?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    disconnect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    delete?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    connect?: FormsWhereUniqueInput | FormsWhereUniqueInput[]
-    update?: FormsUpdateWithWhereUniqueWithoutUserInput | FormsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FormsUpdateManyWithWhereWithoutUserInput | FormsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FormsScalarWhereInput | FormsScalarWhereInput[]
   }
 
   export type CategoryCreateNestedOneWithoutExpensesInput = {
@@ -14220,6 +15789,28 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutFormsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFormsInput, UserUpdateWithoutFormsInput>, UserUncheckedUpdateWithoutFormsInput>
+  }
+
+  export type UserCreateNestedOneWithoutFinancialAnalysisInput = {
+    create?: XOR<UserCreateWithoutFinancialAnalysisInput, UserUncheckedCreateWithoutFinancialAnalysisInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFinancialAnalysisInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutFinancialAnalysisNestedInput = {
+    create?: XOR<UserCreateWithoutFinancialAnalysisInput, UserUncheckedCreateWithoutFinancialAnalysisInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFinancialAnalysisInput
+    upsert?: UserUpsertWithoutFinancialAnalysisInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFinancialAnalysisInput, UserUpdateWithoutFinancialAnalysisInput>, UserUncheckedUpdateWithoutFinancialAnalysisInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -14415,6 +16006,62 @@ export namespace Prisma {
     _max?: NestedEnumGoalStatusFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type BalanceCreateWithoutUserInput = {
+    id?: string
+    value: number
+    date: Date | string
+  }
+
+  export type BalanceUncheckedCreateWithoutUserInput = {
+    id?: string
+    value: number
+    date: Date | string
+  }
+
+  export type BalanceCreateOrConnectWithoutUserInput = {
+    where: BalanceWhereUniqueInput
+    create: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
+  }
+
   export type ExpenseCreateWithoutUserInput = {
     id?: string
     title: string
@@ -14447,15 +16094,95 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ExpenseAnalysisCreateWithoutUserInput = {
+    id?: string
+    total: number
+    categoriaMaiorGasto: number
+    diferencamensal: number
+    createdAt: Date | string
+  }
+
+  export type ExpenseAnalysisUncheckedCreateWithoutUserInput = {
+    id?: string
+    total: number
+    categoriaMaiorGasto: number
+    diferencamensal: number
+    createdAt: Date | string
+  }
+
+  export type ExpenseAnalysisCreateOrConnectWithoutUserInput = {
+    where: ExpenseAnalysisWhereUniqueInput
+    create: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput>
+  }
+
+  export type ExpenseAnalysisCreateManyUserInputEnvelope = {
+    data: ExpenseAnalysisCreateManyUserInput | ExpenseAnalysisCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FinancialAnalysisCreateWithoutUserInput = {
+    id?: string
+    month: number
+    year: number
+    data: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FinancialAnalysisUncheckedCreateWithoutUserInput = {
+    id?: string
+    month: number
+    year: number
+    data: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FinancialAnalysisCreateOrConnectWithoutUserInput = {
+    where: FinancialAnalysisWhereUniqueInput
+    create: XOR<FinancialAnalysisCreateWithoutUserInput, FinancialAnalysisUncheckedCreateWithoutUserInput>
+  }
+
+  export type FinancialAnalysisCreateManyUserInputEnvelope = {
+    data: FinancialAnalysisCreateManyUserInput | FinancialAnalysisCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FormsCreateWithoutUserInput = {
+    id?: string
+    media_salarial: string
+    idade: string
+    quantidade_filhos: string
+    dinheiro: string
+    createdAt?: Date | string
+  }
+
+  export type FormsUncheckedCreateWithoutUserInput = {
+    id?: string
+    media_salarial: string
+    idade: string
+    quantidade_filhos: string
+    dinheiro: string
+    createdAt?: Date | string
+  }
+
+  export type FormsCreateOrConnectWithoutUserInput = {
+    where: FormsWhereUniqueInput
+    create: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
+  }
+
+  export type FormsCreateManyUserInputEnvelope = {
+    data: FormsCreateManyUserInput | FormsCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type GoalCreateWithoutUserInput = {
     id?: string
     title: string
     target: number
     progress?: number
     status?: $Enums.GoalStatus
+    createdAt?: Date | string
     category?: string | null
     imageUrl?: string | null
-    createdAt?: Date | string
   }
 
   export type GoalUncheckedCreateWithoutUserInput = {
@@ -14464,9 +16191,9 @@ export namespace Prisma {
     target: number
     progress?: number
     status?: $Enums.GoalStatus
+    createdAt?: Date | string
     category?: string | null
     imageUrl?: string | null
-    createdAt?: Date | string
   }
 
   export type GoalCreateOrConnectWithoutUserInput = {
@@ -14533,75 +16260,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type BalanceCreateWithoutUserInput = {
-    id?: string
-    value: number
-    date: Date | string
-  }
-
-  export type BalanceUncheckedCreateWithoutUserInput = {
-    id?: string
-    value: number
-    date: Date | string
-  }
-
-  export type BalanceCreateOrConnectWithoutUserInput = {
-    where: BalanceWhereUniqueInput
+  export type BalanceUpsertWithoutUserInput = {
+    update: XOR<BalanceUpdateWithoutUserInput, BalanceUncheckedUpdateWithoutUserInput>
     create: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
+    where?: BalanceWhereInput
   }
 
-  export type ExpenseAnalysisCreateWithoutUserInput = {
-    id?: string
-    total: number
-    categoriaMaiorGasto: number
-    diferencamensal: number
-    createdAt: Date | string
+  export type BalanceUpdateToOneWithWhereWithoutUserInput = {
+    where?: BalanceWhereInput
+    data: XOR<BalanceUpdateWithoutUserInput, BalanceUncheckedUpdateWithoutUserInput>
   }
 
-  export type ExpenseAnalysisUncheckedCreateWithoutUserInput = {
-    id?: string
-    total: number
-    categoriaMaiorGasto: number
-    diferencamensal: number
-    createdAt: Date | string
+  export type BalanceUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: FloatFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ExpenseAnalysisCreateOrConnectWithoutUserInput = {
-    where: ExpenseAnalysisWhereUniqueInput
-    create: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput>
-  }
-
-  export type ExpenseAnalysisCreateManyUserInputEnvelope = {
-    data: ExpenseAnalysisCreateManyUserInput | ExpenseAnalysisCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type FormsCreateWithoutUserInput = {
-    id?: string
-    media_salarial: string
-    idade: string
-    quantidade_filhos: string
-    dinheiro: string
-    createdAt?: Date | string
-  }
-
-  export type FormsUncheckedCreateWithoutUserInput = {
-    id?: string
-    media_salarial: string
-    idade: string
-    quantidade_filhos: string
-    dinheiro: string
-    createdAt?: Date | string
-  }
-
-  export type FormsCreateOrConnectWithoutUserInput = {
-    where: FormsWhereUniqueInput
-    create: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
-  }
-
-  export type FormsCreateManyUserInputEnvelope = {
-    data: FormsCreateManyUserInput | FormsCreateManyUserInput[]
-    skipDuplicates?: boolean
+  export type BalanceUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: FloatFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExpenseUpsertWithWhereUniqueWithoutUserInput = {
@@ -14635,6 +16314,91 @@ export namespace Prisma {
     userId?: StringFilter<"Expense"> | string
   }
 
+  export type ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput = {
+    where: ExpenseAnalysisWhereUniqueInput
+    update: XOR<ExpenseAnalysisUpdateWithoutUserInput, ExpenseAnalysisUncheckedUpdateWithoutUserInput>
+    create: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput>
+  }
+
+  export type ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput = {
+    where: ExpenseAnalysisWhereUniqueInput
+    data: XOR<ExpenseAnalysisUpdateWithoutUserInput, ExpenseAnalysisUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ExpenseAnalysisUpdateManyWithWhereWithoutUserInput = {
+    where: ExpenseAnalysisScalarWhereInput
+    data: XOR<ExpenseAnalysisUpdateManyMutationInput, ExpenseAnalysisUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ExpenseAnalysisScalarWhereInput = {
+    AND?: ExpenseAnalysisScalarWhereInput | ExpenseAnalysisScalarWhereInput[]
+    OR?: ExpenseAnalysisScalarWhereInput[]
+    NOT?: ExpenseAnalysisScalarWhereInput | ExpenseAnalysisScalarWhereInput[]
+    id?: StringFilter<"ExpenseAnalysis"> | string
+    userId?: StringFilter<"ExpenseAnalysis"> | string
+    total?: FloatFilter<"ExpenseAnalysis"> | number
+    categoriaMaiorGasto?: FloatFilter<"ExpenseAnalysis"> | number
+    diferencamensal?: FloatFilter<"ExpenseAnalysis"> | number
+    createdAt?: DateTimeFilter<"ExpenseAnalysis"> | Date | string
+  }
+
+  export type FinancialAnalysisUpsertWithWhereUniqueWithoutUserInput = {
+    where: FinancialAnalysisWhereUniqueInput
+    update: XOR<FinancialAnalysisUpdateWithoutUserInput, FinancialAnalysisUncheckedUpdateWithoutUserInput>
+    create: XOR<FinancialAnalysisCreateWithoutUserInput, FinancialAnalysisUncheckedCreateWithoutUserInput>
+  }
+
+  export type FinancialAnalysisUpdateWithWhereUniqueWithoutUserInput = {
+    where: FinancialAnalysisWhereUniqueInput
+    data: XOR<FinancialAnalysisUpdateWithoutUserInput, FinancialAnalysisUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FinancialAnalysisUpdateManyWithWhereWithoutUserInput = {
+    where: FinancialAnalysisScalarWhereInput
+    data: XOR<FinancialAnalysisUpdateManyMutationInput, FinancialAnalysisUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FinancialAnalysisScalarWhereInput = {
+    AND?: FinancialAnalysisScalarWhereInput | FinancialAnalysisScalarWhereInput[]
+    OR?: FinancialAnalysisScalarWhereInput[]
+    NOT?: FinancialAnalysisScalarWhereInput | FinancialAnalysisScalarWhereInput[]
+    id?: StringFilter<"FinancialAnalysis"> | string
+    userId?: StringFilter<"FinancialAnalysis"> | string
+    month?: IntFilter<"FinancialAnalysis"> | number
+    year?: IntFilter<"FinancialAnalysis"> | number
+    data?: JsonFilter<"FinancialAnalysis">
+    createdAt?: DateTimeFilter<"FinancialAnalysis"> | Date | string
+  }
+
+  export type FormsUpsertWithWhereUniqueWithoutUserInput = {
+    where: FormsWhereUniqueInput
+    update: XOR<FormsUpdateWithoutUserInput, FormsUncheckedUpdateWithoutUserInput>
+    create: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
+  }
+
+  export type FormsUpdateWithWhereUniqueWithoutUserInput = {
+    where: FormsWhereUniqueInput
+    data: XOR<FormsUpdateWithoutUserInput, FormsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FormsUpdateManyWithWhereWithoutUserInput = {
+    where: FormsScalarWhereInput
+    data: XOR<FormsUpdateManyMutationInput, FormsUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FormsScalarWhereInput = {
+    AND?: FormsScalarWhereInput | FormsScalarWhereInput[]
+    OR?: FormsScalarWhereInput[]
+    NOT?: FormsScalarWhereInput | FormsScalarWhereInput[]
+    id?: StringFilter<"Forms"> | string
+    media_salarial?: StringFilter<"Forms"> | string
+    idade?: StringFilter<"Forms"> | string
+    quantidade_filhos?: StringFilter<"Forms"> | string
+    dinheiro?: StringFilter<"Forms"> | string
+    createdAt?: DateTimeFilter<"Forms"> | Date | string
+    userId?: StringFilter<"Forms"> | string
+  }
+
   export type GoalUpsertWithWhereUniqueWithoutUserInput = {
     where: GoalWhereUniqueInput
     update: XOR<GoalUpdateWithoutUserInput, GoalUncheckedUpdateWithoutUserInput>
@@ -14660,10 +16424,10 @@ export namespace Prisma {
     target?: FloatFilter<"Goal"> | number
     progress?: FloatFilter<"Goal"> | number
     status?: EnumGoalStatusFilter<"Goal"> | $Enums.GoalStatus
-    category?: StringNullableFilter<"Goal"> | string | null
-    imageUrl?: StringNullableFilter<"Goal"> | string | null
     userId?: StringFilter<"Goal"> | string
     createdAt?: DateTimeFilter<"Goal"> | Date | string
+    category?: StringNullableFilter<"Goal"> | string | null
+    imageUrl?: StringNullableFilter<"Goal"> | string | null
   }
 
   export type IncomeUpsertWithWhereUniqueWithoutUserInput = {
@@ -14723,86 +16487,6 @@ export namespace Prisma {
     month?: DateTimeFilter<"IncomeSummary"> | Date | string
   }
 
-  export type BalanceUpsertWithoutUserInput = {
-    update: XOR<BalanceUpdateWithoutUserInput, BalanceUncheckedUpdateWithoutUserInput>
-    create: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
-    where?: BalanceWhereInput
-  }
-
-  export type BalanceUpdateToOneWithWhereWithoutUserInput = {
-    where?: BalanceWhereInput
-    data: XOR<BalanceUpdateWithoutUserInput, BalanceUncheckedUpdateWithoutUserInput>
-  }
-
-  export type BalanceUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BalanceUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value?: FloatFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ExpenseAnalysisUpsertWithWhereUniqueWithoutUserInput = {
-    where: ExpenseAnalysisWhereUniqueInput
-    update: XOR<ExpenseAnalysisUpdateWithoutUserInput, ExpenseAnalysisUncheckedUpdateWithoutUserInput>
-    create: XOR<ExpenseAnalysisCreateWithoutUserInput, ExpenseAnalysisUncheckedCreateWithoutUserInput>
-  }
-
-  export type ExpenseAnalysisUpdateWithWhereUniqueWithoutUserInput = {
-    where: ExpenseAnalysisWhereUniqueInput
-    data: XOR<ExpenseAnalysisUpdateWithoutUserInput, ExpenseAnalysisUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ExpenseAnalysisUpdateManyWithWhereWithoutUserInput = {
-    where: ExpenseAnalysisScalarWhereInput
-    data: XOR<ExpenseAnalysisUpdateManyMutationInput, ExpenseAnalysisUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type ExpenseAnalysisScalarWhereInput = {
-    AND?: ExpenseAnalysisScalarWhereInput | ExpenseAnalysisScalarWhereInput[]
-    OR?: ExpenseAnalysisScalarWhereInput[]
-    NOT?: ExpenseAnalysisScalarWhereInput | ExpenseAnalysisScalarWhereInput[]
-    id?: StringFilter<"ExpenseAnalysis"> | string
-    userId?: StringFilter<"ExpenseAnalysis"> | string
-    total?: FloatFilter<"ExpenseAnalysis"> | number
-    categoriaMaiorGasto?: FloatFilter<"ExpenseAnalysis"> | number
-    diferencamensal?: FloatFilter<"ExpenseAnalysis"> | number
-    createdAt?: DateTimeFilter<"ExpenseAnalysis"> | Date | string
-  }
-
-  export type FormsUpsertWithWhereUniqueWithoutUserInput = {
-    where: FormsWhereUniqueInput
-    update: XOR<FormsUpdateWithoutUserInput, FormsUncheckedUpdateWithoutUserInput>
-    create: XOR<FormsCreateWithoutUserInput, FormsUncheckedCreateWithoutUserInput>
-  }
-
-  export type FormsUpdateWithWhereUniqueWithoutUserInput = {
-    where: FormsWhereUniqueInput
-    data: XOR<FormsUpdateWithoutUserInput, FormsUncheckedUpdateWithoutUserInput>
-  }
-
-  export type FormsUpdateManyWithWhereWithoutUserInput = {
-    where: FormsScalarWhereInput
-    data: XOR<FormsUpdateManyMutationInput, FormsUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type FormsScalarWhereInput = {
-    AND?: FormsScalarWhereInput | FormsScalarWhereInput[]
-    OR?: FormsScalarWhereInput[]
-    NOT?: FormsScalarWhereInput | FormsScalarWhereInput[]
-    id?: StringFilter<"Forms"> | string
-    userId?: StringFilter<"Forms"> | string
-    media_salarial?: StringFilter<"Forms"> | string
-    idade?: StringFilter<"Forms"> | string
-    quantidade_filhos?: StringFilter<"Forms"> | string
-    dinheiro?: StringFilter<"Forms"> | string
-    createdAt?: DateTimeFilter<"Forms"> | Date | string
-  }
-
   export type CategoryCreateWithoutExpensesInput = {
     id?: string
     name: string
@@ -14824,24 +16508,26 @@ export namespace Prisma {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceCreateNestedOneWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
-    balance?: BalanceCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutExpensesInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
-    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutExpensesInput = {
@@ -14887,24 +16573,26 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUpdateOneWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
-    balance?: BalanceUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExpensesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
-    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseCreateWithoutCategoryInput = {
@@ -14959,24 +16647,26 @@ export namespace Prisma {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceCreateNestedOneWithoutUserInput
     expenses?: ExpenseCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
-    balance?: BalanceCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGoalsInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
-    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGoalsInput = {
@@ -14999,24 +16689,26 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
-    balance?: BalanceUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGoalsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
-    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBalanceInput = {
@@ -15024,11 +16716,12 @@ export namespace Prisma {
     name: string
     avatarUrl?: string | null
     expenses?: ExpenseCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBalanceInput = {
@@ -15036,11 +16729,12 @@ export namespace Prisma {
     name: string
     avatarUrl?: string | null
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBalanceInput = {
@@ -15064,11 +16758,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBalanceInput = {
@@ -15076,35 +16771,38 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutIncomesInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceCreateNestedOneWithoutUserInput
     expenses?: ExpenseCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
-    balance?: BalanceCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncomesInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
-    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutIncomesInput = {
@@ -15127,48 +16825,52 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
-    balance?: BalanceUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncomesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
-    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutIncomesummaryInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceCreateNestedOneWithoutUserInput
     expenses?: ExpenseCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
-    balance?: BalanceCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncomesummaryInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
-    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutIncomesummaryInput = {
@@ -15191,48 +16893,52 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
-    balance?: BalanceUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncomesummaryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
-    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutExpensesAnalysisInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceCreateNestedOneWithoutUserInput
     expenses?: ExpenseCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
-    balance?: BalanceCreateNestedOneWithoutUserInput
-    Forms?: FormsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutExpensesAnalysisInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
-    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
-    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutExpensesAnalysisInput = {
@@ -15255,48 +16961,52 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
-    balance?: BalanceUpdateOneWithoutUserNestedInput
-    Forms?: FormsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExpensesAnalysisInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
-    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
-    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFormsInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceCreateNestedOneWithoutUserInput
     expenses?: ExpenseCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisCreateNestedManyWithoutUserInput
     goals?: GoalCreateNestedManyWithoutUserInput
     incomes?: IncomeCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
-    balance?: BalanceCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFormsInput = {
     id?: string
     name: string
     avatarUrl?: string | null
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
+    financialAnalysis?: FinancialAnalysisUncheckedCreateNestedManyWithoutUserInput
     goals?: GoalUncheckedCreateNestedManyWithoutUserInput
     incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
     incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
-    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
-    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFormsInput = {
@@ -15319,24 +17029,94 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUpdateManyWithoutUserNestedInput
     goals?: GoalUpdateManyWithoutUserNestedInput
     incomes?: IncomeUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
-    balance?: BalanceUpdateOneWithoutUserNestedInput
-    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFormsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    financialAnalysis?: FinancialAnalysisUncheckedUpdateManyWithoutUserNestedInput
     goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
     incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
     incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutFinancialAnalysisInput = {
+    id?: string
+    name: string
+    avatarUrl?: string | null
+    balance?: BalanceCreateNestedOneWithoutUserInput
+    expenses?: ExpenseCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisCreateNestedManyWithoutUserInput
+    Forms?: FormsCreateNestedManyWithoutUserInput
+    goals?: GoalCreateNestedManyWithoutUserInput
+    incomes?: IncomeCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFinancialAnalysisInput = {
+    id?: string
+    name: string
+    avatarUrl?: string | null
+    balance?: BalanceUncheckedCreateNestedOneWithoutUserInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutUserInput
+    expensesAnalysis?: ExpenseAnalysisUncheckedCreateNestedManyWithoutUserInput
+    Forms?: FormsUncheckedCreateNestedManyWithoutUserInput
+    goals?: GoalUncheckedCreateNestedManyWithoutUserInput
+    incomes?: IncomeUncheckedCreateNestedManyWithoutUserInput
+    incomesummary?: IncomeSummaryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFinancialAnalysisInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFinancialAnalysisInput, UserUncheckedCreateWithoutFinancialAnalysisInput>
+  }
+
+  export type UserUpsertWithoutFinancialAnalysisInput = {
+    update: XOR<UserUpdateWithoutFinancialAnalysisInput, UserUncheckedUpdateWithoutFinancialAnalysisInput>
+    create: XOR<UserCreateWithoutFinancialAnalysisInput, UserUncheckedCreateWithoutFinancialAnalysisInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFinancialAnalysisInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFinancialAnalysisInput, UserUncheckedUpdateWithoutFinancialAnalysisInput>
+  }
+
+  export type UserUpdateWithoutFinancialAnalysisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    balance?: BalanceUpdateOneWithoutUserNestedInput
+    expenses?: ExpenseUpdateManyWithoutUserNestedInput
+    expensesAnalysis?: ExpenseAnalysisUpdateManyWithoutUserNestedInput
+    Forms?: FormsUpdateManyWithoutUserNestedInput
+    goals?: GoalUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFinancialAnalysisInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: BalanceUncheckedUpdateOneWithoutUserNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     expensesAnalysis?: ExpenseAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    Forms?: FormsUncheckedUpdateManyWithoutUserNestedInput
+    goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
+    incomes?: IncomeUncheckedUpdateManyWithoutUserNestedInput
+    incomesummary?: IncomeSummaryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseCreateManyUserInput = {
@@ -15350,15 +17130,40 @@ export namespace Prisma {
     categoryId: string
   }
 
+  export type ExpenseAnalysisCreateManyUserInput = {
+    id?: string
+    total: number
+    categoriaMaiorGasto: number
+    diferencamensal: number
+    createdAt: Date | string
+  }
+
+  export type FinancialAnalysisCreateManyUserInput = {
+    id?: string
+    month: number
+    year: number
+    data: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FormsCreateManyUserInput = {
+    id?: string
+    media_salarial: string
+    idade: string
+    quantidade_filhos: string
+    dinheiro: string
+    createdAt?: Date | string
+  }
+
   export type GoalCreateManyUserInput = {
     id?: string
     title: string
     target: number
     progress?: number
     status?: $Enums.GoalStatus
+    createdAt?: Date | string
     category?: string | null
     imageUrl?: string | null
-    createdAt?: Date | string
   }
 
   export type IncomeCreateManyUserInput = {
@@ -15376,23 +17181,6 @@ export namespace Prisma {
     impostoRenda: number
     createdAt: Date | string
     month: Date | string
-  }
-
-  export type ExpenseAnalysisCreateManyUserInput = {
-    id?: string
-    total: number
-    categoriaMaiorGasto: number
-    diferencamensal: number
-    createdAt: Date | string
-  }
-
-  export type FormsCreateManyUserInput = {
-    id?: string
-    media_salarial: string
-    idade: string
-    quantidade_filhos: string
-    dinheiro: string
-    createdAt?: Date | string
   }
 
   export type ExpenseUpdateWithoutUserInput = {
@@ -15428,15 +17216,90 @@ export namespace Prisma {
     categoryId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type ExpenseAnalysisUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    categoriaMaiorGasto?: FloatFieldUpdateOperationsInput | number
+    diferencamensal?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseAnalysisUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    categoriaMaiorGasto?: FloatFieldUpdateOperationsInput | number
+    diferencamensal?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseAnalysisUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: FloatFieldUpdateOperationsInput | number
+    categoriaMaiorGasto?: FloatFieldUpdateOperationsInput | number
+    diferencamensal?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAnalysisUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    data?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAnalysisUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    data?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAnalysisUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    data?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    media_salarial?: StringFieldUpdateOperationsInput | string
+    idade?: StringFieldUpdateOperationsInput | string
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
+    dinheiro?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    media_salarial?: StringFieldUpdateOperationsInput | string
+    idade?: StringFieldUpdateOperationsInput | string
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
+    dinheiro?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormsUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    media_salarial?: StringFieldUpdateOperationsInput | string
+    idade?: StringFieldUpdateOperationsInput | string
+    quantidade_filhos?: StringFieldUpdateOperationsInput | string
+    dinheiro?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type GoalUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GoalUncheckedUpdateWithoutUserInput = {
@@ -15445,9 +17308,9 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GoalUncheckedUpdateManyWithoutUserInput = {
@@ -15456,9 +17319,9 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     progress?: FloatFieldUpdateOperationsInput | number
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IncomeUpdateWithoutUserInput = {
@@ -15510,57 +17373,6 @@ export namespace Prisma {
     impostoRenda?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     month?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ExpenseAnalysisUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
-    categoriaMaiorGasto?: FloatFieldUpdateOperationsInput | number
-    diferencamensal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ExpenseAnalysisUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
-    categoriaMaiorGasto?: FloatFieldUpdateOperationsInput | number
-    diferencamensal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ExpenseAnalysisUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
-    categoriaMaiorGasto?: FloatFieldUpdateOperationsInput | number
-    diferencamensal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FormsUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: StringFieldUpdateOperationsInput | string
-    dinheiro?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FormsUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: StringFieldUpdateOperationsInput | string
-    dinheiro?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FormsUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    media_salarial?: StringFieldUpdateOperationsInput | string
-    idade?: StringFieldUpdateOperationsInput | string
-    quantidade_filhos?: StringFieldUpdateOperationsInput | string
-    dinheiro?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExpenseCreateManyCategoryInput = {

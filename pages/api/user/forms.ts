@@ -37,15 +37,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(404).json({ message: "Usuário não encontrado." });
         }
         
-        const formEntry = await prisma.forms.create({
-            data: {
+        const formEntry = await prisma.forms.upsert({
+            where: {
+                userId: data.userId, 
+            },
+            update: {
+                media_salarial: data.media_salarial,
+                idade: data.idade,
+                quantidade_filhos: data.quantidade_filhos ?? null,
+                dinheiro: data.dinheiro,
+            },
+            create: {
                 userId: data.userId,
                 media_salarial: data.media_salarial,
                 idade: data.idade,
                 quantidade_filhos: data.quantidade_filhos ?? null,
                 dinheiro: data.dinheiro,
-            }
+            },
         });
+
 
         return res.status(201).json({ form: formEntry, message: "Formulário salvo com sucesso!" });
     } catch (error) {
