@@ -14,12 +14,12 @@ model User {
   avatarUrl         String?
   balance           Balance?
   expenses          Expense[]
-  ExpenseAnalysis   ExpenseAnalysis[]
-  FinancialAnalysis FinancialAnalysis[]
+  expensesAnalysis  ExpenseAnalysis[]
+  financialAnalysis FinancialAnalysis[]
   Forms             Forms?
   goals             Goal[]
-  Income            Income[]
-  IncomeSummary     IncomeSummary[]
+  incomes           Income[]
+  incomesummary     IncomeSummary[]
 }
 
 model Expense {
@@ -57,69 +57,63 @@ model Goal {
 }
 
 model Balance {
-  id        String   @id @default(uuid())
-  value     Float
-  userId    String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id])
+  id     String   @id @default(uuid())
+  value  Float
+  date   DateTime
+  userId String   @unique
+  user   User     @relation(fields: [userId], references: [id])
 }
 
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model ExpenseAnalysis {
-  id                  String   @id
-  userId              String
-  total               Float
-  categoriaMaiorGasto Float
-  diferencamensal     Float
-  createdAt           DateTime
-  User                User     @relation(fields: [userId], references: [id])
-}
-
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model FinancialAnalysis {
-  id        String   @id
-  userId    String
-  month     Int
-  year      Int
-  data      Json
-  createdAt DateTime @default(now())
-  User      User     @relation(fields: [userId], references: [id])
-}
-
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model Forms {
-  id                String   @id
-  media_salarial    String
-  idade             String
-  quantidade_filhos String
-  dinheiro          String
-  createdAt         DateTime @default(now())
-  userId            String   @unique
-  User              User     @relation(fields: [userId], references: [id])
-}
-
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Income {
-  id          String   @id
+  id          String   @id @default(uuid())
   date        DateTime
   userId      String
   income      Float
   extraincome Float
   otherincome Float
   month       DateTime
-  User        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
 }
 
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model IncomeSummary {
-  id           String   @id
+  id           String   @id @default(uuid())
   userId       String
   total        Float
   impostoRenda Float
   createdAt    DateTime
   month        DateTime
-  User         User     @relation(fields: [userId], references: [id])
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model ExpenseAnalysis {
+  id                  String   @id @default(uuid())
+  userId              String
+  total               Float
+  categoriaMaiorGasto Float
+  diferencamensal     Float
+  createdAt           DateTime
+  user                User     @relation(fields: [userId], references: [id])
+}
+
+model Forms {
+  id                String   @id @default(uuid())
+  media_salarial    Decimal  @db.Decimal(10, 2)
+  idade             Int
+  quantidade_filhos String
+  dinheiro          String
+  createdAt         DateTime @default(now())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id])
+}
+
+model FinancialAnalysis {
+  id        String   @id @default(uuid())
+  userId    String
+  month     Int
+  year      Int
+  data      Json
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 enum GoalStatus {
