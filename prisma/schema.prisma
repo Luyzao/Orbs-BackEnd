@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -15,12 +9,17 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  name      String
-  avatarUrl String?
-  expenses  Expense[]
-  goals     Goal[]
-  balance   Balance?
+  id                String              @id @default(uuid())
+  name              String
+  avatarUrl         String?
+  balance           Balance?
+  expenses          Expense[]
+  ExpenseAnalysis   ExpenseAnalysis[]
+  FinancialAnalysis FinancialAnalysis[]
+  Forms             Forms?
+  goals             Goal[]
+  Income            Income[]
+  IncomeSummary     IncomeSummary[]
 }
 
 model Expense {
@@ -28,19 +27,19 @@ model Expense {
   title              String
   amount             Float
   date               DateTime
-  isCredit           Boolean  @default(false) // Se a compra foi feita no crédito
-  totalInstallments  Int? // Total de parcelas (se foi parcelado)
-  currentInstallment Int? // Número da parcela atual
+  isCredit           Boolean  @default(false)
+  totalInstallments  Int?
+  currentInstallment Int?
   categoryId         String
-  category           Category @relation(fields: [categoryId], references: [id])
   userId             String
+  category           Category @relation(fields: [categoryId], references: [id])
   user               User     @relation(fields: [userId], references: [id])
 }
 
 model Category {
   id       String    @id @default(uuid())
   name     String    @unique
-  color    String? // Cor para o gráfico (ex: "#A020F0")
+  color    String?
   expenses Expense[]
 }
 
@@ -49,22 +48,82 @@ model Goal {
   title     String
   target    Float
   progress  Float      @default(0)
-  status    GoalStatus
-  user      User       @relation(fields: [userId], references: [id])
+  status    GoalStatus @default(PENDING)
   userId    String
   createdAt DateTime   @default(now())
+  category  String?
+  imageUrl  String?
+  user      User       @relation(fields: [userId], references: [id])
+}
+
+model Balance {
+  id        String   @id @default(uuid())
+  value     Float
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ExpenseAnalysis {
+  id                  String   @id
+  userId              String
+  total               Float
+  categoriaMaiorGasto Float
+  diferencamensal     Float
+  createdAt           DateTime
+  User                User     @relation(fields: [userId], references: [id])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model FinancialAnalysis {
+  id        String   @id
+  userId    String
+  month     Int
+  year      Int
+  data      Json
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Forms {
+  id                String   @id
+  media_salarial    String
+  idade             String
+  quantidade_filhos String
+  dinheiro          String
+  createdAt         DateTime @default(now())
+  userId            String   @unique
+  User              User     @relation(fields: [userId], references: [id])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Income {
+  id          String   @id
+  date        DateTime
+  userId      String
+  income      Float
+  extraincome Float
+  otherincome Float
+  month       DateTime
+  User        User     @relation(fields: [userId], references: [id])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model IncomeSummary {
+  id           String   @id
+  userId       String
+  total        Float
+  impostoRenda Float
+  createdAt    DateTime
+  month        DateTime
+  User         User     @relation(fields: [userId], references: [id])
 }
 
 enum GoalStatus {
   PENDING
   IN_PROGRESS
   COMPLETED
-}
-
-model Balance {
-  id     String   @id @default(uuid())
-  value  Float
-  date   DateTime
-  user   User     @relation(fields: [userId], references: [id])
-  userId String   @unique
 }

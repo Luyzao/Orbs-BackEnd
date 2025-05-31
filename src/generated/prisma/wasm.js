@@ -151,19 +151,73 @@ exports.Prisma.GoalScalarFieldEnum = {
   progress: 'progress',
   status: 'status',
   userId: 'userId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  category: 'category',
+  imageUrl: 'imageUrl'
 };
 
 exports.Prisma.BalanceScalarFieldEnum = {
   id: 'id',
   value: 'value',
-  date: 'date',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ExpenseAnalysisScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  total: 'total',
+  categoriaMaiorGasto: 'categoriaMaiorGasto',
+  diferencamensal: 'diferencamensal',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.FinancialAnalysisScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  month: 'month',
+  year: 'year',
+  data: 'data',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.FormsScalarFieldEnum = {
+  id: 'id',
+  media_salarial: 'media_salarial',
+  idade: 'idade',
+  quantidade_filhos: 'quantidade_filhos',
+  dinheiro: 'dinheiro',
+  createdAt: 'createdAt',
   userId: 'userId'
+};
+
+exports.Prisma.IncomeScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  userId: 'userId',
+  income: 'income',
+  extraincome: 'extraincome',
+  otherincome: 'otherincome',
+  month: 'month'
+};
+
+exports.Prisma.IncomeSummaryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  total: 'total',
+  impostoRenda: 'impostoRenda',
+  createdAt: 'createdAt',
+  month: 'month'
 };
 
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -174,6 +228,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.GoalStatus = exports.$Enums.GoalStatus = {
   PENDING: 'PENDING',
@@ -186,7 +246,12 @@ exports.Prisma.ModelName = {
   Expense: 'Expense',
   Category: 'Category',
   Goal: 'Goal',
-  Balance: 'Balance'
+  Balance: 'Balance',
+  ExpenseAnalysis: 'ExpenseAnalysis',
+  FinancialAnalysis: 'FinancialAnalysis',
+  Forms: 'Forms',
+  Income: 'Income',
+  IncomeSummary: 'IncomeSummary'
 };
 
 /**
