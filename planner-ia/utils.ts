@@ -47,43 +47,7 @@ export async function salvarResumoFinanceiro(userId: string) {
 
   const resumo = agruparPorCategoria(despesas);
 
-  const now = new Date();
-  const mesAtual = now.getMonth() + 1;
-  const anoAtual = now.getFullYear();
-
-  // Verificar se já existe um registro para este usuário no mês e ano atuais
-  const analiseExistente = await prisma.financialAnalysis.findFirst({
-    where: {
-      userId,
-      month: mesAtual,
-      year: anoAtual,
-    },
-  });
-
-  if (analiseExistente) {
-    // Se existir, atualiza
-    const atualizada = await prisma.financialAnalysis.update({
-      where: {
-        id: analiseExistente.id,
-      },
-      data: {
-        data: resumo,
-        createdAt: new Date(),
-      },
-    });
-
-    return atualizada;
-  } else {
-    // Se não existir, cria
-    const criada = await prisma.financialAnalysis.create({
-      data: {
-        userId,
-        month: mesAtual,
-        year: anoAtual,
-        data: resumo,
-      },
-    });
-
-    return criada;
-  }
+  // Retorna só o resumo, sem salvar no banco
+  return resumo;
 }
+
