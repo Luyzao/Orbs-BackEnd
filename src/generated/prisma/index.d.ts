@@ -14335,7 +14335,7 @@ export namespace Prisma {
   }
 
   export type IncomeCreateInput = {
-    id: string
+    id?: string
     date: Date | string
     income: number
     extraincome: number
@@ -14345,7 +14345,7 @@ export namespace Prisma {
   }
 
   export type IncomeUncheckedCreateInput = {
-    id: string
+    id?: string
     date: Date | string
     userId: string
     income: number
@@ -14375,7 +14375,7 @@ export namespace Prisma {
   }
 
   export type IncomeCreateManyInput = {
-    id: string
+    id?: string
     date: Date | string
     userId: string
     income: number
@@ -14404,7 +14404,7 @@ export namespace Prisma {
   }
 
   export type IncomeSummaryCreateInput = {
-    id: string
+    id?: string
     total: number
     impostoRenda: number
     createdAt: Date | string
@@ -14413,7 +14413,7 @@ export namespace Prisma {
   }
 
   export type IncomeSummaryUncheckedCreateInput = {
-    id: string
+    id?: string
     userId: string
     total: number
     impostoRenda: number
@@ -14440,7 +14440,7 @@ export namespace Prisma {
   }
 
   export type IncomeSummaryCreateManyInput = {
-    id: string
+    id?: string
     userId: string
     total: number
     impostoRenda: number
@@ -14466,7 +14466,7 @@ export namespace Prisma {
   }
 
   export type ExpenseAnalysisCreateInput = {
-    id: string
+    id?: string
     total: number
     categoriaMaiorGasto: number
     diferencamensal: number
@@ -14475,7 +14475,7 @@ export namespace Prisma {
   }
 
   export type ExpenseAnalysisUncheckedCreateInput = {
-    id: string
+    id?: string
     userId: string
     total: number
     categoriaMaiorGasto: number
@@ -14502,7 +14502,7 @@ export namespace Prisma {
   }
 
   export type ExpenseAnalysisCreateManyInput = {
-    id: string
+    id?: string
     userId: string
     total: number
     categoriaMaiorGasto: number
@@ -14597,7 +14597,7 @@ export namespace Prisma {
   }
 
   export type FinancialAnalysisCreateInput = {
-    id: string
+    id?: string
     month: number
     year: number
     data: JsonNullValueInput | InputJsonValue
@@ -14606,7 +14606,7 @@ export namespace Prisma {
   }
 
   export type FinancialAnalysisUncheckedCreateInput = {
-    id: string
+    id?: string
     userId: string
     month: number
     year: number
@@ -14633,7 +14633,7 @@ export namespace Prisma {
   }
 
   export type FinancialAnalysisCreateManyInput = {
-    id: string
+    id?: string
     userId: string
     month: number
     year: number
@@ -16223,7 +16223,7 @@ export namespace Prisma {
   }
 
   export type ExpenseAnalysisCreateWithoutUserInput = {
-    id: string
+    id?: string
     total: number
     categoriaMaiorGasto: number
     diferencamensal: number
@@ -16231,7 +16231,7 @@ export namespace Prisma {
   }
 
   export type ExpenseAnalysisUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     total: number
     categoriaMaiorGasto: number
     diferencamensal: number
@@ -16249,7 +16249,7 @@ export namespace Prisma {
   }
 
   export type FinancialAnalysisCreateWithoutUserInput = {
-    id: string
+    id?: string
     month: number
     year: number
     data: JsonNullValueInput | InputJsonValue
@@ -16257,7 +16257,7 @@ export namespace Prisma {
   }
 
   export type FinancialAnalysisUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     month: number
     year: number
     data: JsonNullValueInput | InputJsonValue
@@ -16330,7 +16330,7 @@ export namespace Prisma {
   }
 
   export type IncomeCreateWithoutUserInput = {
-    id: string
+    id?: string
     date: Date | string
     income: number
     extraincome: number
@@ -16339,7 +16339,7 @@ export namespace Prisma {
   }
 
   export type IncomeUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     date: Date | string
     income: number
     extraincome: number
@@ -16358,7 +16358,7 @@ export namespace Prisma {
   }
 
   export type IncomeSummaryCreateWithoutUserInput = {
-    id: string
+    id?: string
     total: number
     impostoRenda: number
     createdAt: Date | string
@@ -16366,7 +16366,7 @@ export namespace Prisma {
   }
 
   export type IncomeSummaryUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     total: number
     impostoRenda: number
     createdAt: Date | string
@@ -17256,7 +17256,7 @@ export namespace Prisma {
   }
 
   export type ExpenseAnalysisCreateManyUserInput = {
-    id: string
+    id?: string
     total: number
     categoriaMaiorGasto: number
     diferencamensal: number
@@ -17264,7 +17264,7 @@ export namespace Prisma {
   }
 
   export type FinancialAnalysisCreateManyUserInput = {
-    id: string
+    id?: string
     month: number
     year: number
     data: JsonNullValueInput | InputJsonValue
@@ -17283,7 +17283,7 @@ export namespace Prisma {
   }
 
   export type IncomeCreateManyUserInput = {
-    id: string
+    id?: string
     date: Date | string
     income: number
     extraincome: number
@@ -17292,7 +17292,7 @@ export namespace Prisma {
   }
 
   export type IncomeSummaryCreateManyUserInput = {
-    id: string
+    id?: string
     total: number
     impostoRenda: number
     createdAt: Date | string

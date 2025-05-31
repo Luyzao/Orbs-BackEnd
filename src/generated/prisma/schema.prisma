@@ -66,7 +66,7 @@ model Balance {
 }
 
 model Income {
-  id          String   @id
+  id          String   @id @default(uuid())
   date        DateTime
   userId      String
   income      Float
@@ -77,7 +77,7 @@ model Income {
 }
 
 model IncomeSummary {
-  id           String   @id
+  id           String   @id @default(uuid())
   userId       String
   total        Float
   impostoRenda Float
@@ -87,7 +87,7 @@ model IncomeSummary {
 }
 
 model ExpenseAnalysis {
-  id                  String   @id
+  id                  String   @id @default(uuid())
   userId              String
   total               Float
   categoriaMaiorGasto Float
@@ -108,7 +108,7 @@ model Forms {
 }
 
 model FinancialAnalysis {
-  id        String   @id
+  id        String   @id @default(uuid())
   userId    String
   month     Int
   year      Int
