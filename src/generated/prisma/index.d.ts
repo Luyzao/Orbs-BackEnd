@@ -14474,7 +14474,7 @@ export namespace Prisma {
   }
 
   export type IncomeCreateInput = {
-    id: string
+    id?: string
     date: Date | string
     income: number
     extraincome: number
@@ -14484,7 +14484,7 @@ export namespace Prisma {
   }
 
   export type IncomeUncheckedCreateInput = {
-    id: string
+    id?: string
     date: Date | string
     userId: string
     income: number
@@ -14514,7 +14514,7 @@ export namespace Prisma {
   }
 
   export type IncomeCreateManyInput = {
-    id: string
+    id?: string
     date: Date | string
     userId: string
     income: number
@@ -16204,7 +16204,7 @@ export namespace Prisma {
   }
 
   export type IncomeCreateWithoutUserInput = {
-    id: string
+    id?: string
     date: Date | string
     income: number
     extraincome: number
@@ -16213,7 +16213,7 @@ export namespace Prisma {
   }
 
   export type IncomeUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     date: Date | string
     income: number
     extraincome: number
@@ -17157,7 +17157,7 @@ export namespace Prisma {
   }
 
   export type IncomeCreateManyUserInput = {
-    id: string
+    id?: string
     date: Date | string
     income: number
     extraincome: number

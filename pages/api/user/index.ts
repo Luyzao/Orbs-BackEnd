@@ -12,6 +12,7 @@ async function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
         expenses: true,
         goals: true,
         balance: true,
+        Income:true
       },
     });
 
@@ -25,6 +26,7 @@ async function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
       expenses: true,
       goals: true,
       balance: true,
+      Income:true,
     },
   });
 
