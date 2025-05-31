@@ -164,34 +164,6 @@ exports.Prisma.BalanceScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ExpenseAnalysisScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  total: 'total',
-  categoriaMaiorGasto: 'categoriaMaiorGasto',
-  diferencamensal: 'diferencamensal',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.FinancialAnalysisScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  month: 'month',
-  year: 'year',
-  data: 'data',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.FormsScalarFieldEnum = {
-  id: 'id',
-  media_salarial: 'media_salarial',
-  idade: 'idade',
-  quantidade_filhos: 'quantidade_filhos',
-  dinheiro: 'dinheiro',
-  createdAt: 'createdAt',
-  userId: 'userId'
-};
-
 exports.Prisma.IncomeScalarFieldEnum = {
   id: 'id',
   date: 'date',
@@ -222,12 +194,12 @@ exports.Prisma.ExpenseAnalysisScalarFieldEnum = {
 
 exports.Prisma.FormsScalarFieldEnum = {
   id: 'id',
-  media_salarial: 'media_salarial',
-  idade: 'idade',
   quantidade_filhos: 'quantidade_filhos',
   dinheiro: 'dinheiro',
   createdAt: 'createdAt',
-  userId: 'userId'
+  userId: 'userId',
+  media_salarial: 'media_salarial',
+  idade: 'idade'
 };
 
 exports.Prisma.FinancialAnalysisScalarFieldEnum = {
