@@ -67,16 +67,17 @@ app.post('/api/recomendacao-gastos', (req, res) => {
     const { salario, idade, filhos, metaEconomia } = req.body;
 
     if (!salario || !idade || filhos === undefined || metaEconomia === undefined) {
-        return res.status(400).json({ erro: 'Envie salario, idade, filhos, metaEconomia.' });
+        return res.status(400).json({ erro: 'Envie salario, idade, filhos e metaEconomia.' });
     }
- 
+
+    const divisaoIdeal = sugerirDivisaoGastos(salario, idade, filhos, metaEconomia);
+
     if (divisaoIdeal.erro) {
         return res.status(400).json(divisaoIdeal);
     }
 
     return res.json({ recomendacao: divisaoIdeal });
 });
-
 
 // 🔥 Endpoint: análise com IA
 app.post('/api/analise-gastos', async (req, res) => {
