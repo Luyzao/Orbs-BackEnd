@@ -196,7 +196,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "E:\\Orbs-BackEnd\\src\\generated\\prisma",
+      "value": "C:\\Users\\laisa\\OneDrive\\Desktop\\Orbs-BackEnd\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -210,7 +210,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "E:\\Orbs-BackEnd\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\laisa\\OneDrive\\Desktop\\Orbs-BackEnd\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -224,7 +224,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

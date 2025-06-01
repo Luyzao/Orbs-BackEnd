@@ -102,7 +102,9 @@ app.post('/api/analise-gastos', async (req, res) => {
     console.log('🧠 Divisão ideal calculada:', divisaoIdeal);
 
     const prompt = `
-Você é um consultor financeiro objetivo. Com base nos dados abaixo, gere alertas claros e diretos sobre os gastos do usuário.
+Você é um consultor financeiro objetivo e direto.
+
+Com base nos dados abaixo, gere alertas claros e curtos sobre os gastos do usuário.
 
 Dados do usuário:
 Salário: R$ ${salario}
@@ -120,17 +122,17 @@ Gastos atuais:
 ${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
 
 Instruções:
-Gere um alerta somente se uma categoria estiver acima do recomendado.
-
-O alerta deve seguir este modelo:
-"Alerta: Mais de X% dos seus gastos estão indo para [categoria]. Considere [ação]."
-
-Seja extremamente enxuto e prático.
-
-Não gere conclusões longas. Não gere análises extensas. Apenas os alertas.
-
-Se todos os gastos estão dentro do ideal, diga apenas:
-"Seus gastos estão equilibrados. Continue assim."`;
+- Para cada categoria presente em gastos atuais, calcule o percentual do salário que está sendo gasto:  
+  (gasto atual / salário) * 100.
+- Compare o gasto atual com o gasto recomendado.
+- Gere um alerta somente se o gasto atual ultrapassar o recomendado.
+- O alerta deve ter o formato:  
+  "Você está gastando X% do seu salário em [categoria]. Considere reduzir essa despesa."
+- Arredonde X para o número inteiro mais próximo.
+- Não inclua categorias que não ultrapassem o limite recomendado.
+- Não gere análises, conclusões ou reflexões.
+- Se nenhum gasto ultrapassar o recomendado, responda apenas:  
+  "Seus gastos estão equilibrados. Continue assim."`
 
     console.log('📝 Prompt gerado para OpenAI:', prompt);
 
