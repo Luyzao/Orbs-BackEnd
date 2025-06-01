@@ -43,7 +43,7 @@ CREATE TABLE "Goal" (
     "status" "GoalStatus" NOT NULL DEFAULT 'PENDING',
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "category" TEXT,
+    "categoryId" TEXT,
     "imageUrl" TEXT,
 
     CONSTRAINT "Goal_pkey" PRIMARY KEY ("id")
@@ -53,8 +53,9 @@ CREATE TABLE "Goal" (
 CREATE TABLE "Balance" (
     "id" TEXT NOT NULL,
     "value" DOUBLE PRECISION NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
     "userId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Balance_pkey" PRIMARY KEY ("id")
 );
@@ -73,52 +74,16 @@ CREATE TABLE "Income" (
 );
 
 -- CreateTable
-CREATE TABLE "IncomeSummary" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "total" DOUBLE PRECISION NOT NULL,
-    "impostoRenda" DOUBLE PRECISION NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL,
-    "month" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "IncomeSummary_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "ExpenseAnalysis" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "total" DOUBLE PRECISION NOT NULL,
-    "categoriaMaiorGasto" DOUBLE PRECISION NOT NULL,
-    "diferencamensal" DOUBLE PRECISION NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "ExpenseAnalysis_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Forms" (
     "id" TEXT NOT NULL,
-    "media_salarial" TEXT NOT NULL,
-    "idade" TEXT NOT NULL,
     "quantidade_filhos" TEXT NOT NULL,
     "dinheiro" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" TEXT NOT NULL,
+    "media_salarial" DECIMAL(10,2) NOT NULL,
+    "idade" INTEGER NOT NULL,
 
     CONSTRAINT "Forms_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "FinancialAnalysis" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "month" INTEGER NOT NULL,
-    "year" INTEGER NOT NULL,
-    "data" JSONB NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "FinancialAnalysis_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -140,19 +105,13 @@ ALTER TABLE "Expense" ADD CONSTRAINT "Expense_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Goal" ADD CONSTRAINT "Goal_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Goal" ADD CONSTRAINT "Goal_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Balance" ADD CONSTRAINT "Balance_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Income" ADD CONSTRAINT "Income_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "IncomeSummary" ADD CONSTRAINT "IncomeSummary_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ExpenseAnalysis" ADD CONSTRAINT "ExpenseAnalysis_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Forms" ADD CONSTRAINT "Forms_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FinancialAnalysis" ADD CONSTRAINT "FinancialAnalysis_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

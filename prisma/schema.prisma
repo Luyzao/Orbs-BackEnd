@@ -14,7 +14,6 @@ model User {
   avatarUrl         String?
   balance           Balance?
   expenses          Expense[]
-  FinancialAnalysis FinancialAnalysis[]
   Forms             Forms?
   goals             Goal[]
   Income            Income[]
@@ -39,19 +38,21 @@ model Category {
   name     String    @unique
   color    String?
   expenses Expense[]
+  goals    Goal[]
 }
 
 model Goal {
-  id        String     @id @default(uuid())
-  title     String
-  target    Float
-  progress  Float      @default(0)
-  status    GoalStatus @default(PENDING)
-  userId    String
-  createdAt DateTime   @default(now())
-  category  String?
-  imageUrl  String?
-  user      User       @relation(fields: [userId], references: [id])
+  id         String     @id @default(uuid())
+  title      String
+  target     Float
+  progress   Float      @default(0)
+  status     GoalStatus @default(PENDING)
+  userId     String
+  createdAt  DateTime   @default(now())
+  categoryId String?
+  imageUrl   String?
+  user       User       @relation(fields: [userId], references: [id])
+  category   Category?  @relation(fields: [categoryId], references: [id])
 }
 
 model Balance {
@@ -83,16 +84,6 @@ model Forms {
   media_salarial    Decimal  @db.Decimal(10, 2)
   idade             Int
   user              User     @relation(fields: [userId], references: [id])
-}
-
-model FinancialAnalysis {
-  userId    String
-  month     Int
-  year      Int
-  data      Json
-  createdAt DateTime @default(now())
-  id        String   @id @default(uuid())
-  User      User     @relation(fields: [userId], references: [id])
 }
 
 enum GoalStatus {
