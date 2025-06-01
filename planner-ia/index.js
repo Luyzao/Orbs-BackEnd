@@ -105,9 +105,10 @@ app.post('/api/analise-gastos', async (req, res) => {
     Você é um consultor financeiro especialista, objetivo e prático.
 
     Sua missão é ajudar o usuário a entender seus gastos, propor soluções claras para reduzir despesas e atingir sua meta de economia mensal.
+    Ao gerar o texto, não deixe marcas de markdown evidentes.
 
     📌 Etapas da sua resposta:
-    1. O que a IA tem a dizer?: (em negrito)
+    1. Análise de Gastos
     - Para cada categoria em que o gasto atual estiver acima do recomendado, faça:
         ➝ Um alerta no formato:  
         "Você está gastando além do recomendado do seu salário em [categoria]. Considere reduzir essa despesa." 
@@ -116,7 +117,7 @@ app.post('/api/analise-gastos', async (req, res) => {
 
     - Se o gasto estiver dentro ou abaixo do recomendado, não gere alerta nem comentários sobre ele.
 
-    2. Dicas bônus para economizar: (em negrito)
+    2. Dicas bônus para economizar
     - Independentemente dos alertas, ao final, inclua uma seção chamada:  
         "Dicas bônus para ajudar você a economizar mais:"
     - Liste de 2 a 4 dicas práticas, gerais, aplicáveis à maioria das pessoas.  
@@ -124,7 +125,7 @@ app.post('/api/analise-gastos', async (req, res) => {
 
     3. Se todos os gastos estiverem dentro do recomendado:
     - Diga:  
-        "Seus gastos estão equilibrados. Continue assim."
+        "A maioria dos seus gastos estão equilibrados. Continue assim."
     - Mesmo assim, apresente as Dicas bônus para ajudar você a economizar mais.
 
     📊 Dados do usuário:
@@ -143,6 +144,7 @@ app.post('/api/analise-gastos', async (req, res) => {
     - As sugestões devem ser simples, diretas e aplicáveis no dia a dia.
     - Evite jargões financeiros e linguagem complexa.
     - Foque em ações realistas que ajudem a economizar, seja reduzindo gastos ou mudando hábitos.
+    - Não deixe marcas de markdown evidentes.
 
     ⚠️ Lembre-se:  
     - Só gere alertas para categorias **acima do recomendado**.  
