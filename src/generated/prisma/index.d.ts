@@ -5133,8 +5133,8 @@ export namespace Prisma {
     createdAt?: boolean
     categoryId?: boolean
     imageUrl?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | Goal$categoryArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["goal"]>
 
   export type GoalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5147,8 +5147,8 @@ export namespace Prisma {
     createdAt?: boolean
     categoryId?: boolean
     imageUrl?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | Goal$categoryArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["goal"]>
 
   export type GoalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5161,8 +5161,8 @@ export namespace Prisma {
     createdAt?: boolean
     categoryId?: boolean
     imageUrl?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | Goal$categoryArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["goal"]>
 
   export type GoalSelectScalar = {
@@ -5179,23 +5179,23 @@ export namespace Prisma {
 
   export type GoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "target" | "progress" | "status" | "userId" | "createdAt" | "categoryId" | "imageUrl", ExtArgs["result"]["goal"]>
   export type GoalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | Goal$categoryArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type GoalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | Goal$categoryArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type GoalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | Goal$categoryArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $GoalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Goal"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       category: Prisma.$CategoryPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5601,8 +5601,8 @@ export namespace Prisma {
    */
   export interface Prisma__GoalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     category<T extends Goal$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Goal$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9834,8 +9834,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Goal"> | Date | string
     categoryId?: StringNullableFilter<"Goal"> | string | null
     imageUrl?: StringNullableFilter<"Goal"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type GoalOrderByWithRelationInput = {
@@ -9848,8 +9848,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     categoryId?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
     category?: CategoryOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type GoalWhereUniqueInput = Prisma.AtLeast<{
@@ -9865,8 +9865,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Goal"> | Date | string
     categoryId?: StringNullableFilter<"Goal"> | string | null
     imageUrl?: StringNullableFilter<"Goal"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type GoalOrderByWithAggregationInput = {
@@ -10294,8 +10294,8 @@ export namespace Prisma {
     status?: $Enums.GoalStatus
     createdAt?: Date | string
     imageUrl?: string | null
-    user: UserCreateNestedOneWithoutGoalsInput
     category?: CategoryCreateNestedOneWithoutGoalsInput
+    user: UserCreateNestedOneWithoutGoalsInput
   }
 
   export type GoalUncheckedCreateInput = {
@@ -10318,8 +10318,8 @@ export namespace Prisma {
     status?: EnumGoalStatusFieldUpdateOperationsInput | $Enums.GoalStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutGoalsNestedInput
     category?: CategoryUpdateOneWithoutGoalsNestedInput
+    user?: UserUpdateOneRequiredWithoutGoalsNestedInput
   }
 
   export type GoalUncheckedUpdateInput = {
@@ -11428,28 +11428,20 @@ export namespace Prisma {
     deleteMany?: GoalScalarWhereInput | GoalScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutGoalsInput = {
-    create?: XOR<UserCreateWithoutGoalsInput, UserUncheckedCreateWithoutGoalsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutGoalsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type CategoryCreateNestedOneWithoutGoalsInput = {
     create?: XOR<CategoryCreateWithoutGoalsInput, CategoryUncheckedCreateWithoutGoalsInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutGoalsInput
     connect?: CategoryWhereUniqueInput
   }
 
-  export type EnumGoalStatusFieldUpdateOperationsInput = {
-    set?: $Enums.GoalStatus
-  }
-
-  export type UserUpdateOneRequiredWithoutGoalsNestedInput = {
+  export type UserCreateNestedOneWithoutGoalsInput = {
     create?: XOR<UserCreateWithoutGoalsInput, UserUncheckedCreateWithoutGoalsInput>
     connectOrCreate?: UserCreateOrConnectWithoutGoalsInput
-    upsert?: UserUpsertWithoutGoalsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGoalsInput, UserUpdateWithoutGoalsInput>, UserUncheckedUpdateWithoutGoalsInput>
+  }
+
+  export type EnumGoalStatusFieldUpdateOperationsInput = {
+    set?: $Enums.GoalStatus
   }
 
   export type CategoryUpdateOneWithoutGoalsNestedInput = {
@@ -11460,6 +11452,14 @@ export namespace Prisma {
     delete?: CategoryWhereInput | boolean
     connect?: CategoryWhereUniqueInput
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutGoalsInput, CategoryUpdateWithoutGoalsInput>, CategoryUncheckedUpdateWithoutGoalsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutGoalsNestedInput = {
+    create?: XOR<UserCreateWithoutGoalsInput, UserUncheckedCreateWithoutGoalsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGoalsInput
+    upsert?: UserUpsertWithoutGoalsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGoalsInput, UserUpdateWithoutGoalsInput>, UserUncheckedUpdateWithoutGoalsInput>
   }
 
   export type UserCreateNestedOneWithoutBalanceInput = {
@@ -12231,6 +12231,25 @@ export namespace Prisma {
     data: XOR<GoalUpdateManyMutationInput, GoalUncheckedUpdateManyWithoutCategoryInput>
   }
 
+  export type CategoryCreateWithoutGoalsInput = {
+    id?: string
+    name: string
+    color?: string | null
+    expenses?: ExpenseCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUncheckedCreateWithoutGoalsInput = {
+    id?: string
+    name: string
+    color?: string | null
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryCreateOrConnectWithoutGoalsInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutGoalsInput, CategoryUncheckedCreateWithoutGoalsInput>
+  }
+
   export type UserCreateWithoutGoalsInput = {
     id?: string
     name: string
@@ -12256,23 +12275,29 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutGoalsInput, UserUncheckedCreateWithoutGoalsInput>
   }
 
-  export type CategoryCreateWithoutGoalsInput = {
-    id?: string
-    name: string
-    color?: string | null
-    expenses?: ExpenseCreateNestedManyWithoutCategoryInput
-  }
-
-  export type CategoryUncheckedCreateWithoutGoalsInput = {
-    id?: string
-    name: string
-    color?: string | null
-    expenses?: ExpenseUncheckedCreateNestedManyWithoutCategoryInput
-  }
-
-  export type CategoryCreateOrConnectWithoutGoalsInput = {
-    where: CategoryWhereUniqueInput
+  export type CategoryUpsertWithoutGoalsInput = {
+    update: XOR<CategoryUpdateWithoutGoalsInput, CategoryUncheckedUpdateWithoutGoalsInput>
     create: XOR<CategoryCreateWithoutGoalsInput, CategoryUncheckedCreateWithoutGoalsInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutGoalsInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutGoalsInput, CategoryUncheckedUpdateWithoutGoalsInput>
+  }
+
+  export type CategoryUpdateWithoutGoalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    expenses?: ExpenseUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryUncheckedUpdateWithoutGoalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    expenses?: ExpenseUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type UserUpsertWithoutGoalsInput = {
@@ -12304,31 +12329,6 @@ export namespace Prisma {
     expenses?: ExpenseUncheckedUpdateManyWithoutUserNestedInput
     Forms?: FormsUncheckedUpdateOneWithoutUserNestedInput
     Income?: IncomeUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type CategoryUpsertWithoutGoalsInput = {
-    update: XOR<CategoryUpdateWithoutGoalsInput, CategoryUncheckedUpdateWithoutGoalsInput>
-    create: XOR<CategoryCreateWithoutGoalsInput, CategoryUncheckedCreateWithoutGoalsInput>
-    where?: CategoryWhereInput
-  }
-
-  export type CategoryUpdateToOneWithWhereWithoutGoalsInput = {
-    where?: CategoryWhereInput
-    data: XOR<CategoryUpdateWithoutGoalsInput, CategoryUncheckedUpdateWithoutGoalsInput>
-  }
-
-  export type CategoryUpdateWithoutGoalsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-    expenses?: ExpenseUpdateManyWithoutCategoryNestedInput
-  }
-
-  export type CategoryUncheckedUpdateWithoutGoalsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-    expenses?: ExpenseUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type UserCreateWithoutBalanceInput = {

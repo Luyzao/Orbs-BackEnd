@@ -51,8 +51,8 @@ model Goal {
   createdAt  DateTime   @default(now())
   categoryId String?
   imageUrl   String?
-  user       User       @relation(fields: [userId], references: [id])
   category   Category?  @relation(fields: [categoryId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
 }
 
 model Balance {

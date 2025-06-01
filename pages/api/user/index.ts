@@ -10,7 +10,11 @@ async function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
       where: { id: String(id) },
       include: {
         expenses: true,
-        goals: true,
+         goals: {
+    include: {
+      category: true, // aqui você puxa a category de cada goal
+    }
+  },
         balance: true,
         Income:true
       },
