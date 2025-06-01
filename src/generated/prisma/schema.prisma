@@ -14,12 +14,10 @@ model User {
   avatarUrl         String?
   balance           Balance?
   expenses          Expense[]
-  ExpenseAnalysis   ExpenseAnalysis[]
   FinancialAnalysis FinancialAnalysis[]
   Forms             Forms?
   goals             Goal[]
   Income            Income[]
-  IncomeSummary     IncomeSummary[]
 }
 
 model Expense {
@@ -66,7 +64,7 @@ model Balance {
 }
 
 model Income {
-  id          String   @id
+  id          String   @id @default(uuid())
   date        DateTime
   userId      String
   income      Float
@@ -74,26 +72,6 @@ model Income {
   otherincome Float
   month       DateTime
   User        User     @relation(fields: [userId], references: [id])
-}
-
-model IncomeSummary {
-  id           String   @id
-  userId       String
-  total        Float
-  impostoRenda Float
-  createdAt    DateTime
-  month        DateTime
-  User         User     @relation(fields: [userId], references: [id])
-}
-
-model ExpenseAnalysis {
-  id                  String   @id
-  userId              String
-  total               Float
-  categoriaMaiorGasto Float
-  diferencamensal     Float
-  createdAt           DateTime
-  User                User     @relation(fields: [userId], references: [id])
 }
 
 model Forms {
@@ -108,7 +86,7 @@ model Forms {
 }
 
 model FinancialAnalysis {
-  id        String   @id
+  id        String   @id @default(uuid())
   userId    String
   month     Int
   year      Int

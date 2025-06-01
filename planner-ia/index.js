@@ -111,6 +111,8 @@ ${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`
 
 Sua tarefa:
 1. Diga se o usuário está gastando mais do que o ideal em alguma categoria.
+2. Aponte quais categorias estão acima e abaixo do recomendado.
+3. Dê dicas práticas, diretas e realistas para ele economizar nas categorias que estão acima.
 4. Seja claro, objetivo e organizado em tópicos.
 `;
 
@@ -143,5 +145,3 @@ app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
 
-//2. Aponte quais categorias estão acima e abaixo do recomendado.
-//3. Dê dicas práticas, diretas e realistas para ele economizar nas categorias que estão acima.
