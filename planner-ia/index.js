@@ -81,49 +81,58 @@ app.post('/api/recomendacao-gastos', (req, res) => {
 
 // 🔥 Endpoint: análise com IA
 app.post('/api/analise-gastos', async (req, res) => {
+    console.log('🟦 Recebido request em /api/analise-gastos');
+    console.log('📥 Body recebido:', req.body);
+
     const { salario, idade, filhos, metaEconomia, gastos } = req.body;
 
     if (!salario || !idade || filhos === undefined || metaEconomia === undefined || !gastos) {
+        console.error('❌ Dados faltando no body:', { salario, idade, filhos, metaEconomia, gastos });
         return res.status(400).json({ erro: 'Envie salario, idade, filhos, metaEconomia e gastos.' });
     }
 
+    console.log('✅ Dados validados. Calculando divisão ideal...');
     const divisaoIdeal = sugerirDivisaoGastos(salario, idade, filhos, metaEconomia);
 
     if (divisaoIdeal.erro) {
+        console.error('❌ Erro na divisão ideal:', divisaoIdeal.erro);
         return res.status(400).json(divisaoIdeal);
     }
 
-    // Monta o prompt
+    console.log('🧠 Divisão ideal calculada:', divisaoIdeal);
+
     const prompt = `
-        Você é um consultor financeiro objetivo. Com base nos dados abaixo, gere alertas claros e diretos sobre os gastos do usuário.
+Você é um consultor financeiro objetivo. Com base nos dados abaixo, gere alertas claros e diretos sobre os gastos do usuário.
 
-        Dados do usuário:
-        Salário: R$ ${salario}
+Dados do usuário:
+Salário: R$ ${salario}
 
-        Idade: ${idade} anos
+Idade: ${idade} anos
 
-        Filhos: ${filhos}
+Filhos: ${filhos}
 
-        Meta de economia mensal: R$ ${metaEconomia}
+Meta de economia mensal: R$ ${metaEconomia}
 
-        Gastos recomendados:
-        ${Object.entries(divisaoIdeal).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+Gastos recomendados:
+${Object.entries(divisaoIdeal).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
 
-        Gastos atuais:
-        ${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+Gastos atuais:
+${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
 
-        Instruções:
-        Gere um alerta somente se uma categoria estiver acima do recomendado.
+Instruções:
+Gere um alerta somente se uma categoria estiver acima do recomendado.
 
-        O alerta deve seguir este modelo:
-        "Alerta: Mais de X% dos seus gastos estão indo para [categoria]. Considere [ação]."
+O alerta deve seguir este modelo:
+"Alerta: Mais de X% dos seus gastos estão indo para [categoria]. Considere [ação]."
 
-        Seja extremamente enxuto e prático.
+Seja extremamente enxuto e prático.
 
-        Não gere conclusões longas. Não gere análises extensas. Apenas os alertas.
+Não gere conclusões longas. Não gere análises extensas. Apenas os alertas.
 
-        Se todos os gastos estão dentro do ideal, diga apenas:
-        "Seus gastos estão equilibrados. Continue assim."`
+Se todos os gastos estão dentro do ideal, diga apenas:
+"Seus gastos estão equilibrados. Continue assim."`;
+
+    console.log('📝 Prompt gerado para OpenAI:', prompt);
 
     try {
         const completion = await openai.chat.completions.create({
@@ -137,16 +146,19 @@ app.post('/api/analise-gastos', async (req, res) => {
         });
 
         const resposta = completion.choices[0].message.content;
+        console.log('🟩 Resposta da OpenAI:', resposta);
+
         res.json({
             divisaoIdeal,
             analise: resposta
         });
 
     } catch (error) {
-        console.error(error);
+        console.error('❌ Erro ao consultar a API da OpenAI:', error);
         res.status(500).json({ erro: 'Erro ao consultar a API da OpenAI.' });
     }
 });
+
 
 // 🚀 Start servidor
 const PORT = process.env.PORT || 3003;
