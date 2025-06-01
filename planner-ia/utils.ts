@@ -46,8 +46,8 @@ export async function salvarResumoFinanceiro(userId: string) {
   }
 
   const resumo = agruparPorCategoria(despesas);
+  console.log(resumo);
 
-  // Retorna só o resumo, sem salvar no banco
   return resumo;
 }
 

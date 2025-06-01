@@ -95,26 +95,35 @@ app.post('/api/analise-gastos', async (req, res) => {
 
     // Monta o prompt
     const prompt = `
-Você é um consultor financeiro. Com base nos dados abaixo, analise os gastos do usuário.
+        Você é um consultor financeiro objetivo. Com base nos dados abaixo, gere alertas claros e diretos sobre os gastos do usuário.
 
-Dados do usuário:
-- Salário: R$ ${salario}
-- Idade: ${idade} anos
-- Filhos: ${filhos}
-- Meta de economia mensal: R$ ${metaEconomia}
+        Dados do usuário:
+        Salário: R$ ${salario}
 
-Distribuição de gastos recomendada:
-${Object.entries(divisaoIdeal).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+        Idade: ${idade} anos
 
-Gastos atuais do usuário:
-${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+        Filhos: ${filhos}
 
-Sua tarefa:
-1. Diga se o usuário está gastando mais do que o ideal em alguma categoria.
-2. Aponte quais categorias estão acima e abaixo do recomendado.
-3. Dê dicas práticas, diretas e realistas para ele economizar nas categorias que estão acima.
-4. Seja claro, objetivo e organizado em tópicos.
-`;
+        Meta de economia mensal: R$ ${metaEconomia}
+
+        Gastos recomendados:
+        ${Object.entries(divisaoIdeal).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+
+        Gastos atuais:
+        ${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+
+        Instruções:
+        Gere um alerta somente se uma categoria estiver acima do recomendado.
+
+        O alerta deve seguir este modelo:
+        "Alerta: Mais de X% dos seus gastos estão indo para [categoria]. Considere [ação]."
+
+        Seja extremamente enxuto e prático.
+
+        Não gere conclusões longas. Não gere análises extensas. Apenas os alertas.
+
+        Se todos os gastos estão dentro do ideal, diga apenas:
+        "Seus gastos estão equilibrados. Continue assim."`
 
     try {
         const completion = await openai.chat.completions.create({
