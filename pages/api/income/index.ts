@@ -8,8 +8,11 @@ async function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
   const { id, userId } = req.query;
 
   if (id) {
-    const income = await prisma.income.findUnique({
+    const income = await prisma.income.findMany({
       where: { id: String(id) },
+      orderBy: {
+        date: 'desc', // ou 'createdAt', se tiver esse campo
+      },
       include: {
         User: true,
       },

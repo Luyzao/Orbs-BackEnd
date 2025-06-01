@@ -38,6 +38,7 @@ async function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
             income: true,
             extraincome: true,
             otherincome: true,
+            date: true
             },
         });
 
