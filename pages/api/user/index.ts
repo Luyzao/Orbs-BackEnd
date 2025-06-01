@@ -9,7 +9,9 @@ async function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
     const user = await prisma.user.findUnique({
       where: { id: String(id) },
       include: {
-        expenses: true,
+            expenses: {  include: {
+          category: true, // aqui você puxa a category de cada goal
+        }},
          goals: {
     include: {
       category: true, // aqui você puxa a category de cada goal
