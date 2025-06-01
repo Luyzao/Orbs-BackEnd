@@ -9,14 +9,14 @@ datasource db {
 }
 
 model User {
-  id                String              @id @default(uuid())
-  name              String
-  avatarUrl         String?
-  balance           Balance?
-  expenses          Expense[]
-  Forms             Forms?
-  goals             Goal[]
-  Income            Income[]
+  id        String    @id @default(uuid())
+  name      String
+  avatarUrl String?
+  balance   Balance?
+  expenses  Expense[]
+  Forms     Forms?
+  goals     Goal[]
+  Income    Income[]
 }
 
 model Expense {
@@ -51,8 +51,8 @@ model Goal {
   createdAt  DateTime   @default(now())
   categoryId String?
   imageUrl   String?
-  user       User       @relation(fields: [userId], references: [id])
   category   Category?  @relation(fields: [categoryId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
 }
 
 model Balance {
