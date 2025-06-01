@@ -9,17 +9,14 @@ datasource db {
 }
 
 model User {
-  id                String              @id @default(uuid())
-  name              String
-  avatarUrl         String?
-  balance           Balance?
-  expenses          Expense[]
-  ExpenseAnalysis   ExpenseAnalysis[]
-  FinancialAnalysis FinancialAnalysis[]
-  Forms             Forms?
-  goals             Goal[]
-  Income            Income[]
-  IncomeSummary     IncomeSummary[]
+  id        String    @id @default(uuid())
+  name      String
+  avatarUrl String?
+  balance   Balance?
+  expenses  Expense[]
+  Forms     Forms?
+  goals     Goal[]
+  Income    Income[]
 }
 
 model Expense {
@@ -41,19 +38,21 @@ model Category {
   name     String    @unique
   color    String?
   expenses Expense[]
+  goals    Goal[]
 }
 
 model Goal {
-  id        String     @id @default(uuid())
-  title     String
-  target    Float
-  progress  Float      @default(0)
-  status    GoalStatus @default(PENDING)
-  userId    String
-  createdAt DateTime   @default(now())
-  category  String?
-  imageUrl  String?
-  user      User       @relation(fields: [userId], references: [id])
+  id         String     @id @default(uuid())
+  title      String
+  target     Float
+  progress   Float      @default(0)
+  status     GoalStatus @default(PENDING)
+  userId     String
+  createdAt  DateTime   @default(now())
+  categoryId String?
+  imageUrl   String?
+  user       User       @relation(fields: [userId], references: [id])
+  category   Category?  @relation(fields: [categoryId], references: [id])
 }
 
 model Balance {
@@ -66,7 +65,7 @@ model Balance {
 }
 
 model Income {
-  id          String   @id
+  id          String   @id @default(uuid())
   date        DateTime
   userId      String
   income      Float
@@ -74,26 +73,6 @@ model Income {
   otherincome Float
   month       DateTime
   User        User     @relation(fields: [userId], references: [id])
-}
-
-model IncomeSummary {
-  id           String   @id
-  userId       String
-  total        Float
-  impostoRenda Float
-  createdAt    DateTime
-  month        DateTime
-  User         User     @relation(fields: [userId], references: [id])
-}
-
-model ExpenseAnalysis {
-  id                  String   @id
-  userId              String
-  total               Float
-  categoriaMaiorGasto Float
-  diferencamensal     Float
-  createdAt           DateTime
-  User                User     @relation(fields: [userId], references: [id])
 }
 
 model Forms {
@@ -105,16 +84,6 @@ model Forms {
   media_salarial    Decimal  @db.Decimal(10, 2)
   idade             Int
   user              User     @relation(fields: [userId], references: [id])
-}
-
-model FinancialAnalysis {
-  id        String   @id
-  userId    String
-  month     Int
-  year      Int
-  data      Json
-  createdAt DateTime @default(now())
-  User      User     @relation(fields: [userId], references: [id])
 }
 
 enum GoalStatus {

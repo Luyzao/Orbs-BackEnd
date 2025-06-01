@@ -9,17 +9,14 @@ datasource db {
 }
 
 model User {
-  id                String              @id @default(uuid())
-  name              String
-  avatarUrl         String?
-  balance           Balance?
-  expenses          Expense[]
-  expensesAnalysis  ExpenseAnalysis[]
-  FinancialAnalysis FinancialAnalysis[]
-  Forms             Forms?
-  goals             Goal[]
-  incomes           Income[]
-  incomesummary     IncomeSummary[]
+  id        String    @id @default(uuid())
+  name      String
+  avatarUrl String?
+  balance   Balance?
+  expenses  Expense[]
+  Forms     Forms?
+  goals     Goal[]
+  Income    Income[]
 }
 
 model Expense {
@@ -41,27 +38,30 @@ model Category {
   name     String    @unique
   color    String?
   expenses Expense[]
+  goals    Goal[]
 }
 
 model Goal {
-  id        String     @id @default(uuid())
-  title     String
-  target    Float
-  progress  Float      @default(0)
-  status    GoalStatus @default(PENDING)
-  userId    String
-  createdAt DateTime   @default(now())
-  category  String?
-  imageUrl  String?
-  user      User       @relation(fields: [userId], references: [id])
+  id         String     @id @default(uuid())
+  title      String
+  target     Float
+  progress   Float      @default(0)
+  status     GoalStatus @default(PENDING)
+  userId     String
+  createdAt  DateTime   @default(now())
+  categoryId String?
+  imageUrl   String?
+  category   Category?  @relation(fields: [categoryId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
 }
 
 model Balance {
-  id     String   @id @default(uuid())
-  value  Float
-  date   DateTime
-  userId String   @unique
-  user   User     @relation(fields: [userId], references: [id])
+  id        String   @id @default(uuid())
+  value     Float
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Income {
@@ -72,49 +72,18 @@ model Income {
   extraincome Float
   otherincome Float
   month       DateTime
-  user        User     @relation(fields: [userId], references: [id])
-}
-
-model IncomeSummary {
-  id           String   @id @default(uuid())
-  userId       String
-  total        Float
-  impostoRenda Float
-  createdAt    DateTime
-  month        DateTime
-  user         User     @relation(fields: [userId], references: [id])
-}
-
-model ExpenseAnalysis {
-  id                  String   @id @default(uuid())
-  userId              String
-  total               Float
-  categoriaMaiorGasto Float
-  diferencamensal     Float
-  createdAt           DateTime
-  user                User     @relation(fields: [userId], references: [id])
+  User        User     @relation(fields: [userId], references: [id])
 }
 
 model Forms {
   id                String   @id @default(uuid())
-  media_salarial    String
-  idade             String
   quantidade_filhos String
   dinheiro          String
   createdAt         DateTime @default(now())
   userId            String   @unique
+  media_salarial    Decimal  @db.Decimal(10, 2)
+  idade             Int
   user              User     @relation(fields: [userId], references: [id])
-}
-
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model FinancialAnalysis {
-  id        String   @id
-  userId    String
-  month     Int
-  year      Int
-  data      Json
-  createdAt DateTime @default(now())
-  User      User     @relation(fields: [userId], references: [id])
 }
 
 enum GoalStatus {

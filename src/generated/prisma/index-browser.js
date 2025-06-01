@@ -152,7 +152,7 @@ exports.Prisma.GoalScalarFieldEnum = {
   status: 'status',
   userId: 'userId',
   createdAt: 'createdAt',
-  category: 'category',
+  categoryId: 'categoryId',
   imageUrl: 'imageUrl'
 };
 
@@ -174,24 +174,6 @@ exports.Prisma.IncomeScalarFieldEnum = {
   month: 'month'
 };
 
-exports.Prisma.IncomeSummaryScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  total: 'total',
-  impostoRenda: 'impostoRenda',
-  createdAt: 'createdAt',
-  month: 'month'
-};
-
-exports.Prisma.ExpenseAnalysisScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  total: 'total',
-  categoriaMaiorGasto: 'categoriaMaiorGasto',
-  diferencamensal: 'diferencamensal',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.FormsScalarFieldEnum = {
   id: 'id',
   quantidade_filhos: 'quantidade_filhos',
@@ -202,22 +184,9 @@ exports.Prisma.FormsScalarFieldEnum = {
   idade: 'idade'
 };
 
-exports.Prisma.FinancialAnalysisScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  month: 'month',
-  year: 'year',
-  data: 'data',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-};
-
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -228,12 +197,6 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
 };
 exports.GoalStatus = exports.$Enums.GoalStatus = {
   PENDING: 'PENDING',
@@ -248,10 +211,7 @@ exports.Prisma.ModelName = {
   Goal: 'Goal',
   Balance: 'Balance',
   Income: 'Income',
-  IncomeSummary: 'IncomeSummary',
-  ExpenseAnalysis: 'ExpenseAnalysis',
-  Forms: 'Forms',
-  FinancialAnalysis: 'FinancialAnalysis'
+  Forms: 'Forms'
 };
 
 /**
