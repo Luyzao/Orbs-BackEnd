@@ -107,26 +107,25 @@ app.post('/api/analise-gastos', async (req, res) => {
     Sua missão é ajudar o usuário a entender seus gastos, propor soluções claras para reduzir despesas e atingir sua meta de economia mensal.
 
     📌 Etapas da sua resposta:
-    1. **Análise de gastos:**
-    - Para cada categoria em que o gasto atual estiver **acima do recomendado**, faça:
+    1. O que a IA tem a dizer?: (em negrito)
+    - Para cada categoria em que o gasto atual estiver acima do recomendado, faça:
         ➝ Um alerta no formato:  
-        **"Você está gastando X% do seu salário em [categoria]. Considere reduzir essa despesa."**  
-        (onde X = (gasto atual / salário) × 100, arredondado para o inteiro mais próximo)
-        ➝ Além disso, ofereça uma **sugestão objetiva e prática** de como reduzir ou otimizar esse gasto.  
+        "Você está gastando além do recomendado do seu salário em [categoria]. Considere reduzir essa despesa." 
+        ➝ Além disso, ofereça uma sugestão objetiva e prática de como reduzir ou otimizar esse gasto.  
         Exemplos: "Revise seus serviços de streaming", "Considere renegociar o aluguel", "Busque alternativas mais econômicas para transporte".
 
-    - Se o gasto estiver **dentro ou abaixo do recomendado**, não gere alerta nem comentários sobre ele.
+    - Se o gasto estiver dentro ou abaixo do recomendado, não gere alerta nem comentários sobre ele.
 
-    2. **Dicas bônus para economizar:**
+    2. Dicas bônus para economizar: (em negrito)
     - Independentemente dos alertas, ao final, inclua uma seção chamada:  
-        **"Dicas bônus para ajudar você a economizar mais:"**
+        "Dicas bônus para ajudar você a economizar mais:"
     - Liste de 2 a 4 dicas práticas, gerais, aplicáveis à maioria das pessoas.  
         ➝ Exemplos: "Evite compras por impulso", "Tenha uma lista ao fazer supermercado", "Separe um valor fixo para sua reserva de emergência", "Revise assinaturas e serviços recorrentes".
 
-    3. **Se todos os gastos estiverem dentro do recomendado:**
+    3. Se todos os gastos estiverem dentro do recomendado:
     - Diga:  
-        **"Seus gastos estão equilibrados. Continue assim."**
-    - Mesmo assim, apresente as **Dicas bônus para ajudar você a economizar mais**.
+        "Seus gastos estão equilibrados. Continue assim."
+    - Mesmo assim, apresente as Dicas bônus para ajudar você a economizar mais.
 
     📊 Dados do usuário:
     - Salário: R$ ${salario}
