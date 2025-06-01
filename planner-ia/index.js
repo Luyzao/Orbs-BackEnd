@@ -102,37 +102,52 @@ app.post('/api/analise-gastos', async (req, res) => {
     console.log('🧠 Divisão ideal calculada:', divisaoIdeal);
 
     const prompt = `
-Você é um consultor financeiro objetivo e direto.
+    Você é um consultor financeiro especialista, objetivo e prático.
 
-Com base nos dados abaixo, gere alertas claros e curtos sobre os gastos do usuário.
+    Sua missão é ajudar o usuário a entender seus gastos, propor soluções claras para reduzir despesas e atingir sua meta de economia mensal.
 
-Dados do usuário:
-Salário: R$ ${salario}
+    📌 Etapas da sua resposta:
+    1. **Análise de gastos:**
+    - Para cada categoria em que o gasto atual estiver **acima do recomendado**, faça:
+        ➝ Um alerta no formato:  
+        **"Você está gastando X% do seu salário em [categoria]. Considere reduzir essa despesa."**  
+        (onde X = (gasto atual / salário) × 100, arredondado para o inteiro mais próximo)
+        ➝ Além disso, ofereça uma **sugestão objetiva e prática** de como reduzir ou otimizar esse gasto.  
+        Exemplos: "Revise seus serviços de streaming", "Considere renegociar o aluguel", "Busque alternativas mais econômicas para transporte".
 
-Idade: ${idade} anos
+    - Se o gasto estiver **dentro ou abaixo do recomendado**, não gere alerta nem comentários sobre ele.
 
-Filhos: ${filhos}
+    2. **Dicas bônus para economizar:**
+    - Independentemente dos alertas, ao final, inclua uma seção chamada:  
+        **"Dicas bônus para ajudar você a economizar mais:"**
+    - Liste de 2 a 4 dicas práticas, gerais, aplicáveis à maioria das pessoas.  
+        ➝ Exemplos: "Evite compras por impulso", "Tenha uma lista ao fazer supermercado", "Separe um valor fixo para sua reserva de emergência", "Revise assinaturas e serviços recorrentes".
 
-Meta de economia mensal: R$ ${metaEconomia}
+    3. **Se todos os gastos estiverem dentro do recomendado:**
+    - Diga:  
+        **"Seus gastos estão equilibrados. Continue assim."**
+    - Mesmo assim, apresente as **Dicas bônus para ajudar você a economizar mais**.
 
-Gastos recomendados:
-${Object.entries(divisaoIdeal).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+    📊 Dados do usuário:
+    - Salário: R$ ${salario}
+    - Idade: ${idade} anos
+    - Filhos: ${filhos}
+    - Meta de economia mensal: R$ ${metaEconomia}
 
-Gastos atuais:
-${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+    💡 Gastos recomendados:
+    ${Object.entries(divisaoIdeal).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
 
-Instruções:
-- Para cada categoria presente em gastos atuais, calcule o percentual do salário que está sendo gasto:  
-  (gasto atual / salário) * 100.
-- Compare o gasto atual com o gasto recomendado.
-- Gere um alerta somente se o gasto atual ultrapassar o recomendado.
-- O alerta deve ter o formato:  
-  "Você está gastando X% do seu salário em [categoria]. Considere reduzir essa despesa."
-- Arredonde X para o número inteiro mais próximo.
-- Não inclua categorias que não ultrapassem o limite recomendado.
-- Não gere análises, conclusões ou reflexões.
-- Se nenhum gasto ultrapassar o recomendado, responda apenas:  
-  "Seus gastos estão equilibrados. Continue assim."`
+    📈 Gastos atuais:
+    ${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+
+    📥 Instruções finais:
+    - As sugestões devem ser simples, diretas e aplicáveis no dia a dia.
+    - Evite jargões financeiros e linguagem complexa.
+    - Foque em ações realistas que ajudem a economizar, seja reduzindo gastos ou mudando hábitos.
+
+    ⚠️ Lembre-se:  
+    - Só gere alertas para categorias **acima do recomendado**.  
+    - As **dicas bônus sempre devem aparecer**, mesmo que não haja alertas.`
 
     console.log('📝 Prompt gerado para OpenAI:', prompt);
 
