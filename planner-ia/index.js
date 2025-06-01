@@ -81,40 +81,74 @@ app.post('/api/recomendacao-gastos', (req, res) => {
 
 // 🔥 Endpoint: análise com IA
 app.post('/api/analise-gastos', async (req, res) => {
+    console.log('🟦 Recebido request em /api/analise-gastos');
+    console.log('📥 Body recebido:', req.body);
+
     const { salario, idade, filhos, metaEconomia, gastos } = req.body;
 
     if (!salario || !idade || filhos === undefined || metaEconomia === undefined || !gastos) {
+        console.error('❌ Dados faltando no body:', { salario, idade, filhos, metaEconomia, gastos });
         return res.status(400).json({ erro: 'Envie salario, idade, filhos, metaEconomia e gastos.' });
     }
 
+    console.log('✅ Dados validados. Calculando divisão ideal...');
     const divisaoIdeal = sugerirDivisaoGastos(salario, idade, filhos, metaEconomia);
 
     if (divisaoIdeal.erro) {
+        console.error('❌ Erro na divisão ideal:', divisaoIdeal.erro);
         return res.status(400).json(divisaoIdeal);
     }
 
-    // Monta o prompt
+    console.log('🧠 Divisão ideal calculada:', divisaoIdeal);
+
     const prompt = `
-Você é um consultor financeiro. Com base nos dados abaixo, analise os gastos do usuário.
+    Você é um consultor financeiro especialista, objetivo e prático.
 
-Dados do usuário:
-- Salário: R$ ${salario}
-- Idade: ${idade} anos
-- Filhos: ${filhos}
-- Meta de economia mensal: R$ ${metaEconomia}
+    Sua missão é ajudar o usuário a entender seus gastos, propor soluções claras para reduzir despesas e atingir sua meta de economia mensal.
 
-Distribuição de gastos recomendada:
-${Object.entries(divisaoIdeal).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+    📌 Etapas da sua resposta:
+    1. O que a IA tem a dizer?: (em negrito)
+    - Para cada categoria em que o gasto atual estiver acima do recomendado, faça:
+        ➝ Um alerta no formato:  
+        "Você está gastando além do recomendado do seu salário em [categoria]. Considere reduzir essa despesa." 
+        ➝ Além disso, ofereça uma sugestão objetiva e prática de como reduzir ou otimizar esse gasto.  
+        Exemplos: "Revise seus serviços de streaming", "Considere renegociar o aluguel", "Busque alternativas mais econômicas para transporte".
 
-Gastos atuais do usuário:
-${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+    - Se o gasto estiver dentro ou abaixo do recomendado, não gere alerta nem comentários sobre ele.
 
-Sua tarefa:
-1. Diga se o usuário está gastando mais do que o ideal em alguma categoria.
-2. Aponte quais categorias estão acima e abaixo do recomendado.
-3. Dê dicas práticas, diretas e realistas para ele economizar nas categorias que estão acima.
-4. Seja claro, objetivo e organizado em tópicos.
-`;
+    2. Dicas bônus para economizar: (em negrito)
+    - Independentemente dos alertas, ao final, inclua uma seção chamada:  
+        "Dicas bônus para ajudar você a economizar mais:"
+    - Liste de 2 a 4 dicas práticas, gerais, aplicáveis à maioria das pessoas.  
+        ➝ Exemplos: "Evite compras por impulso", "Tenha uma lista ao fazer supermercado", "Separe um valor fixo para sua reserva de emergência", "Revise assinaturas e serviços recorrentes".
+
+    3. Se todos os gastos estiverem dentro do recomendado:
+    - Diga:  
+        "Seus gastos estão equilibrados. Continue assim."
+    - Mesmo assim, apresente as Dicas bônus para ajudar você a economizar mais.
+
+    📊 Dados do usuário:
+    - Salário: R$ ${salario}
+    - Idade: ${idade} anos
+    - Filhos: ${filhos}
+    - Meta de economia mensal: R$ ${metaEconomia}
+
+    💡 Gastos recomendados:
+    ${Object.entries(divisaoIdeal).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+
+    📈 Gastos atuais:
+    ${Object.entries(gastos).map(([categoria, valor]) => `${categoria}: R$ ${valor}`).join(', ')}
+
+    📥 Instruções finais:
+    - As sugestões devem ser simples, diretas e aplicáveis no dia a dia.
+    - Evite jargões financeiros e linguagem complexa.
+    - Foque em ações realistas que ajudem a economizar, seja reduzindo gastos ou mudando hábitos.
+
+    ⚠️ Lembre-se:  
+    - Só gere alertas para categorias **acima do recomendado**.  
+    - As **dicas bônus sempre devem aparecer**, mesmo que não haja alertas.`
+
+    console.log('📝 Prompt gerado para OpenAI:', prompt);
 
     try {
         const completion = await openai.chat.completions.create({
@@ -128,16 +162,19 @@ Sua tarefa:
         });
 
         const resposta = completion.choices[0].message.content;
+        console.log('🟩 Resposta da OpenAI:', resposta);
+
         res.json({
             divisaoIdeal,
             analise: resposta
         });
 
     } catch (error) {
-        console.error(error);
+        console.error('❌ Erro ao consultar a API da OpenAI:', error);
         res.status(500).json({ erro: 'Erro ao consultar a API da OpenAI.' });
     }
 });
+
 
 // 🚀 Start servidor
 const PORT = process.env.PORT || 3003;
