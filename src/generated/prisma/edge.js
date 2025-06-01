@@ -196,7 +196,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "E:\\Orbs-BackEnd\\src\\generated\\prisma",
+      "value": "/Users/alexinsel/Desktop/PUC/PI_FINAL/Orbs-BackEnd/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -205,12 +205,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "darwin",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "E:\\Orbs-BackEnd\\prisma\\schema.prisma",
+    "sourceFilePath": "/Users/alexinsel/Desktop/PUC/PI_FINAL/Orbs-BackEnd/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
