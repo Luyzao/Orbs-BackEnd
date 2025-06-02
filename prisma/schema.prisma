@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  avatarUrl String?
+  balance   Balance?
+  expenses  Expense[]
+  Forms     Forms?
+  goals     Goal[]
+  Income    Income[]
+}
+
+model Expense {
+  id                 String   @id @default(uuid())
+  title              String
+  amount             Float
+  date               DateTime
+  isCredit           Boolean  @default(false)
+  totalInstallments  Int?
+  currentInstallment Int?
+  categoryId         String
+  userId             String
+  category           Category @relation(fields: [categoryId], references: [id])
+  user               User     @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  color    String?
+  expenses Expense[]
+  goals    Goal[]
+}
+
+model Goal {
+  id         String     @id @default(uuid())
+  title      String
+  target     Float
+  progress   Float      @default(0)
+  status     GoalStatus @default(PENDING)
+  userId     String
+  createdAt  DateTime   @default(now())
+  categoryId String?
+  imageUrl   String?
+  category   Category?  @relation(fields: [categoryId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
+}
+
+model Balance {
+  id        String   @id @default(uuid())
+  value     Float
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Income {
+  id          String   @id @default(uuid())
+  date        DateTime
+  userId      String
+  income      Float
+  extraincome Float
+  otherincome Float
+  month       DateTime
+  User        User     @relation(fields: [userId], references: [id])
+}
+
+model Forms {
+  id                String   @id @default(uuid())
+  quantidade_filhos String
+  dinheiro          String
+  createdAt         DateTime @default(now())
+  userId            String   @unique
+  media_salarial    Decimal  @db.Decimal(10, 2)
+  idade             Int
+  user              User     @relation(fields: [userId], references: [id])
+}
+
+enum GoalStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
